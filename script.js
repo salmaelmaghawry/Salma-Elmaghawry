@@ -227,8 +227,42 @@ function closeLightbox() {
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         closeLightbox();
+        closeVideoModal(null);
     }
 });
+
+// --- YOUTUBE SHORTS VIDEO MODAL ---
+function openVideoModal(videoId, title) {
+    const modal = document.getElementById('video-modal');
+    const iframe = document.getElementById('video-modal-iframe');
+    const titleEl = document.getElementById('video-modal-title');
+    const ytLink = document.getElementById('video-modal-yt-link');
+
+    // Set embed src with autoplay for immediate playback
+    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+    titleEl.textContent = title;
+    ytLink.href = `https://youtube.com/shorts/${videoId}`;
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    // Re-render lucide icons (for the YT icon in the link)
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+function closeVideoModal(event) {
+    const modal = document.getElementById('video-modal');
+
+    // If triggered by click, only close if clicking the backdrop (not the inner card)
+    if (event && event.target !== modal) return;
+
+    const iframe = document.getElementById('video-modal-iframe');
+    // Clear src to stop video playback
+    iframe.src = '';
+
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
 
 // --- MOCK CONTACT FORM SUBMISSION RESPONSE ---
 function handleFormSubmit(event) {

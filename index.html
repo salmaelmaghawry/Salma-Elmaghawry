@@ -121,13 +121,11 @@
                         <div class="glow-ring glow-ring-mint"></div>
                         <div class="glow-ring glow-ring-pink"></div>
                         <div class="avatar-frame">
-                            <!-- Visual placeholder representing Salma's brand - clean code meets warm visual design -->
-                            <div class="avatar-fallback">
-                                <div class="fallback-icon">👩‍💻</div>
-                                <div class="floating-tech flutter-icon"><i data-lucide="smartphone"></i></div>
-                                <div class="floating-tech code-icon"><i data-lucide="code-2"></i></div>
-                                <div class="floating-tech heart-icon">💖</div>
-                            </div>
+                            <!-- Real profile photo -->
+                            <img src="assets/profile_pc.jpeg" alt="Salma Elmaghawry - Flutter Developer" class="profile-photo">
+                            <div class="floating-tech flutter-icon"><i data-lucide="smartphone"></i></div>
+                            <div class="floating-tech code-icon"><i data-lucide="code-2"></i></div>
+                            <div class="floating-tech heart-icon">💖</div>
                         </div>
                     </div>
                 </div>
@@ -348,10 +346,36 @@
                 </div>
                 
                 <div class="projects-grid">
-                    <!-- Project 1: Chainly -->
+                    <!-- Project 1: Shtiwy -->
+                    <div class="project-card" data-category="flutter">
+                        <div class="project-image-placeholder project-img-cover">
+                            <img src="assets/Projects_images/shtiway_poster.png" alt="Shtiwy App Screenshot" class="project-cover-img">
+                            <span class="proj-badge">Client Project (Production)</span>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Shtiwy - Smart Travel & Tourism App</h3>
+                            <p class="project-desc">
+                                A production-grade, multi-platform mobile application for travel, Hajj, and Umrah bookings. Built with Clean Architecture, BLoC/Cubit state management, Supabase (Auth & PostgreSQL), and functional error handling with Dartz.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">Flutter</span>
+                                <span class="tag">BLoC / Cubit</span>
+                                <span class="tag">Supabase</span>
+                                <span class="tag">Clean Arch</span>
+                                <span class="tag">Dartz</span>
+                                <span class="tag">Google Maps</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/salma-elmaghawry" target="_blank" class="proj-link"><i data-lucide="github"></i> GitHub</a>
+                                <a href="https://github.com/user-attachments/assets/7e339e87-6490-47ef-a781-6ee170ea172c" target="_blank" class="proj-link demo-link"><i data-lucide="play-circle"></i> Watch Video</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Chainly -->
                     <div class="project-card" data-category="flutter ai">
-                        <div class="project-image-placeholder mint-gradient">
-                            <div class="project-icon"><i data-lucide="route"></i></div>
+                        <div class="project-image-placeholder project-img-cover">
+                            <img src="assets/Projects_images/chainly_poster.png" alt="Chainly App Screenshot" class="project-cover-img">
                             <span class="proj-badge">Graduation Project (In Progress)</span>
                         </div>
                         <div class="project-info">
@@ -373,7 +397,7 @@
                         </div>
                     </div>
 
-                    <!-- Project 2: StudyMate -->
+                    <!-- Project 3: StudyMate -->
                     <div class="project-card" data-category="flutter ai">
                         <div class="project-image-placeholder pink-gradient">
                             <div class="project-icon"><i data-lucide="brain-circuit"></i></div>
@@ -398,7 +422,7 @@
                         </div>
                     </div>
 
-                    <!-- Project 3: SoilPredictor -->
+                    <!-- Project 4: SoilPredictor -->
                     <div class="project-card" data-category="flutter ai">
                         <div class="project-image-placeholder lavender-gradient">
                             <div class="project-icon"><i data-lucide="leaf"></i></div>
@@ -458,26 +482,54 @@
                     
                     <div class="video-preview-cards">
                         <!-- Video Card 1 -->
-                        <div class="video-card">
-                            <div class="video-thumbnail-placeholder mint-gradient">
+                        <div class="video-card" onclick="openVideoModal('vEW_r69NHRI', 'Flutter Tip — Clean Architecture Setup')" role="button" tabindex="0">
+                            <div class="video-thumbnail-yt">
+                                <img src="https://i.ytimg.com/vi/vEW_r69NHRI/hqdefault.jpg" alt="Flutter Tip video thumbnail" class="yt-thumb-img" loading="lazy">
                                 <div class="play-overlay"><i data-lucide="play"></i></div>
-                                <span class="video-duration">Flutter &amp; Dart</span>
+                                <span class="video-duration shorts-badge">Shorts</span>
                             </div>
                             <div class="video-info">
-                                <h4 class="video-title">Building State-Driven Apps with Cubit/Bloc</h4>
-                                <p class="video-desc">Detailed walkthrough on asynchronous states, repository patterns, and clean UI state UI triggers.</p>
+                                <h4 class="video-title">Flutter Tip — Clean Architecture Setup</h4>
+                                <p class="video-desc">Quick deep-dive into organizing your project layers the clean way.</p>
                             </div>
                         </div>
 
                         <!-- Video Card 2 -->
-                        <div class="video-card">
-                            <div class="video-thumbnail-placeholder pink-gradient">
+                        <div class="video-card" onclick="openVideoModal('fF4zGMSSUQg', 'Dart Tip — BLoC State Patterns')" role="button" tabindex="0">
+                            <div class="video-thumbnail-yt">
+                                <img src="https://i.ytimg.com/vi/fF4zGMSSUQg/hqdefault.jpg" alt="Dart BLoC video thumbnail" class="yt-thumb-img" loading="lazy">
                                 <div class="play-overlay"><i data-lucide="play"></i></div>
-                                <span class="video-duration">C++ Programming</span>
+                                <span class="video-duration shorts-badge">Shorts</span>
                             </div>
                             <div class="video-info">
-                                <h4 class="video-title">OOP Fundamentals: Classes, Inheritances &amp; Pointers</h4>
-                                <p class="video-desc">Helping students establish structured memory layouts and object-oriented foundations.</p>
+                                <h4 class="video-title">Dart Tip — BLoC State Patterns</h4>
+                                <p class="video-desc">Simple breakdown of BLoC Cubit state handling for beginners.</p>
+                            </div>
+                        </div>
+
+                        <!-- Video Card 3 -->
+                        <div class="video-card" onclick="openVideoModal('_bWEaU2lpw0', 'OOP in C++ — Explained Simply')" role="button" tabindex="0">
+                            <div class="video-thumbnail-yt">
+                                <img src="https://i.ytimg.com/vi/_bWEaU2lpw0/hqdefault.jpg" alt="OOP C++ video thumbnail" class="yt-thumb-img" loading="lazy">
+                                <div class="play-overlay"><i data-lucide="play"></i></div>
+                                <span class="video-duration shorts-badge">Shorts</span>
+                            </div>
+                            <div class="video-info">
+                                <h4 class="video-title">OOP in C++ — Explained Simply</h4>
+                                <p class="video-desc">Inheritance, classes and pointers — made easy for students.</p>
+                            </div>
+                        </div>
+
+                        <!-- Video Card 4 -->
+                        <div class="video-card" onclick="openVideoModal('U8zxvY9bJCQ', 'Flutter UI — Premium Custom Widgets')" role="button" tabindex="0">
+                            <div class="video-thumbnail-yt">
+                                <img src="https://i.ytimg.com/vi/U8zxvY9bJCQ/hqdefault.jpg" alt="Flutter UI video thumbnail" class="yt-thumb-img" loading="lazy">
+                                <div class="play-overlay"><i data-lucide="play"></i></div>
+                                <span class="video-duration shorts-badge">Shorts</span>
+                            </div>
+                            <div class="video-info">
+                                <h4 class="video-title">Flutter UI — Premium Custom Widgets</h4>
+                                <p class="video-desc">Building reusable, beautiful widget components step by step.</p>
                             </div>
                         </div>
                     </div>
@@ -790,6 +842,28 @@
         <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
         <img class="lightbox-image" id="lightbox-img" src="" alt="Certificate View">
         <div class="lightbox-caption" id="lightbox-caption">Certificate Detail</div>
+    </div>
+
+    <!-- YouTube Video Modal -->
+    <div class="video-modal" id="video-modal" onclick="closeVideoModal(event)">
+        <div class="video-modal-inner">
+            <button class="video-modal-close" onclick="closeVideoModal(null)" aria-label="Close video">&times;</button>
+            <div class="video-modal-title" id="video-modal-title"></div>
+            <div class="video-iframe-wrapper">
+                <iframe
+                    id="video-modal-iframe"
+                    src=""
+                    title="YouTube Shorts"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                    loading="lazy">
+                </iframe>
+            </div>
+            <a class="video-modal-yt-link" id="video-modal-yt-link" href="#" target="_blank" rel="noopener">
+                <i data-lucide="youtube"></i> Watch on YouTube
+            </a>
+        </div>
     </div>
 
     <!-- Lucide Icons via CDN -->
