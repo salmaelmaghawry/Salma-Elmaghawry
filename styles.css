@@ -2441,3 +2441,292 @@ body.dark-mode .volunteer-achievement {
     width: 20px;
     height: 20px;
 }
+
+/* ==========================================================================
+   BRAND ICONS (inline SVG injected via data-brand)
+   Lucide dropped brand logos, so these render our own. They inherit
+   currentColor and are sized to match each context.
+   ========================================================================== */
+.brand-svg {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+}
+
+.brand-svg svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+    fill: currentColor;
+}
+
+/* Context-specific sizing */
+.method-icon .brand-svg svg { width: 22px; height: 22px; }
+.proj-link .brand-svg svg { width: 16px; height: 16px; }
+.btn .brand-svg svg { width: 18px; height: 18px; }
+.footer-socials .brand-svg svg { width: 18px; height: 18px; }
+.video-modal-yt-link .brand-svg svg { width: 20px; height: 20px; }
+
+/* ==========================================================================
+   EDUCATIONAL CONTENT — Banner + Auto-playing Shorts Row
+   ========================================================================== */
+.yt-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+}
+
+.yt-banner-text {
+    flex: 1;
+    min-width: 280px;
+}
+
+.yt-banner .yt-stats {
+    margin-bottom: 0;
+}
+
+.yt-banner .btn-yt {
+    flex-shrink: 0;
+}
+
+/* Row of vertical Shorts players */
+.shorts-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    align-items: start;
+}
+
+.short-player {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--glass-shadow);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+}
+
+.short-player:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent-mint);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+}
+
+/* 9:16 vertical frame that holds the thumbnail then the live iframe */
+.short-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    background-color: #0f0f0f;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.short-frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    z-index: 2;
+    animation: shortFadeIn 0.6s ease forwards;
+}
+
+@keyframes shortFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Soft pulsing overlay while the thumbnail waits to become a live player */
+.short-frame:not(.is-playing)::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(0,0,0,0.05), rgba(0,0,0,0.45));
+    z-index: 1;
+}
+
+.short-caption {
+    padding: 14px 16px 18px;
+    position: relative;
+}
+
+.short-caption .shorts-badge {
+    position: static;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.short-caption .video-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Staggered entrance for the row */
+.shorts-row .short-player:nth-child(1) { transition-delay: 0s; }
+.shorts-row .short-player:nth-child(2) { transition-delay: 0.12s; }
+.shorts-row .short-player:nth-child(3) { transition-delay: 0.24s; }
+.shorts-row .short-player:nth-child(4) { transition-delay: 0.36s; }
+
+/* Responsive: 2-up on tablet, horizontal swipe row on phones */
+@media (max-width: 992px) {
+    .shorts-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .shorts-row {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 16px;
+        padding-bottom: 12px;
+        -webkit-overflow-scrolling: touch;
+    }
+    .short-player {
+        flex: 0 0 72%;
+        scroll-snap-align: center;
+    }
+    .yt-banner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .yt-banner .btn-yt {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ==========================================================================
+   IMPACT SECTION — Stacked blocks (tabs removed) + Activities Marquee
+   ========================================================================== */
+.impact-subheading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 8px 0 24px;
+}
+
+.impact-subheading svg {
+    width: 22px;
+    height: 22px;
+    color: var(--accent-pink);
+}
+
+.impact-subheading.center {
+    justify-content: center;
+}
+
+/* Space between the two stacked blocks now that tabs are gone */
+#tab-certifications {
+    margin-top: 56px;
+}
+
+/* --- Activities & Moments Marquee --- */
+.activities-block {
+    margin-top: 72px;
+    text-align: center;
+}
+
+.activities-caption {
+    color: var(--text-secondary);
+    margin: -12px 0 32px;
+    font-size: 0.98rem;
+}
+
+.activities-marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 16px;
+    padding: 8px 0;
+    /* Fade the edges so photos glide in/out softly */
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+
+.activities-track {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    animation: activitiesScroll 68s linear infinite;
+    will-change: transform;
+}
+
+/* Pause on hover so people can look */
+.activities-marquee:hover .activities-track {
+    animation-play-state: paused;
+}
+
+@keyframes activitiesScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+.activity-item {
+    flex: 0 0 auto;
+    height: 300px;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    cursor: pointer;
+    background: var(--bg-card);
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+}
+
+.activity-item img {
+    height: 100%;
+    width: auto;
+    max-width: none;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.activity-item:hover {
+    transform: translateY(-8px) scale(1.03);
+    border-color: var(--accent-pink);
+    box-shadow: 0 22px 45px rgba(0, 0, 0, 0.28);
+    z-index: 2;
+}
+
+.activity-item:hover img {
+    transform: scale(1.08);
+}
+
+/* Respect users who prefer no motion */
+@media (prefers-reduced-motion: reduce) {
+    .activities-track {
+        animation: none;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .activity-item {
+        height: 220px;
+    }
+    .activities-track {
+        gap: 14px;
+    }
+    .impact-subheading {
+        font-size: 1.15rem;
+    }
+}

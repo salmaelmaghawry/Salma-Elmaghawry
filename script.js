@@ -4,8 +4,34 @@
    project filtering, tabs toggling, certificate lightbox, and form submissions.
    ========================================================================== */
 
+/* --- BRAND ICONS (inline SVG) ---
+   Lucide removed brand/logo icons (github, linkedin, youtube, instagram,
+   facebook) from recent versions, so they render blank. We inject reliable
+   inline SVGs into any element marked with data-brand="name". */
+const BRAND_ICONS = {
+    linkedin: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>',
+    github: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.3-1.8-1.3-1.8-1.1-.7 0-.7 0-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8 0 3.2.9.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1 .9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"/></svg>',
+    youtube: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>',
+    instagram: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7 .1 5.7.1 4.8.3 4.1.6c-.8.3-1.4.7-2.1 1.4C1.3 2.7.9 3.3.6 4.1.3 4.8.1 5.7.1 7 0 8.3 0 8.7 0 12s0 3.7.1 5c.1 1.3.3 2.2.5 2.9.3.8.7 1.4 1.4 2.1.7.7 1.3 1.1 2.1 1.4.7.3 1.6.5 2.9.5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.3 2.9-.5.8-.3 1.4-.7 2.1-1.4.7-.7 1.1-1.3 1.4-2.1.3-.7.5-1.6.5-2.9.1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.3-2.2-.5-2.9-.3-.8-.7-1.4-1.4-2.1C21.3 1.3 20.7.9 19.9.6 19.2.3 18.3.1 17 .1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-10.4a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0z"/></svg>',
+    facebook: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.6 4.5-4.6 1.3 0 2.6.2 2.6.2v2.9h-1.5c-1.5 0-1.9.9-1.9 1.8V12h3.3l-.5 3.5h-2.8v8.4A12 12 0 0 0 24 12z"/></svg>'
+};
+
+function renderBrandIcons() {
+    document.querySelectorAll('[data-brand]').forEach(el => {
+        const name = el.getAttribute('data-brand');
+        if (BRAND_ICONS[name] && !el.dataset.brandDone) {
+            el.innerHTML = BRAND_ICONS[name];
+            el.dataset.brandDone = 'true';
+            el.classList.add('brand-svg');
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    
+
+    // Inject brand SVGs (LinkedIn/GitHub/YouTube/Instagram/Facebook)
+    renderBrandIcons();
+
     // --- STICKY NAV & ACTIVE LINK HIGHLIGHTER ---
     const navbar = document.getElementById('navbar');
     const navLinks = document.querySelectorAll('.nav-link');
@@ -151,6 +177,81 @@ document.addEventListener('DOMContentLoaded', () => {
         revealObserver.observe(item);
     });
 
+    // --- AUTOPLAY YOUTUBE SHORTS WHEN SCROLLED INTO VIEW ---
+    // Lazy-loads a muted, looping embed so the page stays fast until the
+    // Educational Content row is actually on screen.
+    const shortPlayers = document.querySelectorAll('.short-player');
+
+    if (shortPlayers.length) {
+        const shortsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const el = entry.target;
+                const frame = el.querySelector('.short-frame');
+                if (!frame) return;
+
+                if (entry.isIntersecting) {
+                    // Build the autoplaying embed only once
+                    if (!frame.querySelector('iframe')) {
+                        const id = el.getAttribute('data-video');
+                        const iframe = document.createElement('iframe');
+                        iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=1&rel=0&modestbranding=1&playsinline=1`;
+                        iframe.title = el.getAttribute('data-title') || 'YouTube Short';
+                        iframe.setAttribute('frameborder', '0');
+                        iframe.setAttribute('loading', 'lazy');
+                        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+                        iframe.allowFullscreen = true;
+                        frame.appendChild(iframe);
+                        frame.classList.add('is-playing');
+                    }
+                    el.classList.add('active');
+                }
+            });
+        }, { threshold: 0.4 });
+
+        shortPlayers.forEach(p => shortsObserver.observe(p));
+    }
+
+    // --- ACTIVITIES MARQUEE (shuffled, auto-scrolling photo strip) ---
+    const activitiesTrack = document.getElementById('activities-track');
+
+    if (activitiesTrack) {
+        const activityFiles = [
+            '1.jpeg', '2.jpeg', '3.jpeg', '4.jpeg', '5.jpeg', '6.jpeg', '7.jpeg',
+            '8.jpeg', '9.jpeg', '10.png', '11.png', '12.png', '13.png', '14.png',
+            '15.png', 'github_workshop.jpeg', 'presentation_workshop.jpeg'
+        ];
+
+        // Fisher–Yates shuffle for a random order each visit
+        for (let i = activityFiles.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [activityFiles[i], activityFiles[j]] = [activityFiles[j], activityFiles[i]];
+        }
+
+        const basePath = 'assets/My_activities/';
+        const buildItem = (file) => {
+            const src = basePath + encodeURIComponent(file);
+            const item = document.createElement('div');
+            item.className = 'activity-item';
+
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = 'Salma Elmaghawry — community activity';
+            img.loading = 'lazy';
+            item.appendChild(img);
+
+            item.addEventListener('click', () => openPhotoLightbox(src, 'Community & Activities'));
+            return item;
+        };
+
+        // Duplicate the set so the loop is seamless (track scrolls exactly -50%)
+        [...activityFiles, ...activityFiles].forEach(file => {
+            activitiesTrack.appendChild(buildItem(file));
+        });
+
+        // Slow the animation down proportionally to the number of images
+        activitiesTrack.style.animationDuration = `${activityFiles.length * 4}s`;
+    }
+
     // --- PORTFOLIO PROJECT FILTERING SYSTEM ---
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
@@ -215,6 +316,18 @@ function openLightbox(imageUrl, captionText) {
     lightboxCaption.textContent = captionText;
     lightbox.style.display = 'flex';
     document.body.style.overflow = 'hidden'; // prevent scrolls behind
+}
+
+// Opens the lightbox with a REAL photo (used by the activities gallery)
+function openPhotoLightbox(src, captionText) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+
+    lightboxImg.src = src;
+    lightboxCaption.textContent = captionText || '';
+    lightbox.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
 }
 
 function closeLightbox() {
