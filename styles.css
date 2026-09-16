@@ -1,13 +1,16 @@
 /* ==========================================================================
    Salma Elmaghawry Portfolio - Custom Styling CSS
-   Designed with ❤️ for a modern, premium, girly-chic and aesthetic developer
+   Brand: ink / sage / mist / cocoa / honey / oat / clay - calm & organised,
+   not loud. See /My/design system/design-system.md for the full spec.
    ========================================================================== */
 
 /* --- CSS Variables Configuration --- */
 :root {
-    /* Fonts */
+    /* Fonts - three faces, three jobs (see design-system.md #3) */
     --font-primary: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    
+    --font-arabic: 'Tajawal', 'Nunito', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
+
     /* Layout */
     --max-width: 1200px;
     --header-height: 80px;
@@ -15,68 +18,84 @@
     --border-radius-md: 16px;
     --border-radius-lg: 24px;
     --border-radius-full: 9999px;
-    
+
     /* Transitions */
     --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    
+
     /* Shadows */
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
     --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.06);
     --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.08);
+
+    /* Brand tokens - fixed, do not vary by mode */
+    --brand-ink: #223528;
+    --brand-sage: #4C7A5B;
+    --brand-mist: #B9CFBC;
+    --brand-cocoa: #6E4A32;
+    --brand-honey: #E3A02B;
+    --brand-oat: #F6EFE4;
+    --brand-clay: #E8D5B7;
+    --brand-paper: #FCF9F3;
 }
 
-/* --- LIGHT MODE COLORS (Aesthetic Cream, Pastel Pink, Mint Green) --- */
+/* --- LIGHT MODE COLORS (oat background, sage + cocoa accents) --- */
 body.light-mode {
-    --bg-primary: #FAF9F6;          /* Ivory/Cream background */
-    --bg-secondary: #FFF2F4;        /* Soft blush canvas */
-    --bg-card: rgba(255, 255, 255, 0.65); /* Glassmorphic card back */
-    
-    --accent-mint: #14B8A6;         /* Primary mint green */
-    --accent-mint-hover: #0D9488;
-    --accent-mint-light: #CCFBF1;
-    
-    --accent-pink: #F472B6;         /* Secondary soft rose */
-    --accent-pink-hover: #EC4899;
-    --accent-pink-light: #FCE7F3;
-    
-    --accent-lavender: #A78BFA;     /* Tertiary soft purple */
-    --accent-lavender-light: #F5F3FF;
-    
-    --text-primary: #1E293B;        /* Deep slate for readability */
-    --text-secondary: #64748B;      /* Muted slate */
-    --text-muted: #94A3B8;
-    
-    --border-color: rgba(20, 184, 166, 0.08);
-    --glass-border: rgba(255, 255, 255, 0.4);
-    --glass-shadow: 0 8px 32px 0 rgba(244, 114, 182, 0.06);
+    --bg-primary: #F6EFE4;          /* oat - primary light background */
+    --bg-secondary: #FCF9F3;        /* paper - raised surface on oat */
+    --bg-card: rgba(252, 249, 243, 0.68); /* paper glass card */
+
+    --accent-mint: #4C7A5B;         /* sage - primary brand green */
+    --accent-mint-hover: #3D6249;
+    --accent-mint-light: rgba(76, 122, 91, 0.14);
+
+    --accent-pink: #6E4A32;         /* cocoa - emphasis colour on light */
+    --accent-pink-hover: #5A3C28;
+    --accent-pink-light: rgba(110, 74, 50, 0.14);
+
+    --accent-lavender: #223528;     /* ink used as neutral third tone - no 4th hue */
+    --accent-lavender-light: rgba(34, 53, 40, 0.07);
+
+    --accent-honey: #E3A02B;        /* signature accent - dark surfaces only, used sparingly */
+    --alert: #B4453A;
+
+    --text-primary: #223528;        /* ink */
+    --text-secondary: #626D60;      /* muted ink */
+    --text-muted: #8C9286;
+
+    --border-color: rgba(76, 122, 91, 0.10);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --glass-shadow: 0 8px 32px 0 rgba(110, 74, 50, 0.07);
 }
 
-/* --- DARK MODE COLORS (Slate Coal, Glowing Emerald/Mint, Neon Pink) --- */
+/* --- DARK MODE COLORS (ink background, glowing sage + honey accent) --- */
 body.dark-mode {
-    --bg-primary: #0F172A;          /* Deep Slate */
-    --bg-secondary: #1E293B;        /* Medium Slate */
-    --bg-card: rgba(30, 41, 59, 0.55); /* Dark Glassmorphic card */
-    
-    --accent-mint: #34D399;         /* Glowing neon mint */
-    --accent-mint-hover: #10B981;
-    --accent-mint-light: rgba(52, 211, 153, 0.15);
-    
-    --accent-pink: #F472B6;         /* Glowing pink */
-    --accent-pink-hover: #EC4899;
-    --accent-pink-light: rgba(244, 114, 182, 0.15);
-    
-    --accent-lavender: #C084FC;     /* Glowing purple */
-    --accent-lavender-light: rgba(192, 132, 252, 0.15);
-    
-    --text-primary: #F8FAFC;        /* Off-white */
-    --text-secondary: #94A3B8;      /* Soft silver */
-    --text-muted: #64748B;
-    
-    --border-color: rgba(52, 211, 153, 0.12);
-    --glass-border: rgba(255, 255, 255, 0.06);
-    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+    --bg-primary: #223528;          /* ink */
+    --bg-secondary: #2E4636;        /* lightened ink */
+    --bg-card: rgba(46, 70, 54, 0.55);
+
+    --accent-mint: #6FA382;         /* sage, brightened for legibility on ink (4.5:1) */
+    --accent-mint-hover: #86B899;
+    --accent-mint-light: rgba(111, 163, 130, 0.16);
+
+    --accent-pink: #E3A02B;         /* honey - the brand's designated dark-surface pop (5.8:1) */
+    --accent-pink-hover: #F0B04A;
+    --accent-pink-light: rgba(227, 160, 43, 0.16);
+
+    --accent-lavender: #B9CFBC;     /* mist - cool neutral, third tone (7.9:1) */
+    --accent-lavender-light: rgba(185, 207, 188, 0.12);
+
+    --accent-honey: #E3A02B;        /* the one accent allowed to pop on dark - use sparingly */
+    --alert: #E07E6A;
+
+    --text-primary: #F6EFE4;        /* oat */
+    --text-secondary: #B9CFBC;      /* mist */
+    --text-muted: rgba(185, 207, 188, 0.6);
+
+    --border-color: rgba(185, 207, 188, 0.14);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
 /* --- GENERAL RESET & BASE STYLES --- */
@@ -150,14 +169,14 @@ img {
     position: absolute;
     border-radius: var(--border-radius-full);
     filter: blur(120px);
-    opacity: 0.28;
+    opacity: 0.18;
     mix-blend-mode: multiply;
     animation: floatBlob 20s infinite alternate ease-in-out;
     transition: background-color var(--transition-normal);
 }
 
 body.dark-mode .blob {
-    opacity: 0.15;
+    opacity: 0.12;
     mix-blend-mode: screen;
 }
 
@@ -182,10 +201,15 @@ body.dark-mode .blob {
 .blob-lavender {
     width: 450px;
     height: 450px;
-    background-color: var(--accent-lavender);
+    /* clay, not ink - a dark blurred smudge would fight the "calm, not loud" rule */
+    background-color: var(--brand-clay);
     top: 40%;
     left: 45%;
     animation-delay: 8s;
+}
+
+body.dark-mode .blob-lavender {
+    background-color: var(--accent-lavender);
 }
 
 @keyframes floatBlob {
@@ -210,7 +234,7 @@ body.dark-mode .blob {
     left: 0;
     width: 100%;
     height: var(--header-height);
-    background-color: rgba(250, 249, 246, 0.7);
+    background-color: rgba(246, 239, 228, 0.7);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     z-index: 100;
@@ -219,7 +243,7 @@ body.dark-mode .blob {
 }
 
 body.dark-mode .navbar {
-    background-color: rgba(15, 23, 42, 0.7);
+    background-color: rgba(34, 53, 40, 0.75);
 }
 
 .navbar.scrolled {
@@ -238,20 +262,32 @@ body.dark-mode .navbar {
 }
 
 .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     font-size: 1.6rem;
     font-weight: 800;
     letter-spacing: -0.5px;
     color: var(--text-primary);
 }
 
+.logo-mark {
+    flex-shrink: 0;
+    border-radius: 29%;
+}
+
 .logo-dot {
-    color: var(--accent-mint);
+    color: var(--accent-pink);
     display: inline-block;
     transition: color var(--transition-normal);
 }
 
+body.dark-mode .logo-dot {
+    color: var(--accent-honey);
+}
+
 .logo:hover .logo-dot {
-    color: var(--accent-pink);
+    color: var(--accent-mint);
 }
 
 .nav-menu {
@@ -341,12 +377,12 @@ body.dark-mode .theme-toggle .moon-icon {
     font-weight: 700;
     border-radius: var(--border-radius-md);
     font-size: 0.95rem;
-    box-shadow: 0 4px 15px rgba(20, 184, 166, 0.2);
+    box-shadow: 0 4px 15px rgba(76, 122, 91, 0.2);
 }
 
 .btn-talk:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(244, 114, 182, 0.3);
+    box-shadow: 0 6px 20px rgba(110, 74, 50, 0.3);
 }
 
 .burger {
@@ -404,21 +440,25 @@ body.dark-mode .theme-toggle .moon-icon {
 .hero-tag {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background-color: var(--accent-mint-light);
-    color: var(--accent-mint-hover);
-    border-radius: var(--border-radius-full);
+    font-family: var(--font-mono);
+    color: var(--accent-mint);
     font-size: 0.85rem;
-    font-weight: 700;
+    font-weight: 500;
+    letter-spacing: 0.08em;
     align-self: flex-start;
     margin-bottom: 24px;
-    border: 1px solid rgba(20, 184, 166, 0.15);
+    direction: ltr;
 }
 
-body.dark-mode .hero-tag {
-    background-color: var(--accent-mint-light);
-    color: var(--accent-mint);
+.hero-tag::before {
+    content: '//';
+    margin-right: 0.5em;
+    color: var(--accent-pink);
+    font-weight: 700;
+}
+
+body.dark-mode .hero-tag::before {
+    color: var(--accent-honey);
 }
 
 .hero-title {
@@ -487,12 +527,12 @@ body.dark-mode .hero-tag {
 .btn-primary {
     background: linear-gradient(135deg, var(--accent-mint), var(--accent-pink));
     color: #FFF;
-    box-shadow: 0 6px 20px rgba(20, 184, 166, 0.2);
+    box-shadow: 0 6px 20px rgba(76, 122, 91, 0.2);
 }
 
 .btn-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(244, 114, 182, 0.35);
+    box-shadow: 0 8px 25px rgba(110, 74, 50, 0.35);
 }
 
 .btn-secondary {
@@ -549,7 +589,7 @@ body.dark-mode .hero-tag {
     color: var(--accent-pink);
     transform: translateY(-3px) scale(1.05);
     border-color: var(--accent-pink);
-    box-shadow: 0 4px 12px rgba(244, 114, 182, 0.15);
+    box-shadow: 0 4px 12px rgba(110, 74, 50, 0.15);
 }
 
 /* --- HERO VISUAL (AVATAR & GLOW) --- */
@@ -717,21 +757,28 @@ body.dark-mode .hero-tag {
 .section-tag {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    font-family: var(--font-mono);
     font-size: 0.85rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--accent-pink);
+    font-weight: 500;
+    text-transform: lowercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-mint);
     margin-bottom: 12px;
-    padding: 6px 14px;
-    background-color: var(--accent-pink-light);
-    border-radius: var(--border-radius-full);
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    direction: ltr;
 }
 
-body.dark-mode .section-tag {
-    background-color: var(--accent-pink-light);
+.section-tag::before {
+    content: '//';
+    margin-right: 0.5em;
     color: var(--accent-pink);
+    font-weight: 700;
+}
+
+body.dark-mode .section-tag::before {
+    color: var(--accent-honey);
 }
 
 .section-title {
@@ -842,7 +889,7 @@ body.dark-mode .edu-icon {
 .stat-card:hover {
     transform: translateY(-5px);
     border-color: var(--accent-pink);
-    box-shadow: 0 12px 35px rgba(244, 114, 182, 0.12);
+    box-shadow: 0 12px 35px rgba(110, 74, 50, 0.12);
 }
 
 .stat-icon {
@@ -860,8 +907,10 @@ body.dark-mode .edu-icon {
 .stat-icon.lavender-bg { background-color: var(--accent-lavender-light); color: var(--accent-lavender); }
 
 .stat-number {
-    font-size: 1.6rem;
-    font-weight: 800;
+    font-family: var(--font-mono);
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     margin-bottom: 4px;
 }
 
@@ -935,8 +984,11 @@ body.dark-mode .edu-icon {
 .skill-badge {
     padding: 2px 8px;
     border-radius: var(--border-radius-sm);
-    font-size: 0.75rem;
-    font-weight: 800;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: lowercase;
     background-color: var(--bg-secondary);
     color: var(--text-secondary);
     flex-shrink: 0;
@@ -1021,8 +1073,10 @@ body.dark-mode .edu-icon {
     flex-wrap: wrap;
     gap: 16px;
     margin-bottom: 12px;
-    font-size: 0.85rem;
-    font-weight: 700;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
 }
 
 .work-date {
@@ -1106,7 +1160,7 @@ body.dark-mode .edu-icon {
     background-color: var(--accent-mint);
     color: #FFF;
     border-color: var(--accent-mint);
-    box-shadow: 0 4px 15px rgba(20, 184, 166, 0.2);
+    box-shadow: 0 4px 15px rgba(76, 122, 91, 0.2);
 }
 
 .projects-grid {
@@ -1131,7 +1185,7 @@ body.dark-mode .edu-icon {
 .project-card:hover {
     transform: translateY(-8px);
     border-color: var(--accent-pink);
-    box-shadow: 0 20px 40px rgba(244, 114, 182, 0.12);
+    box-shadow: 0 20px 40px rgba(110, 74, 50, 0.12);
 }
 
 .project-image-placeholder {
@@ -1142,10 +1196,10 @@ body.dark-mode .edu-icon {
     position: relative;
 }
 
-.mint-gradient { background: linear-gradient(135deg, #14B8A6, #34D399); }
-.pink-gradient { background: linear-gradient(135deg, #F472B6, #FB7185); }
-.lavender-gradient { background: linear-gradient(135deg, #A78BFA, #C084FC); }
-.cyan-gradient { background: linear-gradient(135deg, #06B6D4, #3B82F6); }
+.mint-gradient { background: linear-gradient(135deg, #4C7A5B, #6FA382); }
+.pink-gradient { background: linear-gradient(135deg, #6E4A32, #8A6248); }
+.lavender-gradient { background: linear-gradient(135deg, #223528, #4C7A5B); }
+.cyan-gradient { background: linear-gradient(135deg, #4C7A5B, #B9CFBC); }
 
 .project-icon {
     font-size: 3rem;
@@ -1166,7 +1220,7 @@ body.dark-mode .edu-icon {
     font-size: 0.75rem;
     font-weight: 800;
     background-color: rgba(255, 255, 255, 0.9);
-    color: #1E293B;
+    color: var(--brand-ink);
 }
 
 .project-info {
@@ -1198,12 +1252,15 @@ body.dark-mode .edu-icon {
 }
 
 .project-tags .tag {
-    font-size: 0.8rem;
-    font-weight: 700;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
     padding: 4px 10px;
     background-color: var(--bg-secondary);
     color: var(--text-secondary);
-    border-radius: var(--border-radius-full);
+    border-radius: var(--border-radius-sm);
 }
 
 body.dark-mode .project-tags .tag {
@@ -1276,8 +1333,9 @@ body.dark-mode .project-tags .tag {
 }
 
 .yt-number {
-    font-size: 1.5rem;
-    font-weight: 800;
+    font-family: var(--font-mono);
+    font-size: 1.3rem;
+    font-weight: 700;
     color: var(--accent-pink);
 }
 
@@ -1385,6 +1443,13 @@ body.dark-mode .project-tags .tag {
     line-height: 1.4;
 }
 
+/* Arabic content (shorts titles, modal title) uses the brand's Arabic face */
+.video-title,
+.video-modal-title,
+[dir="auto"] {
+    font-family: var(--font-arabic);
+}
+
 .video-desc {
     font-size: 0.9rem;
     color: var(--text-secondary);
@@ -1410,7 +1475,7 @@ body.dark-mode .project-tags .tag {
 .service-card:hover {
     transform: translateY(-8px);
     border-color: var(--accent-mint);
-    box-shadow: 0 16px 40px rgba(20, 184, 166, 0.1);
+    box-shadow: 0 16px 40px rgba(76, 122, 91, 0.1);
 }
 
 .service-icon-box {
@@ -1471,7 +1536,7 @@ body.dark-mode .project-tags .tag {
     background-color: var(--accent-pink);
     color: #FFF;
     border-color: var(--accent-pink);
-    box-shadow: 0 4px 15px rgba(244, 114, 182, 0.2);
+    box-shadow: 0 4px 15px rgba(110, 74, 50, 0.2);
 }
 
 .tab-content {
@@ -1772,7 +1837,7 @@ body.dark-mode .volunteer-achievement {
 .textarea-container textarea:focus {
     outline: none;
     border-color: var(--accent-mint);
-    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.15);
+    box-shadow: 0 0 0 3px rgba(76, 122, 91, 0.15);
 }
 
 .btn-submit {
@@ -1787,12 +1852,12 @@ body.dark-mode .volunteer-achievement {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    box-shadow: 0 4px 15px rgba(20, 184, 166, 0.2);
+    box-shadow: 0 4px 15px rgba(76, 122, 91, 0.2);
 }
 
 .btn-submit:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(244, 114, 182, 0.35);
+    box-shadow: 0 6px 20px rgba(110, 74, 50, 0.35);
 }
 
 .btn-submit i {
@@ -1808,11 +1873,11 @@ body.dark-mode .volunteer-achievement {
 }
 
 .form-status.success {
-    color: #10B981;
+    color: var(--accent-mint);
 }
 
 .form-status.error {
-    color: #EF4444;
+    color: var(--alert);
 }
 
 /* --- FOOTER --- */
@@ -1893,7 +1958,7 @@ body.dark-mode .volunteer-achievement {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(15, 23, 42, 0.95);
+    background-color: rgba(34, 53, 40, 0.95);
     z-index: 200;
     display: none;
     align-items: center;
@@ -2310,7 +2375,7 @@ body.dark-mode .volunteer-achievement {
 }
 
 @media (max-width: 360px) {
-    .hero-tag span {
+    .hero-tag {
         font-size: 0.78rem;
     }
 
@@ -2363,7 +2428,7 @@ body.dark-mode .volunteer-achievement {
     top: 14px;
     right: 14px;
     z-index: 2;
-    background: rgba(15, 23, 42, 0.75);
+    background: rgba(34, 53, 40, 0.75);
     color: #fff;
     backdrop-filter: blur(8px);
 }

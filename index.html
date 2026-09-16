@@ -27,15 +27,16 @@
     <meta property="twitter:description"
         content="Portfolio of Salma Elmaghawry, featuring Flutter apps, AI-powered projects, and tech educational content.">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+    <!-- Favicon (brand mark: the prompt - terminal cursor + fast-forward, sage container) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/brand/favicon-192.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="assets/brand/favicon-192.png">
 
-    <!-- Google Fonts - Nunito -->
+    <!-- Google Fonts - Nunito (Latin), Tajawal (Arabic), JetBrains Mono (labels/code) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Tajawal:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
         rel="stylesheet">
 
     <!-- Stylesheet -->
@@ -54,7 +55,15 @@
     <!-- Navigation Header -->
     <header class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">Salma<span class="logo-dot">.</span></a>
+            <a href="#" class="logo">
+                <svg class="logo-mark" viewBox="0 0 100 100" width="34" height="34" aria-hidden="true">
+                    <rect x="0" y="0" width="100" height="100" rx="29" fill="#4C7A5B" />
+                    <path d="M32,30 L48,46 L32,62" fill="none" stroke="#F6EFE4" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M52,30 L68,46 L52,62" fill="none" stroke="#F6EFE4" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <rect x="32" y="76" width="38" height="10" rx="5" fill="#E3A02B" />
+                </svg>
+                Salma<span class="logo-dot">.</span>
+            </a>
 
             <nav class="nav-menu" id="nav-menu">
                 <a href="#about" class="nav-link active">About</a>
@@ -90,10 +99,7 @@
         <section class="hero-section" id="hero">
             <div class="hero-container">
                 <div class="hero-content">
-                    <div class="hero-tag">
-                        <i data-lucide="sparkles"></i>
-                        <span>Welcome to my digital space</span>
-                    </div>
+                    <div class="hero-tag">welcome to my digital space</div>
                     <h1 class="hero-title">
                         Hi, I'm <span class="highlight-mint">Salma</span>
                         <span class="highlight-pink">Elmaghawry</span>
@@ -166,7 +172,7 @@
         <section class="about-section section-padding" id="about">
             <div class="container">
                 <div class="section-header center">
-                    <span class="section-tag"><i data-lucide="user"></i> My Story</span>
+                    <span class="section-tag">my story</span>
                     <h2 class="section-title">About Me</h2>
                     <p class="section-desc">Behind the code: combining logic with creativity.</p>
                 </div>
@@ -228,7 +234,7 @@
         <section class="youtube-section section-padding" id="youtube">
             <div class="container">
                 <div class="section-header center">
-                    <span class="section-tag"><i data-lucide="play-circle"></i> Sharing Knowledge</span>
+                    <span class="section-tag">sharing knowledge</span>
                     <h2 class="section-title">Educational Content</h2>
                     <p class="section-desc">Simplifying mobile engineering, OOP, and professional Dart/Flutter tips on
                         my YouTube channel.</p>
@@ -313,7 +319,7 @@
         <section class="skills-section section-padding" id="skills">
             <div class="container">
                 <div class="section-header center">
-                    <span class="section-tag"><i data-lucide="cpu"></i> Expertise</span>
+                    <span class="section-tag">expertise</span>
                     <h2 class="section-title">My Technical Toolbox</h2>
                     <p class="section-desc">Highly structured framework knowledge, custom tools, and solid fundamentals.
                     </p>
@@ -419,7 +425,7 @@
         <section class="volunteering-section section-padding" id="volunteering">
             <div class="container">
                 <div class="section-header center">
-                    <span class="section-tag"><i data-lucide="award"></i> Impact</span>
+                    <span class="section-tag">impact</span>
                     <h2 class="section-title">Community &amp; Activities</h2>
                     <p class="section-desc">Workshops, mentoring sessions, hackathons, and tech community events I've
                         been part of.</p>
@@ -436,7 +442,7 @@
         <section class="experience-section section-padding" id="experience">
             <div class="container">
                 <div class="section-header center">
-                    <span class="section-tag"><i data-lucide="briefcase"></i> Journey</span>
+                    <span class="section-tag">journey</span>
                     <h2 class="section-title">Work Experience</h2>
                     <p class="section-desc">My professional roadmap, teaching computer science and engineering
                         interactive learning structures.</p>
@@ -501,7 +507,7 @@
             <div class="container">
                 <div class="section-header">
                     <div>
-                        <span class="section-tag"><i data-lucide="folder-open"></i> Portfolio</span>
+                        <span class="section-tag">portfolio</span>
                         <h2 class="section-title">Featured Projects</h2>
                         <p class="section-desc">Mobile applications combining complex state systems, custom APIs, and
                             seamless interfaces.</p>
@@ -582,7 +588,7 @@
         <section class="contact-section section-padding" id="contact">
             <div class="container">
                 <div class="section-header center">
-                    <span class="section-tag"><i data-lucide="mail"></i> Let's Connect</span>
+                    <span class="section-tag">let's connect</span>
                     <h2 class="section-title">Get In Touch</h2>
                     <p class="section-desc">Open for mobile engineering positions, custom freelance apps, or
                         collaborative tutorials.</p>
@@ -686,7 +692,15 @@
     <footer class="footer">
         <div class="container footer-container">
             <div class="footer-brand">
-                <a href="#" class="logo">Salma<span class="logo-dot">.</span></a>
+                <a href="#" class="logo">
+                    <svg class="logo-mark" viewBox="0 0 100 100" width="30" height="30" aria-hidden="true">
+                        <rect x="0" y="0" width="100" height="100" rx="29" fill="#4C7A5B" />
+                        <path d="M32,30 L48,46 L32,62" fill="none" stroke="#F6EFE4" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M52,30 L68,46 L52,62" fill="none" stroke="#F6EFE4" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+                        <rect x="32" y="76" width="38" height="10" rx="5" fill="#E3A02B" />
+                    </svg>
+                    Salma<span class="logo-dot">.</span>
+                </a>
                 <p class="footer-slogan">Combining clean logic, aesthetic frontends, and dynamic education storytelling.
                 </p>
             </div>
@@ -711,7 +725,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Salma Elmaghawry. Designed &amp; Engineered with 💖 using Nunito &amp; Mint accents.</p>
+            <p>&copy; 2026 Salma Elmaghawry. Designed &amp; engineered with Nunito, Tajawal &amp; JetBrains Mono.</p>
         </div>
     </footer>
 
@@ -726,7 +740,7 @@
     <div class="video-modal" id="video-modal" onclick="closeVideoModal(event)">
         <div class="video-modal-inner">
             <button class="video-modal-close" onclick="closeVideoModal(null)" aria-label="Close video">&times;</button>
-            <div class="video-modal-title" id="video-modal-title"></div>
+            <div class="video-modal-title" id="video-modal-title" dir="auto"></div>
             <div class="video-iframe-wrapper">
                 <iframe id="video-modal-iframe" src="" title="YouTube Shorts" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
