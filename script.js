@@ -27,10 +27,54 @@ function renderBrandIcons() {
     });
 }
 
+// Currently active UI language ('en' | 'ar'). Read by handleFormSubmit()
+// below and updated by applyLanguage() inside the DOMContentLoaded handler.
+let currentLang = 'en';
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // Inject brand SVGs (LinkedIn/GitHub/YouTube/Instagram/Facebook)
     renderBrandIcons();
+
+    // --- LANGUAGE SWITCHER (EN / AR) ---
+    // Translation strings live in translations.js (TRANSLATIONS.en / TRANSLATIONS.ar),
+    // keyed to the data-i18n / data-i18n-placeholder attributes in index.html.
+    const langToggleBtn = document.getElementById('lang-toggle');
+    const langToggleCode = document.getElementById('lang-toggle-code');
+
+    function applyLanguage(lang) {
+        if (!window.TRANSLATIONS || !TRANSLATIONS[lang]) return;
+        currentLang = lang;
+        const dict = TRANSLATIONS[lang];
+        const isRtl = lang === 'ar';
+
+        document.documentElement.lang = lang;
+        document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+        if (dict['meta.title']) document.title = dict['meta.title'];
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (dict[key] !== undefined) el.innerHTML = dict[key];
+        });
+
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            if (dict[key] !== undefined) el.placeholder = dict[key];
+        });
+
+        if (langToggleCode) langToggleCode.textContent = isRtl ? 'EN' : 'AR';
+
+        try { localStorage.setItem('lang', lang); } catch (e) {}
+
+        // Restart the hero typing cycler so it picks up the translated profession list
+        if (typeof restartTypingCycle === 'function') restartTypingCycle();
+    }
+
+    if (langToggleBtn) {
+        langToggleBtn.addEventListener('click', () => {
+            applyLanguage(currentLang === 'ar' ? 'en' : 'ar');
+        });
+    }
 
     // --- STICKY NAV & ACTIVE LINK HIGHLIGHTER ---
     const navbar = document.getElementById('navbar');
@@ -113,24 +157,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- PREMIUM TYPING TEXT EFFECT CYCLER ---
+    // --- PREMIUM TYPING TEXT EFFECT CYCLER (language-aware) ---
     const typingSpan = document.querySelector('.typing-text');
-    const professions = [
-        "Software Engineer & Flutter Developer",
-        "Computer Science Programming Instructor",
-        "Edu Tech Content Creator",
-        "Clean Architecture Enthusiast",
-        "Tech Community Mentor"
-    ];
-    
+    const FALLBACK_PROFESSIONS = ["Software Engineer & Flutter Developer"];
+
+    function getProfessions() {
+        return (window.TRANSLATIONS && TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang].professions)
+            || FALLBACK_PROFESSIONS;
+    }
+
     let professionIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
     let typeSpeed = 100;
-    
+    let typingTimeoutId = null;
+
     function cycleText() {
-        const currentText = professions[professionIndex];
-        
+        const professions = getProfessions();
+        const currentText = professions[professionIndex % professions.length];
+
         if (isDeleting) {
             // Delete characters
             typingSpan.textContent = currentText.substring(0, charIndex - 1);
@@ -142,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
             charIndex++;
             typeSpeed = 80; // natural typing speed
         }
-        
+
         // Handling limits
         if (!isDeleting && charIndex === currentText.length) {
             // Full word typed, pause before deletion
@@ -154,12 +199,19 @@ document.addEventListener('DOMContentLoaded', () => {
             professionIndex = (professionIndex + 1) % professions.length;
             typeSpeed = 400; // brief pause before typing next
         }
-        
-        setTimeout(cycleText, typeSpeed);
+
+        typingTimeoutId = setTimeout(cycleText, typeSpeed);
     }
-    
-    // Initiate cycler
-    if (typingSpan) {
+
+    // Resets and restarts the cycler — called on first load and whenever
+    // the language toggle switches the active profession list.
+    function restartTypingCycle() {
+        if (!typingSpan) return;
+        clearTimeout(typingTimeoutId);
+        professionIndex = 0;
+        charIndex = 0;
+        isDeleting = false;
+        typingSpan.textContent = '';
         cycleText();
     }
 
@@ -315,6 +367,18 @@ document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
         });
     });
+
+    // --- APPLY PERSISTED (OR DEFAULT) LANGUAGE ---
+    // Runs last so every element above (typing cycler included) is ready.
+    let initialLang = 'en';
+    try { initialLang = localStorage.getItem('lang') === 'ar' ? 'ar' : 'en'; } catch (e) {}
+
+    if (window.TRANSLATIONS) {
+        applyLanguage(initialLang);
+    } else if (typingSpan) {
+        // translations.js failed to load — still run the typing cycler in English
+        restartTypingCycle();
+    }
 });
 
 // --- CERTIFICATE LIGHTBOX MODAL TRIGGER ---
@@ -398,24 +462,26 @@ function handleFormSubmit(event) {
     const submitBtn = document.getElementById('submit-btn');
     const statusDiv = document.getElementById('form-status');
     const submitBtnText = submitBtn.querySelector('span');
-    
+    const dict = (window.TRANSLATIONS && TRANSLATIONS[currentLang]) || {};
+
     // Visually toggle loading state
     submitBtn.disabled = true;
     submitBtn.style.opacity = '0.7';
-    submitBtnText.textContent = 'Sending Message...';
-    
+    submitBtnText.textContent = dict['form.sending'] || 'Sending Message...';
+
     setTimeout(() => {
         statusDiv.className = 'form-status success';
-        statusDiv.innerHTML = `<i data-lucide="check" style="display:inline-block; vertical-align:middle; width:18px; height:18px;"></i> Message Sent! Thank you, I will get back to you shortly.`;
-        
+        const sentMessage = dict['form.sent'] || 'Message Sent! Thank you, I will get back to you shortly.';
+        statusDiv.innerHTML = `<i data-lucide="check" style="display:inline-block; vertical-align:middle; width:18px; height:18px;"></i> ${sentMessage}`;
+
         // Re-draw lucide icon
         lucide.createIcons();
-        
+
         // Reset form
         form.reset();
         submitBtn.disabled = false;
         submitBtn.style.opacity = '1';
-        submitBtnText.textContent = 'Send Message';
+        submitBtnText.textContent = dict['form.submit'] || 'Send Message';
         
         // Clear message after 5 seconds
         setTimeout(() => {

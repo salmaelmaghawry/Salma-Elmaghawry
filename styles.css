@@ -338,6 +338,34 @@ body.dark-mode .logo-dot {
     gap: 20px;
 }
 
+/* --- LANGUAGE TOGGLE (EN / AR) --- */
+.lang-toggle {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--border-radius-md);
+    background-color: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+}
+
+.lang-toggle:hover {
+    background-color: var(--bg-primary);
+    transform: scale(1.05);
+    color: var(--accent-pink);
+}
+
+body.dark-mode .lang-toggle:hover {
+    color: var(--accent-honey);
+}
+
 /* --- SUN/MOON THEME TOGGLER --- */
 .theme-toggle {
     width: 44px;
@@ -2991,5 +3019,103 @@ body.dark-mode .volunteer-achievement {
     }
     .impact-subheading {
         font-size: 1.15rem;
+    }
+}
+
+/* ==========================================================================
+   RTL LAYOUT SUPPORT (Arabic)
+   Most flex/grid layouts mirror automatically once [dir="rtl"] is set on
+   <html> (row/grid tracks are direction-aware per the CSS spec). The rules
+   below only cover the handful of components that use *physical*
+   left/right/padding values, which do not flip on their own, plus the
+   Arabic typeface swap for text set in the mono/primary font stacks.
+   ========================================================================== */
+
+/* Arabic typeface (Nunito/JetBrains Mono don't carry Arabic glyphs) */
+[dir="rtl"] body {
+    font-family: var(--font-arabic);
+}
+
+[dir="rtl"] button,
+[dir="rtl"] .hero-tag,
+[dir="rtl"] .section-tag,
+[dir="rtl"] .card-meta,
+[dir="rtl"] .input-container input,
+[dir="rtl"] .textarea-container textarea {
+    font-family: var(--font-arabic);
+}
+
+/* Experience timeline: rail + dot move to the right, card padding flips */
+[dir="rtl"] .timeline-container::before {
+    left: auto;
+    right: 40px;
+}
+
+[dir="rtl"] .timeline-item {
+    padding-left: 0;
+    padding-right: 80px;
+}
+
+[dir="rtl"] .timeline-dot {
+    left: auto;
+    right: 29px;
+}
+
+[dir="rtl"] .role-bullets {
+    padding-left: 0;
+    padding-right: 20px;
+}
+
+@media (max-width: 1100px) {
+    [dir="rtl"] .timeline-container::before {
+        left: auto;
+        right: 20px;
+    }
+
+    [dir="rtl"] .timeline-item {
+        padding-left: 0;
+        padding-right: 50px;
+    }
+
+    [dir="rtl"] .timeline-dot {
+        left: auto;
+        right: 9px;
+    }
+}
+
+/* Contact form: leading icon + input padding move to the right */
+[dir="rtl"] .input-container i {
+    left: auto;
+    right: 16px;
+}
+
+[dir="rtl"] .input-container input,
+[dir="rtl"] .textarea-container textarea {
+    padding: 12px 48px 12px 16px;
+}
+
+[dir="rtl"] .textarea-container textarea {
+    padding-right: 16px;
+}
+
+/* Directional icons: point the other way in RTL */
+[dir="rtl"] .btn-primary svg {
+    transform: scaleX(-1);
+}
+
+[dir="rtl"] #btn-send-icon {
+    transform: scaleX(-1);
+}
+
+/* Mobile nav overlay slides in from the right instead of the left */
+@media (max-width: 1100px) {
+    [dir="rtl"] .nav-menu {
+        left: auto;
+        right: -100%;
+    }
+
+    [dir="rtl"] .nav-menu.active {
+        left: auto;
+        right: 0;
     }
 }
