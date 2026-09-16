@@ -2,6 +2,19 @@
 <html lang="en">
 
 <head>
+    <script>
+        // Apply persisted language before first paint to avoid a flash of the wrong direction
+        (function () {
+            try {
+                var storedLang = localStorage.getItem('lang');
+                if (storedLang === 'ar') {
+                    document.documentElement.lang = 'ar';
+                    document.documentElement.dir = 'rtl';
+                }
+            } catch (e) {}
+        })();
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salma Elmaghawry | Software Engineer & Flutter Developer</title>
@@ -27,15 +40,16 @@
     <meta property="twitter:description"
         content="Portfolio of Salma Elmaghawry, featuring Flutter apps, AI-powered projects, and tech educational content.">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+    <!-- Favicon (brand mark: the prompt - terminal cursor + fast-forward, sage container) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/brand/favicon-192.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="assets/brand/favicon-192.png">
 
-    <!-- Google Fonts - Nunito -->
+    <!-- Google Fonts - Nunito (Latin), Tajawal (Arabic), JetBrains Mono (labels/code) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Tajawal:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
         rel="stylesheet">
 
     <!-- Stylesheet -->
@@ -54,26 +68,39 @@
     <!-- Navigation Header -->
     <header class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">Salma<span class="logo-dot">.</span></a>
+            <a href="#" class="logo">
+                <svg class="logo-mark" viewBox="0 0 100 100" width="34" height="34" aria-hidden="true">
+                    <rect x="0" y="0" width="100" height="100" rx="29" fill="#4C7A5B" />
+                    <path d="M32,30 L48,46 L32,62" fill="none" stroke="#F6EFE4" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M52,30 L68,46 L52,62" fill="none" stroke="#F6EFE4" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <rect x="32" y="76" width="38" height="10" rx="5" fill="#E3A02B" />
+                </svg>
+                Salma<span class="logo-dot">.</span>
+            </a>
 
             <nav class="nav-menu" id="nav-menu">
-                <a href="#about" class="nav-link active">About</a>
-                <a href="#youtube" class="nav-link">Tutorials</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#volunteering" class="nav-link">Impact</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#contact" class="nav-btn-mobile">Let's Talk</a>
+                <a href="#about" class="nav-link active" data-i18n="nav.about">About</a>
+                <a href="#youtube" class="nav-link" data-i18n="nav.tutorials">Tutorials</a>
+                <a href="#skills" class="nav-link" data-i18n="nav.skills">Skills</a>
+                <a href="#volunteering" class="nav-link" data-i18n="nav.impact">Impact</a>
+                <a href="#experience" class="nav-link" data-i18n="nav.experience">Experience</a>
+                <a href="#projects" class="nav-link" data-i18n="nav.projects">Projects</a>
+                <a href="#contact" class="nav-btn-mobile" data-i18n="nav.talk">Let's Talk</a>
             </nav>
 
             <div class="nav-actions">
+                <!-- Language Toggle -->
+                <button class="lang-toggle" id="lang-toggle" aria-label="Switch language">
+                    <span class="lang-toggle-code" id="lang-toggle-code">AR</span>
+                </button>
+
                 <!-- Theme Toggle Switch -->
                 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
                     <i data-lucide="sun" class="sun-icon"></i>
                     <i data-lucide="moon" class="moon-icon"></i>
                 </button>
 
-                <a href="#contact" class="btn-talk">Let's Talk</a>
+                <a href="#contact" class="btn-talk" data-i18n="nav.talk">Let's Talk</a>
 
                 <!-- Burger Menu Toggle -->
                 <button class="burger" id="burger-menu" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
@@ -90,35 +117,32 @@
         <section class="hero-section" id="hero">
             <div class="hero-container">
                 <div class="hero-content">
-                    <div class="hero-tag">
-                        <i data-lucide="sparkles"></i>
-                        <span>Welcome to my digital space</span>
-                    </div>
+                    <div class="hero-tag" data-i18n="hero.tag">welcome to my digital space</div>
                     <h1 class="hero-title">
-                        Hi, I'm <span class="highlight-mint">Salma</span>
+                        <span data-i18n="hero.greeting">Hi, I'm</span> <span class="highlight-mint">Salma</span>
                         <span class="highlight-pink">Elmaghawry</span>
                     </h1>
                     <h2 class="hero-subtitle">
-                        I am a <span class="typing-text">Software Engineer &amp; Flutter Developer</span>
+                        <span data-i18n="hero.subtitle_prefix">I am a</span> <span class="typing-text">Software Engineer &amp; Flutter Developer</span>
                     </h2>
-                    <p class="hero-desc">
+                    <p class="hero-desc" data-i18n="hero.desc">
                         Building gorgeous, high-performance mobile applications and sharing knowledge to empower the
                         next generation of tech creators. I blend clean architecture with creative storytelling to build
                         impactful digital experiences.
                     </p>
                     <div class="hero-ctas">
                         <a href="#projects" class="btn btn-primary">
-                            <span>Explore Projects</span>
+                            <span data-i18n="hero.cta_projects">Explore Projects</span>
                             <i data-lucide="arrow-right"></i>
                         </a>
                         <a href="https://drive.google.com/file/d/1f5kGBxOCUVC3bPQZVJl--gGSOTd-XGbk/view?usp=sharing"
                             target="_blank" class="btn btn-secondary">
                             <i data-lucide="download"></i>
-                            <span>Download CV</span>
+                            <span data-i18n="hero.cta_cv">Download CV</span>
                         </a>
                     </div>
                     <div class="hero-socials">
-                        <span class="socials-label">Connect:</span>
+                        <span class="socials-label" data-i18n="hero.connect">Connect:</span>
                         <div class="socials-icons">
                             <a href="https://www.linkedin.com/in/salma-elmaghawry/" target="_blank" class="social-icon"
                                 aria-label="LinkedIn"><i data-brand="linkedin"></i></a>
@@ -166,21 +190,21 @@
         <section class="about-section section-padding" id="about">
             <div class="container">
                 <div class="section-header center">
-                    <span class="section-tag"><i data-lucide="user"></i> My Story</span>
-                    <h2 class="section-title">About Me</h2>
-                    <p class="section-desc">Behind the code: combining logic with creativity.</p>
+                    <span class="section-tag" data-i18n="about.tag">my story</span>
+                    <h2 class="section-title" data-i18n="about.title">About Me</h2>
+                    <p class="section-desc" data-i18n="about.desc">Behind the code: combining logic with creativity.</p>
                 </div>
 
                 <div class="about-grid">
                     <div class="about-text-content">
-                        <h3 class="about-title">Crafting impactful experiences, one screen at a time</h3>
-                        <p class="about-paragraph">
+                        <h3 class="about-title" data-i18n="about.subtitle">Crafting impactful experiences, one screen at a time</h3>
+                        <p class="about-paragraph" data-i18n="about.p1">
                             I am a passionate <strong>Flutter Developer and Software Engineer</strong> dedicated to
                             building modern, user-friendly mobile applications and creating educational tech content. My
                             background in Computer Science allows me to build applications with strong foundations in
                             algorithms, data structures, and OOP, while keeping the user experience clean and aesthetic.
                         </p>
-                        <p class="about-paragraph">
+                        <p class="about-paragraph" data-i18n="about.p2">
                             My journey has been fueled by a love for combining technology, creativity, and storytelling.
                             Whether I am writing scalable clean code using Bloc/Cubit, integrating AI into mobile
                             applications, or lecturing C++ students, my goal is always to create robust systems and help
@@ -190,9 +214,9 @@
                         <div class="education-card">
                             <div class="edu-icon"><i data-lucide="graduation-cap"></i></div>
                             <div class="edu-details">
-                                <span class="edu-time">Degree &amp; Foundation</span>
-                                <h4 class="edu-degree">Bachelor's Degree in Computer Science</h4>
-                                <p class="edu-desc">Focusing on software engineering core principles, object-oriented
+                                <span class="edu-time" data-i18n="about.edu_time">Degree &amp; Foundation</span>
+                                <h4 class="edu-degree" data-i18n="about.edu_degree">Bachelor's Degree in Computer Science</h4>
+                                <p class="edu-desc" data-i18n="about.edu_desc">Focusing on software engineering core principles, object-oriented
                                     design, advanced algorithms, and mobile architecture.</p>
                             </div>
                         </div>
@@ -202,22 +226,22 @@
                         <div class="stat-card">
                             <div class="stat-icon pink-bg"><i data-lucide="smartphone"></i></div>
                             <h3 class="stat-number">Flutter</h3>
-                            <p class="stat-label">Mobile Specialist</p>
+                            <p class="stat-label" data-i18n="about.stat1_label">Mobile Specialist</p>
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon mint-bg"><i data-lucide="users"></i></div>
-                            <h3 class="stat-number">1.5+ Yrs</h3>
-                            <p class="stat-label">Programming Mentor</p>
+                            <h3 class="stat-number" data-i18n="about.stat2_number">1.5+ Yrs</h3>
+                            <p class="stat-label" data-i18n="about.stat2_label">Programming Mentor</p>
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon lavender-bg"><i data-lucide="book-open"></i></div>
-                            <h3 class="stat-number">1+ Yrs</h3>
-                            <p class="stat-label">Programming Instructor</p>
+                            <h3 class="stat-number" data-i18n="about.stat3_number">1+ Yrs</h3>
+                            <p class="stat-label" data-i18n="about.stat3_label">Programming Instructor</p>
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon mint-bg"><i data-lucide="video"></i></div>
                             <h3 class="stat-number">YouTube</h3>
-                            <p class="stat-label">Edu Content Creator</p>
+                            <p class="stat-label" data-i18n="about.stat4_label">Edu Content Creator</p>
                         </div>
                     </div>
                 </div>
@@ -228,16 +252,16 @@
         <section class="youtube-section section-padding" id="youtube">
             <div class="container">
                 <div class="section-header center">
-                    <span class="section-tag"><i data-lucide="play-circle"></i> Sharing Knowledge</span>
-                    <h2 class="section-title">Educational Content</h2>
-                    <p class="section-desc">Simplifying mobile engineering, OOP, and professional Dart/Flutter tips on
+                    <span class="section-tag" data-i18n="yt.tag">sharing knowledge</span>
+                    <h2 class="section-title" data-i18n="yt.title">Educational Content</h2>
+                    <p class="section-desc" data-i18n="yt.desc">Simplifying mobile engineering, OOP, and professional Dart/Flutter tips on
                         my YouTube channel.</p>
                 </div>
 
                 <div class="youtube-intro-card yt-banner">
                     <div class="yt-banner-text">
-                        <h3 class="yt-title">Creating a modern learning community</h3>
-                        <p class="yt-desc">
+                        <h3 class="yt-title" data-i18n="yt.banner_title">Creating a modern learning community</h3>
+                        <p class="yt-desc" data-i18n="yt.banner_desc">
                             Through tech storytelling and clean visual tutorials, I create videos that simplify complex
                             programming logic, BLoC structure configurations, clean coding patterns, and real-world
                             project blueprints.
@@ -245,21 +269,21 @@
                         <div class="yt-stats">
                             <div class="yt-stat-item">
                                 <span class="yt-number">100%</span>
-                                <span class="yt-label">Free Education</span>
+                                <span class="yt-label" data-i18n="yt.stat1_label">Free Education</span>
                             </div>
                             <div class="yt-stat-item">
                                 <span class="yt-number">OOP/C++</span>
-                                <span class="yt-label">Foundation Videos</span>
+                                <span class="yt-label" data-i18n="yt.stat2_label">Foundation Videos</span>
                             </div>
                             <div class="yt-stat-item">
                                 <span class="yt-number">Flutter</span>
-                                <span class="yt-label">Real-World Tips</span>
+                                <span class="yt-label" data-i18n="yt.stat3_label">Real-World Tips</span>
                             </div>
                         </div>
                     </div>
                     <a href="https://www.youtube.com/@salma.elmaghawry" target="_blank" class="btn btn-yt">
                         <i data-brand="youtube"></i>
-                        <span>Visit My Channel</span>
+                        <span data-i18n="yt.btn">Visit My Channel</span>
                     </a>
                 </div>
 
@@ -313,9 +337,9 @@
         <section class="skills-section section-padding" id="skills">
             <div class="container">
                 <div class="section-header center">
-                    <span class="section-tag"><i data-lucide="cpu"></i> Expertise</span>
-                    <h2 class="section-title">My Technical Toolbox</h2>
-                    <p class="section-desc">Highly structured framework knowledge, custom tools, and solid fundamentals.
+                    <span class="section-tag" data-i18n="skills.tag">expertise</span>
+                    <h2 class="section-title" data-i18n="skills.title">My Technical Toolbox</h2>
+                    <p class="section-desc" data-i18n="skills.desc">Highly structured framework knowledge, custom tools, and solid fundamentals.
                     </p>
                 </div>
 
@@ -328,19 +352,19 @@
                         </div>
                         <ul class="skill-list">
                             <li><span class="skill-name">Flutter &amp; Dart</span> <span
-                                    class="skill-badge pink">Expert</span></li>
+                                    class="skill-badge pink" data-i18n="badge.expert">Expert</span></li>
                             <li><span class="skill-name">BLoC / Cubit</span> <span
-                                    class="skill-badge pink">Advanced</span></li>
+                                    class="skill-badge pink" data-i18n="badge.advanced">Advanced</span></li>
                             <li><span class="skill-name">Responsive UI Design</span> <span
-                                    class="skill-badge pink">Expert</span></li>
+                                    class="skill-badge pink" data-i18n="badge.expert">Expert</span></li>
                             <li><span class="skill-name">State Management</span> <span
-                                    class="skill-badge pink">Advanced</span></li>
+                                    class="skill-badge pink" data-i18n="badge.advanced">Advanced</span></li>
                             <li><span class="skill-name">Flavors (Dev/Prod)</span> <span
-                                    class="skill-badge">Intermediate</span></li>
+                                    class="skill-badge" data-i18n="badge.intermediate">Intermediate</span></li>
                             <li><span class="skill-name">Unit Testing (Mockito)</span> <span
-                                    class="skill-badge">Advanced</span></li>
+                                    class="skill-badge" data-i18n="badge.advanced">Advanced</span></li>
                             <li><span class="skill-name">Pagination &amp; Caching</span> <span
-                                    class="skill-badge">Advanced</span></li>
+                                    class="skill-badge" data-i18n="badge.advanced">Advanced</span></li>
                         </ul>
                     </div>
 
@@ -348,21 +372,21 @@
                     <div class="skill-category-card">
                         <div class="category-header mint-accent">
                             <i data-lucide="shield-check"></i>
-                            <h3>Architecture &amp; Security</h3>
+                            <h3 data-i18n="skills.cat2">Architecture &amp; Security</h3>
                         </div>
                         <ul class="skill-list">
                             <li><span class="skill-name">Clean Architecture</span> <span
-                                    class="skill-badge mint">Advanced</span></li>
+                                    class="skill-badge mint" data-i18n="badge.advanced">Advanced</span></li>
                             <li><span class="skill-name">SOLID Principles</span> <span
-                                    class="skill-badge mint">Expert</span></li>
+                                    class="skill-badge mint" data-i18n="badge.expert">Expert</span></li>
                             <li><span class="skill-name">OOP Design Patterns</span> <span
-                                    class="skill-badge mint">Expert</span></li>
+                                    class="skill-badge mint" data-i18n="badge.expert">Expert</span></li>
                             <li><span class="skill-name">JWT Authentication</span> <span
-                                    class="skill-badge">Advanced</span></li>
+                                    class="skill-badge" data-i18n="badge.advanced">Advanced</span></li>
                             <li><span class="skill-name">Flutter Secure Storage</span> <span
-                                    class="skill-badge">Advanced</span></li>
+                                    class="skill-badge" data-i18n="badge.advanced">Advanced</span></li>
                             <li><span class="skill-name">Asynchronous Code</span> <span
-                                    class="skill-badge mint">Expert</span></li>
+                                    class="skill-badge mint" data-i18n="badge.expert">Expert</span></li>
                         </ul>
                     </div>
 
@@ -370,21 +394,21 @@
                     <div class="skill-category-card">
                         <div class="category-header lavender-accent">
                             <i data-lucide="git-merge"></i>
-                            <h3>Integrations &amp; Storage</h3>
+                            <h3 data-i18n="skills.cat3">Integrations &amp; Storage</h3>
                         </div>
                         <ul class="skill-list">
                             <li><span class="skill-name">REST APIs &amp; JSON</span> <span
-                                    class="skill-badge lavender">Expert</span></li>
+                                    class="skill-badge lavender" data-i18n="badge.expert">Expert</span></li>
                             <li><span class="skill-name">Firebase (Auth, Firestore)</span> <span
-                                    class="skill-badge lavender">Advanced</span></li>
+                                    class="skill-badge lavender" data-i18n="badge.advanced">Advanced</span></li>
                             <li><span class="skill-name">Google Maps API</span> <span
-                                    class="skill-badge">Advanced</span></li>
+                                    class="skill-badge" data-i18n="badge.advanced">Advanced</span></li>
                             <li><span class="skill-name">Hive (Local DB)</span> <span
-                                    class="skill-badge lavender">Advanced</span></li>
+                                    class="skill-badge lavender" data-i18n="badge.advanced">Advanced</span></li>
                             <li><span class="skill-name">SQLite / sqflite</span> <span
-                                    class="skill-badge">Intermediate</span></li>
+                                    class="skill-badge" data-i18n="badge.intermediate">Intermediate</span></li>
                             <li><span class="skill-name">Camera &amp; QR Scanning</span> <span
-                                    class="skill-badge">Advanced</span></li>
+                                    class="skill-badge" data-i18n="badge.advanced">Advanced</span></li>
                         </ul>
                     </div>
 
@@ -392,23 +416,23 @@
                     <div class="skill-category-card">
                         <div class="category-header mint-accent">
                             <i data-lucide="terminal"></i>
-                            <h3>Tools &amp; AI-Dev</h3>
+                            <h3 data-i18n="skills.cat4">Tools &amp; AI-Dev</h3>
                         </div>
                         <ul class="skill-list">
                             <li><span class="skill-name">Git &amp; GitHub</span> <span
-                                    class="skill-badge mint">Expert</span></li>
+                                    class="skill-badge mint" data-i18n="badge.expert">Expert</span></li>
                             <li><span class="skill-name">CI/CD (GitHub Actions)</span> <span
-                                    class="skill-badge">Intermediate</span></li>
+                                    class="skill-badge" data-i18n="badge.intermediate">Intermediate</span></li>
                             <li><span class="skill-name">Postman (API Testing)</span> <span
-                                    class="skill-badge mint">Advanced</span></li>
-                            <li><span class="skill-name">Figma (UI/UX)</span> <span class="skill-badge">Advanced</span>
+                                    class="skill-badge mint" data-i18n="badge.advanced">Advanced</span></li>
+                            <li><span class="skill-name">Figma (UI/UX)</span> <span class="skill-badge" data-i18n="badge.advanced">Advanced</span>
                             </li>
                             <li><span class="skill-name">Prompt Engineering</span> <span
-                                    class="skill-badge mint">Expert</span></li>
+                                    class="skill-badge mint" data-i18n="badge.expert">Expert</span></li>
                             <li><span class="skill-name">Model Context Protocol (MCP)</span> <span
-                                    class="skill-badge">Advanced</span></li>
+                                    class="skill-badge" data-i18n="badge.advanced">Advanced</span></li>
                             <li><span class="skill-name">Strategic AI Coding</span> <span
-                                    class="skill-badge mint">Expert</span></li>
+                                    class="skill-badge mint" data-i18n="badge.expert">Expert</span></li>
                         </ul>
                     </div>
                 </div>
@@ -419,9 +443,9 @@
         <section class="volunteering-section section-padding" id="volunteering">
             <div class="container">
                 <div class="section-header center">
-                    <span class="section-tag"><i data-lucide="award"></i> Impact</span>
-                    <h2 class="section-title">Community &amp; Activities</h2>
-                    <p class="section-desc">Workshops, mentoring sessions, hackathons, and tech community events I've
+                    <span class="section-tag" data-i18n="volunteering.tag">impact</span>
+                    <h2 class="section-title" data-i18n="volunteering.title">Community &amp; Activities</h2>
+                    <p class="section-desc" data-i18n="volunteering.desc">Workshops, mentoring sessions, hackathons, and tech community events I've
                         been part of.</p>
                 </div>
 
@@ -436,9 +460,9 @@
         <section class="experience-section section-padding" id="experience">
             <div class="container">
                 <div class="section-header center">
-                    <span class="section-tag"><i data-lucide="briefcase"></i> Journey</span>
-                    <h2 class="section-title">Work Experience</h2>
-                    <p class="section-desc">My professional roadmap, teaching computer science and engineering
+                    <span class="section-tag" data-i18n="exp.tag">journey</span>
+                    <h2 class="section-title" data-i18n="exp.title">Work Experience</h2>
+                    <p class="section-desc" data-i18n="exp.desc">My professional roadmap, teaching computer science and engineering
                         interactive learning structures.</p>
                 </div>
 
@@ -448,22 +472,19 @@
                         <div class="timeline-dot dot-mint"></div>
                         <div class="timeline-card">
                             <div class="card-meta">
-                                <span class="work-date"><i data-lucide="calendar"></i> Aug 2025 - Present</span>
-                                <span class="work-type"><i data-lucide="clock"></i> Part-time</span>
+                                <span class="work-date"><i data-lucide="calendar"></i> <span data-i18n="exp.card1.date">Aug 2025 - Present</span></span>
+                                <span class="work-type"><i data-lucide="clock"></i> <span data-i18n="exp.card1.type">Part-time</span></span>
                             </div>
-                            <h3 class="role-title">Educational Technologist</h3>
+                            <h3 class="role-title" data-i18n="exp.card1.role">Educational Technologist</h3>
                             <h4 class="company-name highlight-mint">Cairo Coding School</h4>
-                            <p class="role-desc">
+                            <p class="role-desc" data-i18n="exp.card1.desc">
                                 Designing and executing interactive, technology-enhanced learning frameworks to maximize
                                 student engagement and modern programming knowledge uptake.
                             </p>
                             <ul class="role-bullets">
-                                <li>Collaborate with mentors and instructors to build highly responsive computer science
-                                    curriculum assets.</li>
-                                <li>Integrate cutting-edge AI and interactive tools into software engineering learning
-                                    paths.</li>
-                                <li>Refine educational methodologies to simplify advanced logic, coding structures, and
-                                    mobile app patterns.</li>
+                                <li data-i18n="exp.card1.b1">Collaborate with mentors and instructors to build highly responsive computer science curriculum assets.</li>
+                                <li data-i18n="exp.card1.b2">Integrate cutting-edge AI and interactive tools into software engineering learning paths.</li>
+                                <li data-i18n="exp.card1.b3">Refine educational methodologies to simplify advanced logic, coding structures, and mobile app patterns.</li>
                             </ul>
                         </div>
                     </div>
@@ -473,22 +494,19 @@
                         <div class="timeline-dot dot-pink"></div>
                         <div class="timeline-card">
                             <div class="card-meta">
-                                <span class="work-date"><i data-lucide="calendar"></i> Mar 2025 - Present</span>
-                                <span class="work-type"><i data-lucide="globe"></i> Remote</span>
+                                <span class="work-date"><i data-lucide="calendar"></i> <span data-i18n="exp.card2.date">Mar 2025 - Present</span></span>
+                                <span class="work-type"><i data-lucide="globe"></i> <span data-i18n="exp.card2.type">Remote</span></span>
                             </div>
-                            <h3 class="role-title">Programming Instructor</h3>
+                            <h3 class="role-title" data-i18n="exp.card2.role">Programming Instructor</h3>
                             <h4 class="company-name highlight-pink">Cairo Coding School</h4>
-                            <p class="role-desc">
+                            <p class="role-desc" data-i18n="exp.card2.desc">
                                 Teaching fundamental computer science concepts and advanced algorithms, helping hundreds
                                 of students establish structural foundations.
                             </p>
                             <ul class="role-bullets">
-                                <li>Conduct live, highly interactive C++ lectures focusing on Object-Oriented
-                                    Programming (OOP) and Memory Management.</li>
-                                <li>Explain advanced complex structures like arrays, pointers, trees, stacks, and
-                                    search/sort algorithms.</li>
-                                <li>Support and review student programming assignments, offering detailed refactoring
-                                    advice to maintain clean, optimal logic.</li>
+                                <li data-i18n="exp.card2.b1">Conduct live, highly interactive C++ lectures focusing on Object-Oriented Programming (OOP) and Memory Management.</li>
+                                <li data-i18n="exp.card2.b2">Explain advanced complex structures like arrays, pointers, trees, stacks, and search/sort algorithms.</li>
+                                <li data-i18n="exp.card2.b3">Support and review student programming assignments, offering detailed refactoring advice to maintain clean, optimal logic.</li>
                             </ul>
                         </div>
                     </div>
@@ -501,15 +519,15 @@
             <div class="container">
                 <div class="section-header">
                     <div>
-                        <span class="section-tag"><i data-lucide="folder-open"></i> Portfolio</span>
-                        <h2 class="section-title">Featured Projects</h2>
-                        <p class="section-desc">Mobile applications combining complex state systems, custom APIs, and
+                        <span class="section-tag" data-i18n="projects.tag">portfolio</span>
+                        <h2 class="section-title" data-i18n="projects.title">Featured Projects</h2>
+                        <p class="section-desc" data-i18n="projects.desc">Mobile applications combining complex state systems, custom APIs, and
                             seamless interfaces.</p>
                     </div>
                     <div class="project-filters">
-                        <button class="filter-btn active" data-filter="all">All Projects</button>
+                        <button class="filter-btn active" data-filter="all" data-i18n="projects.filter_all">All Projects</button>
                         <button class="filter-btn" data-filter="flutter">Flutter</button>
-                        <button class="filter-btn" data-filter="ai">AI-Powered</button>
+                        <button class="filter-btn" data-filter="ai" data-i18n="projects.filter_ai">AI-Powered</button>
                     </div>
                 </div>
 
@@ -521,8 +539,8 @@
                                 class="project-cover-img">
                         </div>
                         <div class="project-info">
-                            <h3 class="project-title">Shtiwy - Smart Travel & Tourism App</h3>
-                            <p class="project-desc">
+                            <h3 class="project-title" data-i18n="proj1.title">Shtiwy - Smart Travel & Tourism App</h3>
+                            <p class="project-desc" data-i18n="proj1.desc">
                                 A production-grade, multi-platform mobile application for travel, Hajj, and Umrah
                                 bookings. Built with Clean Architecture, BLoC/Cubit state management, Supabase (Auth &
                                 PostgreSQL), and functional error handling with Dartz.
@@ -537,10 +555,9 @@
                             </div>
                             <div class="project-links">
                                 <a href="https://github.com/salma-elmaghawry" target="_blank" class="proj-link"><i
-                                        data-brand="github"></i> GitHub</a>
+                                        data-brand="github"></i> <span data-i18n="link.github">GitHub</span></a>
                                 <a href="https://github.com/user-attachments/assets/7e339e87-6490-47ef-a781-6ee170ea172c"
-                                    target="_blank" class="proj-link demo-link"><i data-lucide="play-circle"></i> Watch
-                                    Video</a>
+                                    target="_blank" class="proj-link demo-link"><i data-lucide="play-circle"></i> <span data-i18n="proj1.link_video">Watch Video</span></a>
                             </div>
                         </div>
                     </div>
@@ -552,8 +569,8 @@
                                 class="project-cover-img">
                         </div>
                         <div class="project-info">
-                            <h3 class="project-title">Chainly - Smart Supply Chain App</h3>
-                            <p class="project-desc">
+                            <h3 class="project-title" data-i18n="proj2.title">Chainly - Smart Supply Chain App</h3>
+                            <p class="project-desc" data-i18n="proj2.desc">
                                 A modern, sustainable supply chain management platform. It offers real-time geolocation
                                 tracking, QR identification, and machine learning components to predict demand and
                                 analyze supply flows.
@@ -567,9 +584,8 @@
                             </div>
                             <div class="project-links">
                                 <a href="https://github.com/salma-elmaghawry" target="_blank" class="proj-link"><i
-                                        data-brand="github"></i> GitHub</a>
-                                <a href="#" class="proj-link demo-link"><i data-lucide="external-link"></i> Live
-                                    Demo</a>
+                                        data-brand="github"></i> <span data-i18n="link.github">GitHub</span></a>
+                                <a href="#" class="proj-link demo-link"><i data-lucide="external-link"></i> <span data-i18n="proj2.link_demo">Live Demo</span></a>
                             </div>
                         </div>
                     </div>
@@ -582,17 +598,17 @@
         <section class="contact-section section-padding" id="contact">
             <div class="container">
                 <div class="section-header center">
-                    <span class="section-tag"><i data-lucide="mail"></i> Let's Connect</span>
-                    <h2 class="section-title">Get In Touch</h2>
-                    <p class="section-desc">Open for mobile engineering positions, custom freelance apps, or
+                    <span class="section-tag" data-i18n="contact.tag">let's connect</span>
+                    <h2 class="section-title" data-i18n="contact.title">Get In Touch</h2>
+                    <p class="section-desc" data-i18n="contact.desc">Open for mobile engineering positions, custom freelance apps, or
                         collaborative tutorials.</p>
                 </div>
 
                 <div class="contact-grid">
                     <!-- Contact Cards -->
                     <div class="contact-info-column">
-                        <h3 class="contact-sub-title">Let's create something beautiful together</h3>
-                        <p class="contact-text">
+                        <h3 class="contact-sub-title" data-i18n="contact.subtitle">Let's create something beautiful together</h3>
+                        <p class="contact-text" data-i18n="contact.text">
                             Have a mobile application design that needs high-fidelity Flutter rendering? Or looking to
                             collaborate on programming videos and student tutorials? Reach out and I will get back to
                             you!
@@ -603,7 +619,7 @@
                             <div class="contact-method-card">
                                 <div class="method-icon pink-bg"><i data-lucide="mail"></i></div>
                                 <div class="method-details">
-                                    <span class="method-label">Direct Email</span>
+                                    <span class="method-label" data-i18n="contact.method_email">Direct Email</span>
                                     <a href="mailto:salmaelmaghawry91@gmail.com"
                                         class="method-link">salmaelmaghawry91@gmail.com</a>
                                 </div>
@@ -613,7 +629,7 @@
                             <div class="contact-method-card">
                                 <div class="method-icon mint-bg"><i data-brand="linkedin"></i></div>
                                 <div class="method-details">
-                                    <span class="method-label">LinkedIn Message</span>
+                                    <span class="method-label" data-i18n="contact.method_linkedin">LinkedIn Message</span>
                                     <a href="https://www.linkedin.com/in/salma-elmaghawry/" target="_blank"
                                         class="method-link">linkedin.com/in/salma-elmaghawry</a>
                                 </div>
@@ -623,7 +639,7 @@
                             <div class="contact-method-card">
                                 <div class="method-icon lavender-bg"><i data-brand="youtube"></i></div>
                                 <div class="method-details">
-                                    <span class="method-label">YouTube Channels</span>
+                                    <span class="method-label" data-i18n="contact.method_youtube">YouTube Channels</span>
                                     <a href="https://www.youtube.com/@salma.elmaghawry" target="_blank"
                                         class="method-link">@salma.elmaghawry</a>
                                 </div>
@@ -636,15 +652,15 @@
                         <form id="contact-form" onsubmit="handleFormSubmit(event)">
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="name">Your Name</label>
+                                    <label for="name" data-i18n="form.name_label">Your Name</label>
                                     <div class="input-container">
                                         <i data-lucide="user"></i>
-                                        <input type="text" id="name" name="name" placeholder="Salma Elmaghawry"
+                                        <input type="text" id="name" name="name" placeholder="Salma Elmaghawry" data-i18n-placeholder="form.name_placeholder"
                                             required>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Your Email</label>
+                                    <label for="email" data-i18n="form.email_label">Your Email</label>
                                     <div class="input-container">
                                         <i data-lucide="mail"></i>
                                         <input type="email" id="email" name="email" placeholder="example@gmail.com"
@@ -653,24 +669,24 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="subject">Subject</label>
+                                <label for="subject" data-i18n="form.subject_label">Subject</label>
                                 <div class="input-container">
                                     <i data-lucide="tag"></i>
                                     <input type="text" id="subject" name="subject"
-                                        placeholder="App Development / Mentorship / Collaboration" required>
+                                        placeholder="App Development / Mentorship / Collaboration" data-i18n-placeholder="form.subject_placeholder" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="message">Message</label>
+                                <label for="message" data-i18n="form.message_label">Message</label>
                                 <div class="textarea-container">
                                     <textarea id="message" name="message" rows="5"
-                                        placeholder="Hi Salma, I loved your portfolio! I'd love to chat about..."
+                                        placeholder="Hi Salma, I loved your portfolio! I'd love to chat about..." data-i18n-placeholder="form.message_placeholder"
                                         required></textarea>
                                 </div>
                             </div>
 
                             <button type="submit" class="btn btn-submit" id="submit-btn">
-                                <span>Send Message</span>
+                                <span data-i18n="form.submit">Send Message</span>
                                 <i data-lucide="send" id="btn-send-icon"></i>
                             </button>
 
@@ -686,18 +702,26 @@
     <footer class="footer">
         <div class="container footer-container">
             <div class="footer-brand">
-                <a href="#" class="logo">Salma<span class="logo-dot">.</span></a>
-                <p class="footer-slogan">Combining clean logic, aesthetic frontends, and dynamic education storytelling.
+                <a href="#" class="logo">
+                    <svg class="logo-mark" viewBox="0 0 100 100" width="30" height="30" aria-hidden="true">
+                        <rect x="0" y="0" width="100" height="100" rx="29" fill="#4C7A5B" />
+                        <path d="M32,30 L48,46 L32,62" fill="none" stroke="#F6EFE4" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M52,30 L68,46 L52,62" fill="none" stroke="#F6EFE4" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+                        <rect x="32" y="76" width="38" height="10" rx="5" fill="#E3A02B" />
+                    </svg>
+                    Salma<span class="logo-dot">.</span>
+                </a>
+                <p class="footer-slogan" data-i18n="footer.slogan">Combining clean logic, aesthetic frontends, and dynamic education storytelling.
                 </p>
             </div>
 
             <div class="footer-links">
-                <a href="#about">About</a>
-                <a href="#skills">Skills</a>
-                <a href="#projects">Projects</a>
-                <a href="#youtube">Tutorials</a>
-                <a href="#volunteering">Volunteering</a>
-                <a href="#contact">Contact</a>
+                <a href="#about" data-i18n="nav.about">About</a>
+                <a href="#skills" data-i18n="nav.skills">Skills</a>
+                <a href="#projects" data-i18n="nav.projects">Projects</a>
+                <a href="#youtube" data-i18n="nav.tutorials">Tutorials</a>
+                <a href="#volunteering" data-i18n="footer.volunteering">Volunteering</a>
+                <a href="#contact" data-i18n="nav.contact">Contact</a>
             </div>
 
             <div class="footer-socials">
@@ -711,7 +735,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Salma Elmaghawry. Designed &amp; Engineered with 💖 using Nunito &amp; Mint accents.</p>
+            <p data-i18n="footer.copyright">&copy; 2026 Salma Elmaghawry. Designed &amp; engineered with Nunito, Tajawal &amp; JetBrains Mono.</p>
         </div>
     </footer>
 
@@ -726,7 +750,7 @@
     <div class="video-modal" id="video-modal" onclick="closeVideoModal(event)">
         <div class="video-modal-inner">
             <button class="video-modal-close" onclick="closeVideoModal(null)" aria-label="Close video">&times;</button>
-            <div class="video-modal-title" id="video-modal-title"></div>
+            <div class="video-modal-title" id="video-modal-title" dir="auto"></div>
             <div class="video-iframe-wrapper">
                 <iframe id="video-modal-iframe" src="" title="YouTube Shorts" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -734,7 +758,7 @@
                 </iframe>
             </div>
             <a class="video-modal-yt-link" id="video-modal-yt-link" href="#" target="_blank" rel="noopener">
-                <i data-brand="youtube"></i> Watch on YouTube
+                <i data-brand="youtube"></i> <span data-i18n="video_modal.watch_youtube">Watch on YouTube</span>
             </a>
         </div>
     </div>
@@ -745,6 +769,8 @@
         // Initialize Lucide Icons immediately after the DOM loads
         lucide.createIcons();
     </script>
+    <!-- Language Translations Data -->
+    <script src="translations.js"></script>
     <!-- Custom Interactions Script -->
     <script src="script.js"></script>
 </body>
