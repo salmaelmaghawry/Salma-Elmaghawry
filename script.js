@@ -69,15 +69,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinksList = document.querySelectorAll('.nav-link, .nav-btn-mobile');
     
     burgerMenu.addEventListener('click', () => {
-        burgerMenu.classList.toggle('active');
-        navMenu.classList.toggle('active');
+        const isOpen = burgerMenu.classList.toggle('active');
+        navMenu.classList.toggle('active', isOpen);
+        document.body.classList.toggle('menu-open', isOpen);
+        burgerMenu.setAttribute('aria-expanded', String(isOpen));
     });
     
     navLinksList.forEach(link => {
         link.addEventListener('click', () => {
             burgerMenu.classList.remove('active');
             navMenu.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            burgerMenu.setAttribute('aria-expanded', 'false');
         });
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 1100) {
+            burgerMenu.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            burgerMenu.setAttribute('aria-expanded', 'false');
+        }
     });
 
     // --- THEME SELECTOR (DARK / LIGHT MODE) ---

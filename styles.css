@@ -89,6 +89,8 @@ body.dark-mode {
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -98,6 +100,10 @@ body {
     transition: background-color var(--transition-normal), color var(--transition-normal);
     overflow-x: hidden;
     line-height: 1.6;
+}
+
+body.menu-open {
+    overflow: hidden;
 }
 
 .container {
@@ -382,6 +388,14 @@ body.dark-mode .theme-toggle .moon-icon {
     align-items: center;
 }
 
+.hero-container > *,
+.about-grid > *,
+.contact-grid > *,
+.skills-grid > *,
+.projects-grid > * {
+    min-width: 0;
+}
+
 .hero-content {
     display: flex;
     flex-direction: column;
@@ -408,7 +422,7 @@ body.dark-mode .hero-tag {
 }
 
 .hero-title {
-    font-size: 3.6rem;
+    font-size: clamp(2.15rem, 5vw, 3.6rem);
     font-weight: 800;
     line-height: 1.15;
     letter-spacing: -1.5px;
@@ -425,10 +439,11 @@ body.dark-mode .hero-tag {
 }
 
 .hero-subtitle {
-    font-size: 1.8rem;
+    font-size: clamp(1.15rem, 2.6vw, 1.8rem);
     font-weight: 700;
     color: var(--text-secondary);
     margin-bottom: 24px;
+    min-height: 2.4em;
 }
 
 .typing-text {
@@ -452,6 +467,7 @@ body.dark-mode .hero-tag {
 
 .hero-ctas {
     display: flex;
+    flex-wrap: wrap;
     gap: 16px;
     margin-bottom: 40px;
 }
@@ -496,6 +512,7 @@ body.dark-mode .hero-tag {
 .hero-socials {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 16px;
     border-top: 1px solid var(--border-color);
     padding-top: 24px;
@@ -511,6 +528,7 @@ body.dark-mode .hero-tag {
 
 .socials-icons {
     display: flex;
+    flex-wrap: wrap;
     gap: 12px;
 }
 
@@ -543,8 +561,9 @@ body.dark-mode .hero-tag {
 
 .avatar-frame-container {
     position: relative;
-    width: 380px;
-    height: 380px;
+    width: min(380px, 86vw);
+    height: min(380px, 86vw);
+    max-width: 100%;
 }
 
 .glow-ring {
@@ -716,7 +735,7 @@ body.dark-mode .section-tag {
 }
 
 .section-title {
-    font-size: 2.6rem;
+    font-size: clamp(1.75rem, 4vw, 2.6rem);
     font-weight: 800;
     letter-spacing: -0.5px;
     margin-bottom: 16px;
@@ -741,7 +760,7 @@ body.dark-mode .section-tag {
 }
 
 .about-title {
-    font-size: 1.8rem;
+    font-size: clamp(1.35rem, 3vw, 1.8rem);
     font-weight: 800;
     margin-bottom: 20px;
     line-height: 1.3;
@@ -907,6 +926,7 @@ body.dark-mode .edu-icon {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 12px;
     font-size: 0.95rem;
     font-weight: 600;
     color: var(--text-secondary);
@@ -919,6 +939,8 @@ body.dark-mode .edu-icon {
     font-weight: 800;
     background-color: var(--bg-secondary);
     color: var(--text-secondary);
+    flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .skill-badge.pink {
@@ -996,6 +1018,7 @@ body.dark-mode .edu-icon {
 
 .card-meta {
     display: flex;
+    flex-wrap: wrap;
     gap: 16px;
     margin-bottom: 12px;
     font-size: 0.85rem;
@@ -1050,8 +1073,17 @@ body.dark-mode .edu-icon {
 }
 
 /* --- PROJECTS SECTION --- */
+.projects-section .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
 .project-filters {
     display: flex;
+    flex-wrap: wrap;
     gap: 12px;
 }
 
@@ -1079,7 +1111,7 @@ body.dark-mode .edu-icon {
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
     gap: 30px;
     margin-top: 40px;
 }
@@ -1233,6 +1265,7 @@ body.dark-mode .project-tags .tag {
 
 .yt-stats {
     display: flex;
+    flex-wrap: wrap;
     gap: 24px;
     margin-bottom: 32px;
 }
@@ -1665,6 +1698,8 @@ body.dark-mode .volunteer-achievement {
 .method-link {
     font-size: 1.05rem;
     font-weight: 700;
+    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 .method-link:hover {
@@ -1791,6 +1826,8 @@ body.dark-mode .volunteer-achievement {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
     margin-bottom: 40px;
 }
 
@@ -1807,7 +1844,9 @@ body.dark-mode .volunteer-achievement {
 
 .footer-links {
     display: flex;
-    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px 24px;
     font-weight: 700;
     color: var(--text-secondary);
 }
@@ -1906,118 +1945,49 @@ body.dark-mode .volunteer-achievement {
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
 
-/* --- RESPONSIVE MEDIA QUERIES (MOBILE-FIRST) --- */
+/* --- RESPONSIVE MEDIA QUERIES --- */
 
-/* Tablet Screens (1024px and down) */
-@media (max-width: 1024px) {
-    .hero-container {
-        grid-template-columns: 1fr;
-        gap: 60px;
-        text-align: center;
+/* Laptop / large tablet — nav links overflow before 1024px */
+@media (max-width: 1100px) {
+    .nav-menu {
+        gap: 20px;
     }
-    
-    .hero-content {
-        align-items: center;
-    }
-    
-    .hero-desc {
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .hero-tag {
-        align-self: center;
-    }
-    
-    .hero-ctas {
-        justify-content: center;
-    }
-    
-    .hero-socials {
-        justify-content: center;
-        width: 100%;
-    }
-    
-    .about-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .skills-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .youtube-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-}
 
-/* Mobile Screens (768px and down) */
-@media (max-width: 768px) {
-    .section-title {
-        font-size: 2.1rem;
+    .btn-talk {
+        display: none;
     }
-    
-    .hero-title {
-        font-size: 2.8rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.4rem;
-    }
-    
-    .avatar-frame-container {
-        width: 300px;
-        height: 300px;
-    }
-    
-    .fallback-icon {
-        font-size: 6rem;
-    }
-    
-    .floating-tech {
-        width: 44px;
-        height: 44px;
-    }
-    
-    /* Navigation burger menu styling */
+
     .burger {
         display: flex;
     }
-    
+
     .nav-menu {
         position: fixed;
         top: var(--header-height);
         left: -100%;
         width: 100%;
+        height: calc(100dvh - var(--header-height));
         height: calc(100vh - var(--header-height));
         background-color: var(--bg-primary);
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        gap: 40px;
+        justify-content: flex-start;
+        padding: 48px 24px 32px;
+        overflow-y: auto;
+        gap: 28px;
         z-index: 99;
         transition: left var(--transition-normal);
         border-top: 1px solid var(--border-color);
     }
-    
+
     .nav-menu.active {
         left: 0;
     }
-    
+
     .nav-link {
-        font-size: 1.3rem;
+        font-size: 1.25rem;
     }
-    
+
     .nav-btn-mobile {
         display: block;
         padding: 12px 32px;
@@ -2025,109 +1995,335 @@ body.dark-mode .volunteer-achievement {
         color: #FFF;
         font-weight: 700;
         border-radius: var(--border-radius-md);
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
-    
-    .btn-talk {
-        display: none;
-    }
-    
-    /* Burger transformation */
+
     .burger.active .bar:nth-child(1) {
         transform: translateY(8px) rotate(45deg);
     }
-    
+
     .burger.active .bar:nth-child(2) {
         opacity: 0;
     }
-    
+
     .burger.active .bar:nth-child(3) {
         transform: translateY(-8px) rotate(-45deg);
     }
-    
-    .timeline-container::before {
-        left: 20px;
+
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
-    
-    .timeline-item {
-        padding-left: 50px;
-    }
-    
-    .timeline-dot {
-        left: 9px;
-    }
-    
-    .volunteering-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .certifications-grid {
-        grid-template-columns: 1fr;
-    }
-    
+
     .contact-grid {
         grid-template-columns: 1fr;
         gap: 40px;
     }
-    
-    .contact-form-card {
-        padding: 24px;
+}
+
+/* Tablet Screens (1024px and down) */
+@media (max-width: 1024px) {
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        text-align: center;
     }
-    
+
+    .hero-content {
+        align-items: center;
+    }
+
+    .hero-desc {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-tag {
+        align-self: center;
+    }
+
+    .hero-ctas {
+        justify-content: center;
+    }
+
+    .hero-socials {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .hero-visual {
+        order: -1;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .youtube-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .projects-section .section-header {
+        align-items: flex-start;
+    }
+
+    .section-padding {
+        padding: 80px 0;
+    }
+}
+
+/* Mobile Screens (768px and down) */
+@media (max-width: 768px) {
+    :root {
+        --header-height: 68px;
+    }
+
+    .container,
+    .nav-container,
+    .hero-container {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .section-padding {
+        padding: 64px 0;
+    }
+
+    .section-header {
+        margin-bottom: 36px;
+    }
+
+    .hero-section {
+        padding-top: calc(var(--header-height) + 24px);
+        min-height: auto;
+        padding-bottom: 80px;
+    }
+
+    .avatar-frame-container {
+        width: min(280px, 78vw);
+        height: min(280px, 78vw);
+    }
+
+    .fallback-icon {
+        font-size: 6rem;
+    }
+
+    .floating-tech {
+        width: 44px;
+        height: 44px;
+    }
+
+    .scroll-indicator {
+        display: none;
+    }
+
+    .blob-mint,
+    .blob-pink,
+    .blob-lavender {
+        width: 280px;
+        height: 280px;
+        filter: blur(80px);
+    }
+
+    .education-card {
+        flex-direction: column;
+        gap: 14px;
+        padding: 20px;
+    }
+
+    .about-stats-container {
+        gap: 14px;
+    }
+
+    .stat-card {
+        padding: 22px 16px;
+    }
+
+    .skill-category-card {
+        padding: 22px 18px;
+    }
+
+    .skill-list li {
+        gap: 8px;
+        align-items: flex-start;
+    }
+
+    .skill-name {
+        min-width: 0;
+    }
+
+    .timeline-container::before {
+        left: 20px;
+    }
+
+    .timeline-item {
+        padding-left: 50px;
+        margin-bottom: 32px;
+    }
+
+    .timeline-dot {
+        left: 9px;
+    }
+
+    .timeline-card {
+        padding: 22px 18px;
+    }
+
+    .timeline-card:hover {
+        transform: none;
+    }
+
+    .volunteering-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .certifications-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-form-card,
+    .youtube-intro-card {
+        padding: 22px 18px;
+    }
+
     .form-row {
         grid-template-columns: 1fr;
         gap: 0;
     }
-    
+
+    .input-container input,
+    .textarea-container textarea {
+        font-size: 16px;
+    }
+
     .footer-container {
         flex-direction: column;
-        gap: 30px;
+        gap: 28px;
         text-align: center;
+        align-items: center;
+    }
+
+    .footer-slogan {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .footer {
+        padding: 40px 0 20px;
+    }
+
+    .lightbox {
+        padding: 16px;
+    }
+
+    .lightbox-close {
+        top: 12px;
+        right: 16px;
+        font-size: 2.2rem;
+    }
+
+    .video-modal {
+        padding: 12px;
+        align-items: flex-end;
+    }
+
+    .video-modal-inner {
+        max-height: min(92dvh, 92vh);
+        max-width: 100%;
+    }
+
+    .video-iframe-wrapper {
+        padding-top: 0;
+        height: min(70dvh, 560px);
     }
 }
 
-/* Ultra Small Mobile Screens (480px and down) */
+/* Small phones (480px and down) */
 @media (max-width: 480px) {
     .skills-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .projects-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
     }
-    
+
     .services-grid {
         grid-template-columns: 1fr;
     }
-    
-    .hero-title {
-        font-size: 2.2rem;
+
+    .about-stats-container {
+        grid-template-columns: 1fr;
     }
-    
+
     .hero-ctas {
         flex-direction: column;
         width: 100%;
     }
-    
+
     .btn {
         width: 100%;
         justify-content: center;
     }
-    
+
     .video-card {
         flex-direction: column;
         align-items: stretch;
     }
-    
+
     .video-thumbnail-placeholder {
         width: 100%;
         height: 160px;
+    }
+
+    .yt-stats {
+        gap: 16px;
+        justify-content: space-between;
+    }
+
+    .yt-number {
+        font-size: 1.2rem;
+    }
+
+    .contact-method-card {
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .project-links {
+        flex-wrap: wrap;
+    }
+
+    .activity-item {
+        height: 180px;
+    }
+}
+
+@media (max-width: 360px) {
+    .hero-tag span {
+        font-size: 0.78rem;
+    }
+
+    .nav-container {
+        padding-left: 12px;
+        padding-right: 12px;
     }
 }
 
 /* ==========================================================================
    REAL ASSETS — Profile Photo, Project Screenshots, Video Integration
    ========================================================================== */
+
 
 /* --- Profile Photo inside Avatar Frame --- */
 .profile-photo {
@@ -2594,9 +2790,11 @@ body.dark-mode .volunteer-achievement {
         gap: 16px;
         padding-bottom: 12px;
         -webkit-overflow-scrolling: touch;
+        margin-inline: -16px;
+        padding-inline: 16px;
     }
     .short-player {
-        flex: 0 0 72%;
+        flex: 0 0 min(240px, 72%);
         scroll-snap-align: center;
     }
     .yt-banner {
