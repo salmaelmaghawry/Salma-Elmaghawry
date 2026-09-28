@@ -454,10 +454,14 @@ function closeVideoModal(event) {
     document.body.style.overflow = 'auto';
 }
 
-// --- MOCK CONTACT FORM SUBMISSION RESPONSE ---
+// --- CONTACT FORM SUBMISSION (real delivery via FormSubmit.co) ---
+// Sends the form data with fetch() to the endpoint set in the form's
+// `action` attribute (index.html), so the page never redirects. Falls
+// back to a visible error + mailto link if the request fails, instead
+// of ever claiming success for a message that didn't actually send.
 function handleFormSubmit(event) {
     event.preventDefault();
-    
+
     const form = document.getElementById('contact-form');
     const submitBtn = document.getElementById('submit-btn');
     const statusDiv = document.getElementById('form-status');
@@ -468,26 +472,44 @@ function handleFormSubmit(event) {
     submitBtn.disabled = true;
     submitBtn.style.opacity = '0.7';
     submitBtnText.textContent = dict['form.sending'] || 'Sending Message...';
+    statusDiv.className = 'form-status';
+    statusDiv.innerHTML = '';
 
-    setTimeout(() => {
-        statusDiv.className = 'form-status success';
-        const sentMessage = dict['form.sent'] || 'Message Sent! Thank you, I will get back to you shortly.';
-        statusDiv.innerHTML = `<i data-lucide="check" style="display:inline-block; vertical-align:middle; width:18px; height:18px;"></i> ${sentMessage}`;
+    const endpoint = form.getAttribute('action');
+    const formData = new FormData(form);
 
-        // Re-draw lucide icon
-        lucide.createIcons();
+    fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) throw new Error('Request failed with status ' + response.status);
+            return response.json().catch(() => ({}));
+        })
+        .then(() => {
+            statusDiv.className = 'form-status success';
+            const sentMessage = dict['form.sent'] || 'Message Sent! Thank you, I will get back to you shortly.';
+            statusDiv.innerHTML = `<i data-lucide="check" style="display:inline-block; vertical-align:middle; width:18px; height:18px;"></i> ${sentMessage}`;
+            form.reset();
+        })
+        .catch(() => {
+            statusDiv.className = 'form-status error';
+            const errorMessage = dict['form.error'] || 'Something went wrong. Please email me directly at salmaelmaghawry91@gmail.com.';
+            statusDiv.innerHTML = `<i data-lucide="alert-circle" style="display:inline-block; vertical-align:middle; width:18px; height:18px;"></i> ${errorMessage}`;
+        })
+        .finally(() => {
+            // Re-draw lucide icon
+            if (typeof lucide !== 'undefined') lucide.createIcons();
 
-        // Reset form
-        form.reset();
-        submitBtn.disabled = false;
-        submitBtn.style.opacity = '1';
-        submitBtnText.textContent = dict['form.submit'] || 'Send Message';
-        
-        // Clear message after 5 seconds
-        setTimeout(() => {
-            statusDiv.innerHTML = '';
-            statusDiv.className = 'form-status';
-        }, 5000);
-        
-    }, 1500);
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = '1';
+            submitBtnText.textContent = dict['form.submit'] || 'Send Message';
+
+            // Clear message after 6 seconds
+            setTimeout(() => {
+                statusDiv.innerHTML = '';
+                statusDiv.className = 'form-status';
+            }, 6000);
+        });
 }

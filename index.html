@@ -532,7 +532,38 @@
                 </div>
 
                 <div class="projects-grid">
-                    <!-- Project 1: Shtiwy -->
+                    <!-- Project: Flowsy -->
+                    <div class="project-card" data-category="flutter">
+                        <div class="project-image-placeholder project-img-cover">
+                            <img src="assets/Projects_images/Flowsy_poster.png" alt="Flowsy App Screenshot"
+                                class="project-cover-img">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title" data-i18n="proj3.title">Flowsy - Smart Budgeting & Wallets App</h3>
+                            <p class="project-desc" data-i18n="proj3.desc">
+                                A bilingual (Arabic/English, RTL) budgeting app that splits money into wallets and shows
+                                what's really left after planned spending. Built with Clean Architecture, Cubit, Firebase
+                                Auth and Firestore, with a biometric app lock and smart daily reminders.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">Flutter</span>
+                                <span class="tag">Firebase</span>
+                                <span class="tag">Clean Arch</span>
+                                <span class="tag">Dartz</span>
+                                <span class="tag">Local Auth</span>
+                                <span class="tag">Biometric App Lock</span>
+                                <span class="tag">Notifications</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/salma-elmaghawry/Flowsy-App" target="_blank" class="proj-link"><i
+                                        data-brand="github"></i> <span data-i18n="link.github">GitHub</span></a>
+                                <a href="https://youtu.be/ahtd_oN3bZ4"
+                                    target="_blank" class="proj-link demo-link"><i data-lucide="play-circle"></i> <span data-i18n="proj3.link_video">Watch Video</span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project: Shtiwy -->
                     <div class="project-card" data-category="flutter">
                         <div class="project-image-placeholder project-img-cover">
                             <img src="assets/Projects_images/shtiway_poster.png" alt="Shtiwy App Screenshot"
@@ -562,7 +593,7 @@
                         </div>
                     </div>
 
-                    <!-- Project 2: Chainly -->
+                    <!-- Project: Chainly -->
                     <div class="project-card" data-category="flutter ai">
                         <div class="project-image-placeholder project-img-cover">
                             <img src="assets/Projects_images/chainly_poster.png" alt="Chainly App Screenshot"
@@ -649,7 +680,17 @@
 
                     <!-- Contact Form -->
                     <div class="contact-form-card">
-                        <form id="contact-form" onsubmit="handleFormSubmit(event)">
+                        <!-- Delivers to salmaelmaghawry91@gmail.com via FormSubmit.co (no backend needed).
+                             The action attribute is a no-JS fallback; handleFormSubmit() in script.js
+                             intercepts the submit and sends it via fetch() instead so the page never
+                             redirects. IMPORTANT: the very first submission after this goes live will
+                             trigger a one-time "confirm your form" email from FormSubmit to that inbox —
+                             it must be confirmed once before messages start arriving. -->
+                        <form id="contact-form" action="https://formsubmit.co/salmaelmaghawry91@gmail.com" method="POST" onsubmit="handleFormSubmit(event)">
+                            <input type="hidden" name="_subject" value="New message from your portfolio contact form">
+                            <input type="hidden" name="_template" value="table">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="name" data-i18n="form.name_label">Your Name</label>
