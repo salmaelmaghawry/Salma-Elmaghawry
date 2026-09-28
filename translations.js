@@ -3,9 +3,14 @@
    Keys match the `data-i18n` / `data-i18n-placeholder` attributes in
    index.html. `professions` is consumed directly by the hero typing
    cycler in script.js (not applied through data-i18n).
+
+   NOTE: this is assigned as `window.TRANSLATIONS` (not `const TRANSLATIONS`)
+   on purpose — script.js checks `window.TRANSLATIONS` before applying a
+   language, and a top-level `const`/`let` never becomes a property of
+   `window`, so that check would silently fail forever with `const`.
    ========================================================================== */
 
-const TRANSLATIONS = {
+window.TRANSLATIONS = {
     en: {
         "meta.title": "Salma Elmaghawry | Software Engineer & Flutter Developer",
 
@@ -96,6 +101,9 @@ const TRANSLATIONS = {
         "proj2.title": "Chainly - Smart Supply Chain App",
         "proj2.desc": "A modern, sustainable supply chain management platform. It offers real-time geolocation tracking, QR identification, and machine learning components to predict demand and analyze supply flows.",
         "proj2.link_demo": "Live Demo",
+        "proj3.title": "Flowsy - Smart Budgeting & Wallets App",
+        "proj3.desc": "A bilingual (Arabic/English, RTL) budgeting app that splits money into wallets and shows what's really left after planned spending. Built with Clean Architecture, Cubit, Firebase Auth and Firestore, with a biometric app lock and smart daily reminders.",
+        "proj3.link_video": "Watch Video",
         "link.github": "GitHub",
 
         "contact.tag": "let's connect",
@@ -117,6 +125,7 @@ const TRANSLATIONS = {
         "form.submit": "Send Message",
         "form.sending": "Sending Message...",
         "form.sent": "Message Sent! Thank you, I will get back to you shortly.",
+        "form.error": "Something went wrong. Please email me directly at salmaelmaghawry91@gmail.com.",
 
         "footer.slogan": "Combining clean logic, aesthetic frontends, and dynamic education storytelling.",
         "footer.volunteering": "Volunteering",
@@ -223,6 +232,9 @@ const TRANSLATIONS = {
         "proj2.title": "Chainly - تطبيق ذكي لسلاسل الإمداد",
         "proj2.desc": "منصة حديثة ومستدامة لإدارة سلاسل الإمداد، توفّر تتبعًا جغرافيًا لحظيًا، وتعريفًا عبر رموز QR، ومكوّنات تعلّم آلي للتنبؤ بالطلب وتحليل تدفقات الإمداد.",
         "proj2.link_demo": "عرض مباشر",
+        "proj3.title": "Flowsy - تطبيق ذكي للميزانية والمحافظ",
+        "proj3.desc": "تطبيق ثنائي اللغة (عربي/إنجليزي مع دعم RTL) لإدارة الميزانية، يقسّم الفلوس على محافظ ويوضّح المتبقي الحقيقي بعد المصروفات المخطط لها. مبني باستخدام Clean Architecture وCubit وFirebase Auth وFirestore، مع قفل للتطبيق بالبصمة وتذكيرات يومية ذكية.",
+        "proj3.link_video": "مشاهدة الفيديو",
         "link.github": "GitHub",
 
         "contact.tag": "لنتواصل",
@@ -244,6 +256,7 @@ const TRANSLATIONS = {
         "form.submit": "إرسال الرسالة",
         "form.sending": "جارٍ الإرسال...",
         "form.sent": "تم إرسال الرسالة! شكرًا لك، سأرد عليك قريبًا.",
+        "form.error": "حدث خطأ ما. من فضلك راسليني مباشرة على salmaelmaghawry91@gmail.com.",
 
         "footer.slogan": "أمزج بين المنطق النظيف، الواجهات الجمالية، وسرد تعليمي ديناميكي.",
         "footer.volunteering": "التطوع",

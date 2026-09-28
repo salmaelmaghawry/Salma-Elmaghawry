@@ -1193,9 +1193,18 @@ body.dark-mode .edu-icon {
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     margin-top: 40px;
+}
+
+/* Keep project order left-to-right (first project on the left) in Arabic too */
+[dir="rtl"] .projects-grid {
+    direction: ltr;
+}
+
+[dir="rtl"] .project-card {
+    direction: rtl;
 }
 
 .project-card {
@@ -2153,7 +2162,7 @@ body.dark-mode .volunteer-achievement {
     }
 
     .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .services-grid {
@@ -2176,6 +2185,10 @@ body.dark-mode .volunteer-achievement {
 
 /* Mobile Screens (768px and down) */
 @media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     :root {
         --header-height: 68px;
     }
