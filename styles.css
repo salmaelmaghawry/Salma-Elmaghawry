@@ -2446,7 +2446,8 @@ body.dark-mode .volunteer-achievement {
     position: relative;
     overflow: hidden;
     padding: 0;
-    height: 220px;
+    height: auto;
+    aspect-ratio: 16 / 10;
     background: var(--bg-card);
 }
 
@@ -2461,6 +2462,132 @@ body.dark-mode .volunteer-achievement {
 
 .project-card:hover .project-cover-img {
     transform: scale(1.06);
+}
+
+/* --- Scrollable screenshot gallery inside a project cover ---
+   --per-view sets how many slides show at once; script.js reads it. */
+.project-gallery {
+    --per-view: 2;
+    --gallery-gap: 0px;
+}
+
+.gallery-track {
+    width: 100%;
+    display: flex;
+    gap: var(--gallery-gap);
+    height: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.gallery-track::-webkit-scrollbar {
+    display: none;
+}
+
+.gallery-slide {
+    flex: 0 0 calc((100% - (var(--per-view) - 1) * var(--gallery-gap)) / var(--per-view));
+    min-width: 0;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 80%;
+    scroll-snap-align: start;
+    display: block;
+}
+
+/* Raw phone screenshots (no mockup frame): framed as rounded screens on a tinted stage */
+.gallery-screens {
+    --per-view: 3;
+    --gallery-gap: 12px;
+    background: var(--accent-mint-light);
+}
+
+.gallery-screens .gallery-track {
+    padding: 16px 16px 30px;
+    scroll-padding: 0 16px;
+}
+
+.gallery-screens .gallery-slide {
+    object-position: top;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(34, 53, 40, 0.15);
+}
+
+@media (max-width: 480px) {
+    .gallery-screens {
+        --per-view: 2;
+        aspect-ratio: 1 / 1;
+    }
+}
+
+.gallery-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(34, 53, 40, 0.6);
+    color: #fff;
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.gallery-nav svg {
+    width: 18px;
+    height: 18px;
+}
+
+.gallery-prev { left: 10px; }
+.gallery-next { right: 10px; }
+
+.project-gallery:hover .gallery-nav,
+.gallery-nav:focus-visible {
+    opacity: 1;
+}
+
+.gallery-nav:disabled {
+    opacity: 0 !important;
+    pointer-events: none;
+}
+
+@media (hover: none) {
+    .gallery-nav { display: none; }
+}
+
+.gallery-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    gap: 6px;
+}
+
+.gallery-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(34, 53, 40, 0.3);
+    cursor: pointer;
+    transition: background 0.25s ease, width 0.25s ease;
+}
+
+.gallery-dot.active {
+    width: 20px;
+    border-radius: 4px;
+    background: var(--accent-mint);
 }
 
 /* Badge sits on top of real image */
