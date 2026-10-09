@@ -1,6 +1,6 @@
 /* ==========================================================================
    Salma Elmaghawry Portfolio - Interaction Scripts JS
-   Provides premium scrolling, theme toggles, dynamic text cycling, 
+   Provides premium scrolling, dynamic text cycling, 
    project filtering, tabs toggling, certificate lightbox, and form submissions.
    ========================================================================== */
 
@@ -137,26 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- THEME SELECTOR (DARK / LIGHT MODE) ---
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const body = document.body;
-    
-    // Get persisted theme preference or default to light mode
-    const storedTheme = localStorage.getItem('theme') || 'light-mode';
-    body.className = storedTheme;
-    
-    themeToggleBtn.addEventListener('click', () => {
-        if (body.classList.contains('light-mode')) {
-            body.classList.remove('light-mode');
-            body.classList.add('dark-mode');
-            localStorage.setItem('theme', 'dark-mode');
-        } else {
-            body.classList.remove('dark-mode');
-            body.classList.add('light-mode');
-            localStorage.setItem('theme', 'light-mode');
-        }
-    });
-
     // --- PREMIUM TYPING TEXT EFFECT CYCLER (language-aware) ---
     const typingSpan = document.querySelector('.typing-text');
     const FALLBACK_PROFESSIONS = ["Software Engineer & Flutter Developer"];
@@ -247,7 +227,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // Educational Content row is actually on screen.
     const shortPlayers = document.querySelectorAll('.short-player');
 
-    if (shortPlayers.length) {
+    // YouTube only plays embeds on pages served over http(s); opened as a
+    // local file (file://) every embed shows "Error 153". There we keep the
+    // thumbnail and open the Short on YouTube instead.
+    const canEmbedYouTube = location.protocol === 'http:' || location.protocol === 'https:';
+
+    if (shortPlayers.length && !canEmbedYouTube) {
+        shortPlayers.forEach(el => {
+            const frame = el.querySelector('.short-frame');
+            frame.classList.add('is-link');
+            frame.setAttribute('role', 'link');
+            frame.setAttribute('tabindex', '0');
+            frame.setAttribute('aria-label', el.getAttribute('data-title') || 'Watch on YouTube');
+            const open = () => window.open(`https://youtube.com/shorts/${el.getAttribute('data-video')}`, '_blank', 'noopener');
+            frame.addEventListener('click', open);
+            frame.addEventListener('keydown', e => { if (e.key === 'Enter') open(); });
+        });
+    } else if (shortPlayers.length) {
         const shortsObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 const el = entry.target;
@@ -259,9 +255,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!frame.querySelector('iframe')) {
                         const id = el.getAttribute('data-video');
                         const iframe = document.createElement('iframe');
-                        iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=1&rel=0&modestbranding=1&playsinline=1`;
+                        iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=1&rel=0&modestbranding=1&playsinline=1&origin=${encodeURIComponent(location.origin)}`;
                         iframe.title = el.getAttribute('data-title') || 'YouTube Short';
                         iframe.setAttribute('frameborder', '0');
+                        // YouTube refuses embeds that arrive without a Referer (Error 153)
+                        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
                         iframe.setAttribute('loading', 'lazy');
                         iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
                         iframe.allowFullscreen = true;
@@ -350,6 +348,53 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // --- PROJECT SCREENSHOT GALLERIES ---
+    document.querySelectorAll('.project-gallery').forEach(gallery => {
+        const track = gallery.querySelector('.gallery-track');
+        const slides = track.querySelectorAll('.gallery-slide');
+        const dotsWrap = gallery.querySelector('.gallery-dots');
+        const prev = gallery.querySelector('.gallery-prev');
+        const next = gallery.querySelector('.gallery-next');
+
+        // Slides per view comes from the CSS (--per-view), so there is one
+        // scroll position, and one dot, per slide that can lead the view
+        const perView = () => parseInt(getComputedStyle(gallery).getPropertyValue('--per-view'), 10) || 1;
+        const lastIndex = () => Math.max(slides.length - perView(), 0);
+        const step = () => slides.length > 1 ? slides[1].offsetLeft - slides[0].offsetLeft : track.clientWidth;
+        const goTo = index => track.scrollTo({ left: index * step() });
+        const current = () => Math.round(track.scrollLeft / step());
+
+        let dots = [];
+        const buildDots = () => {
+            dotsWrap.innerHTML = '';
+            dots = Array.from({ length: lastIndex() + 1 }, (_, i) => {
+                const dot = document.createElement('button');
+                dot.className = 'gallery-dot';
+                dot.setAttribute('aria-label', `Screenshot ${i + 1}`);
+                dot.addEventListener('click', () => goTo(i));
+                dotsWrap.appendChild(dot);
+                return dot;
+            });
+        };
+
+        const update = () => {
+            const index = current();
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+            prev.disabled = index === 0;
+            next.disabled = index >= lastIndex();
+        };
+
+        prev.addEventListener('click', () => goTo(current() - 1));
+        next.addEventListener('click', () => goTo(current() + 1));
+        track.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', () => {
+            if (dots.length !== lastIndex() + 1) buildDots();
+            update();
+        });
+        buildDots();
+        update();
+    });
+
     // --- IMPACT SECTIONS TAB CONTROL ---
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
@@ -428,6 +473,11 @@ function openVideoModal(videoId, title) {
     const titleEl = document.getElementById('video-modal-title');
     const ytLink = document.getElementById('video-modal-yt-link');
 
+    if (location.protocol !== 'http:' && location.protocol !== 'https:') {
+        window.open(`https://youtube.com/shorts/${videoId}`, '_blank', 'noopener');
+        return;
+    }
+
     // Set embed src with autoplay for immediate playback
     iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
     titleEl.textContent = title;
@@ -485,15 +535,20 @@ function handleFormSubmit(event) {
     })
         .then(response => {
             if (!response.ok) throw new Error('Request failed with status ' + response.status);
-            return response.json().catch(() => ({}));
+            return response.json();
         })
-        .then(() => {
+        .then(data => {
+            // FormSubmit answers 200 even when it rejects a message (e.g. the
+            // form isn't activated yet), so trust only its own success flag
+            if (String(data.success) !== 'true') throw new Error(data.message || 'FormSubmit rejected the message');
+
             statusDiv.className = 'form-status success';
             const sentMessage = dict['form.sent'] || 'Message Sent! Thank you, I will get back to you shortly.';
             statusDiv.innerHTML = `<i data-lucide="check" style="display:inline-block; vertical-align:middle; width:18px; height:18px;"></i> ${sentMessage}`;
             form.reset();
         })
-        .catch(() => {
+        .catch(error => {
+            console.error('Contact form:', error);
             statusDiv.className = 'form-status error';
             const errorMessage = dict['form.error'] || 'Something went wrong. Please email me directly at salmaelmaghawry91@gmail.com.';
             statusDiv.innerHTML = `<i data-lucide="alert-circle" style="display:inline-block; vertical-align:middle; width:18px; height:18px;"></i> ${errorMessage}`;

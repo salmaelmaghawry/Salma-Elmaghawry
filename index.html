@@ -56,7 +56,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="light-mode">
+<body class="dark-mode">
 
     <!-- Ambient Background Blobs -->
     <div class="blob-container">
@@ -92,12 +92,6 @@
                 <!-- Language Toggle -->
                 <button class="lang-toggle" id="lang-toggle" aria-label="Switch language">
                     <span class="lang-toggle-code" id="lang-toggle-code">AR</span>
-                </button>
-
-                <!-- Theme Toggle Switch -->
-                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-                    <i data-lucide="sun" class="sun-icon"></i>
-                    <i data-lucide="moon" class="moon-icon"></i>
                 </button>
 
                 <a href="#contact" class="btn-talk" data-i18n="nav.talk">Let's Talk</a>
@@ -281,10 +275,16 @@
                             </div>
                         </div>
                     </div>
-                    <a href="https://www.youtube.com/@salma.elmaghawry" target="_blank" class="btn btn-yt">
-                        <i data-brand="youtube"></i>
-                        <span data-i18n="yt.btn">Visit My Channel</span>
-                    </a>
+                    <div class="yt-actions">
+                        <a href="https://www.youtube.com/@salma.elmaghawry" target="_blank" class="btn btn-yt">
+                            <i data-brand="youtube"></i>
+                            <span data-i18n="yt.btn">Visit My Channel</span>
+                        </a>
+                        <a href="https://www.facebook.com/salmaelmaghawryy/" target="_blank" class="btn btn-yt btn-fb">
+                            <i data-brand="facebook"></i>
+                            <span data-i18n="yt.btn_fb">Follow on Facebook</span>
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Auto-playing Shorts row (muted + looping, plays when scrolled into view) -->
@@ -535,24 +535,16 @@
                     <!-- Project: Flowsy -->
                     <div class="project-card" data-category="flutter">
                         <div class="project-image-placeholder project-img-cover">
-                            <img src="assets/Projects_images/Flowsy_poster.png" alt="Flowsy App Screenshot"
-                                class="project-cover-img">
+                            <img src="assets/Projects_images/Flowsy_poster.png" alt="Flowsy App Screenshot" class="project-cover-img">
                         </div>
                         <div class="project-info">
-                            <h3 class="project-title" data-i18n="proj3.title">Flowsy - Smart Budgeting & Wallets App</h3>
-                            <p class="project-desc" data-i18n="proj3.desc">
-                                A bilingual (Arabic/English, RTL) budgeting app that splits money into wallets and shows
-                                what's really left after planned spending. Built with Clean Architecture, Cubit, Firebase
-                                Auth and Firestore, with a biometric app lock and smart daily reminders.
-                            </p>
+                            <h3 class="project-title" data-i18n="proj3.title">Flowsy - Smart Budgeting &amp; Wallets App</h3>
+                            <p class="project-desc" data-i18n="proj3.desc">Bilingual budgeting app that splits money into wallets and shows what's really left.</p>
                             <div class="project-tags">
                                 <span class="tag">Flutter</span>
                                 <span class="tag">Firebase</span>
                                 <span class="tag">Clean Arch</span>
-                                <span class="tag">Dartz</span>
-                                <span class="tag">Local Auth</span>
-                                <span class="tag">Biometric App Lock</span>
-                                <span class="tag">Notifications</span>
+                                <span class="tag">Biometric Lock</span>
                             </div>
                             <div class="project-links">
                                 <a href="https://github.com/salma-elmaghawry/Flowsy-App" target="_blank" class="proj-link"><i
@@ -563,25 +555,107 @@
                         </div>
                     </div>
 
+                    <!-- Project: Chainly -->
+                    <div class="project-card" data-category="flutter ai">
+                        <div class="project-image-placeholder project-img-cover">
+                            <img src="assets/Projects_images/chainly_poster.png" alt="Chainly App Screenshot" class="project-cover-img">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title" data-i18n="proj2.title">Chainly - Smart Supply Chain App</h3>
+                            <p class="project-desc" data-i18n="proj2.desc">Supply chain platform with live tracking, QR identification and ML demand prediction.</p>
+                            <div class="project-tags">
+                                <span class="tag">Flutter</span>
+                                <span class="tag">Cubit (BLoC)</span>
+                                <span class="tag">Google Maps</span>
+                                <span class="tag">QR Scanner</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/salma-elmaghawry" target="_blank" class="proj-link"><i
+                                        data-brand="github"></i> <span data-i18n="link.github">GitHub</span></a>
+                                <a href="#" class="proj-link demo-link"><i data-lucide="external-link"></i> <span data-i18n="proj2.link_demo">Live Demo</span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project: My Clinic -->
+                    <div class="project-card" data-category="flutter">
+                        <div class="project-image-placeholder project-img-cover project-gallery gallery-screens" dir="ltr">
+                            <div class="gallery-track" tabindex="0" aria-label="My Clinic screenshots">
+                                <img src="assets/Projects_images/myclinic_1.png" alt="My Clinic home screen" class="gallery-slide" loading="lazy">
+                                <img src="assets/Projects_images/myclinic_2.png" alt="Patients list" class="gallery-slide" loading="lazy">
+                                <img src="assets/Projects_images/myclinic_3.png" alt="Patient file with medical history" class="gallery-slide" loading="lazy">
+                                <img src="assets/Projects_images/myclinic_4.png" alt="New prescription form" class="gallery-slide" loading="lazy">
+                                <img src="assets/Projects_images/myclinic_5.png" alt="Prescription preview with QR code" class="gallery-slide" loading="lazy">
+                                <img src="assets/Projects_images/myclinic_6.png" alt="Appointments week view" class="gallery-slide" loading="lazy">
+                                <img src="assets/Projects_images/myclinic_7.png" alt="Clinic stats" class="gallery-slide" loading="lazy">
+                                <img src="assets/Projects_images/myclinic_8.png" alt="Home screen in dark mode" class="gallery-slide" loading="lazy">
+                                <img src="assets/Projects_images/myclinic_9.png" alt="Home screen in Arabic" class="gallery-slide" loading="lazy">
+                            </div>
+                            <button class="gallery-nav gallery-prev" aria-label="Previous screenshot"><i data-lucide="chevron-left"></i></button>
+                            <button class="gallery-nav gallery-next" aria-label="Next screenshot"><i data-lucide="chevron-right"></i></button>
+                            <div class="gallery-dots"></div>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title" data-i18n="proj5.title">My Clinic - Doctor's Clinic Assistant</h3>
+                            <p class="project-desc" data-i18n="proj5.desc">Offline clinic assistant for doctors: patient files, QR prescriptions, appointments and stats.</p>
+                            <div class="project-tags">
+                                <span class="tag">Flutter</span>
+                                <span class="tag">Cubit</span>
+                                <span class="tag">Offline-first</span>
+                                <span class="tag">EN / AR + RTL</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/salma-elmaghawry/My-Clinic" target="_blank" class="proj-link"><i
+                                        data-brand="github"></i> <span data-i18n="link.github">GitHub</span></a>
+                                <a href="https://youtu.be/Lp2XHssitXA"
+                                    target="_blank" class="proj-link demo-link"><i data-lucide="play-circle"></i> <span data-i18n="proj5.link_video">Watch Video</span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project: StudyMate -->
+                    <div class="project-card" data-category="flutter ai">
+                        <div class="project-image-placeholder project-img-cover project-gallery" dir="ltr">
+                            <div class="gallery-track" tabindex="0" aria-label="StudyMate screenshots">
+                                <img src="assets/Projects_images/studymate_1.png" alt="StudyMate home screen with XP level and daily goals" class="gallery-slide" loading="lazy">
+                                <img src="assets/Projects_images/studymate_2.png" alt="StudyMate summarize screen with uploaded files" class="gallery-slide" loading="lazy">
+                                <img src="assets/Projects_images/studymate_3.png" alt="StudyMate Pomodoro screen with music and notes" class="gallery-slide" loading="lazy">
+                                <img src="assets/Projects_images/studymate_4.png" alt="StudyMate preparing a summarized file" class="gallery-slide" loading="lazy">
+                            </div>
+                            <button class="gallery-nav gallery-prev" aria-label="Previous screenshot"><i data-lucide="chevron-left"></i></button>
+                            <button class="gallery-nav gallery-next" aria-label="Next screenshot"><i data-lucide="chevron-right"></i></button>
+                            <div class="gallery-dots"></div>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title" data-i18n="proj4.title">StudyMate - AI Study Companion App</h3>
+                            <p class="project-desc" data-i18n="proj4.desc">AI study companion with summaries, flashcards, quizzes, Pomodoro and XP-based goals.</p>
+                            <div class="project-tags">
+                                <span class="tag">Flutter</span>
+                                <span class="tag">AI Summarization</span>
+                                <span class="tag">AI Chatbot</span>
+                                <span class="tag">Gamification</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/salma-elmaghawry/Study-Mate-App" target="_blank" class="proj-link"><i
+                                        data-brand="github"></i> <span data-i18n="link.github">GitHub</span></a>
+                                <a href="https://youtu.be/iyDsESiW-v4"
+                                    target="_blank" class="proj-link demo-link"><i data-lucide="play-circle"></i> <span data-i18n="proj4.link_video">Watch Video</span></a>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Project: Shtiwy -->
                     <div class="project-card" data-category="flutter">
                         <div class="project-image-placeholder project-img-cover">
-                            <img src="assets/Projects_images/shtiway_poster.png" alt="Shtiwy App Screenshot"
-                                class="project-cover-img">
+                            <img src="assets/Projects_images/shtiway_poster.png" alt="Shtiwy App Screenshot" class="project-cover-img">
                         </div>
                         <div class="project-info">
-                            <h3 class="project-title" data-i18n="proj1.title">Shtiwy - Smart Travel & Tourism App</h3>
-                            <p class="project-desc" data-i18n="proj1.desc">
-                                A production-grade, multi-platform mobile application for travel, Hajj, and Umrah
-                                bookings. Built with Clean Architecture, BLoC/Cubit state management, Supabase (Auth &
-                                PostgreSQL), and functional error handling with Dartz.
-                            </p>
+                            <h3 class="project-title" data-i18n="proj1.title">Shtiwy - Smart Travel &amp; Tourism App</h3>
+                            <p class="project-desc" data-i18n="proj1.desc">Travel, Hajj and Umrah booking app built on Supabase with Clean Architecture.</p>
                             <div class="project-tags">
                                 <span class="tag">Flutter</span>
                                 <span class="tag">BLoC / Cubit</span>
                                 <span class="tag">Supabase</span>
-                                <span class="tag">Clean Arch</span>
-                                <span class="tag">Dartz</span>
                                 <span class="tag">Google Maps</span>
                             </div>
                             <div class="project-links">
@@ -589,34 +663,6 @@
                                         data-brand="github"></i> <span data-i18n="link.github">GitHub</span></a>
                                 <a href="https://github.com/user-attachments/assets/7e339e87-6490-47ef-a781-6ee170ea172c"
                                     target="_blank" class="proj-link demo-link"><i data-lucide="play-circle"></i> <span data-i18n="proj1.link_video">Watch Video</span></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project: Chainly -->
-                    <div class="project-card" data-category="flutter ai">
-                        <div class="project-image-placeholder project-img-cover">
-                            <img src="assets/Projects_images/chainly_poster.png" alt="Chainly App Screenshot"
-                                class="project-cover-img">
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title" data-i18n="proj2.title">Chainly - Smart Supply Chain App</h3>
-                            <p class="project-desc" data-i18n="proj2.desc">
-                                A modern, sustainable supply chain management platform. It offers real-time geolocation
-                                tracking, QR identification, and machine learning components to predict demand and
-                                analyze supply flows.
-                            </p>
-                            <div class="project-tags">
-                                <span class="tag">Flutter</span>
-                                <span class="tag">Cubit (BLoC)</span>
-                                <span class="tag">Google Maps</span>
-                                <span class="tag">QR Scanner</span>
-                                <span class="tag">Clean Arch</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://github.com/salma-elmaghawry" target="_blank" class="proj-link"><i
-                                        data-brand="github"></i> <span data-i18n="link.github">GitHub</span></a>
-                                <a href="#" class="proj-link demo-link"><i data-lucide="external-link"></i> <span data-i18n="proj2.link_demo">Live Demo</span></a>
                             </div>
                         </div>
                     </div>
@@ -686,7 +732,7 @@
                              redirects. IMPORTANT: the very first submission after this goes live will
                              trigger a one-time "confirm your form" email from FormSubmit to that inbox —
                              it must be confirmed once before messages start arriving. -->
-                        <form id="contact-form" action="https://formsubmit.co/salmaelmaghawry91@gmail.com" method="POST" onsubmit="handleFormSubmit(event)">
+                        <form id="contact-form" action="https://formsubmit.co/ajax/salmaelmaghawry91@gmail.com" method="POST" onsubmit="handleFormSubmit(event)">
                             <input type="hidden" name="_subject" value="New message from your portfolio contact form">
                             <input type="hidden" name="_template" value="table">
                             <input type="hidden" name="_captcha" value="false">
@@ -794,6 +840,7 @@
             <div class="video-modal-title" id="video-modal-title" dir="auto"></div>
             <div class="video-iframe-wrapper">
                 <iframe id="video-modal-iframe" src="" title="YouTube Shorts" frameborder="0"
+                    referrerpolicy="strict-origin-when-cross-origin"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowfullscreen loading="lazy">
                 </iframe>
