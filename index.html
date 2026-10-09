@@ -56,7 +56,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="light-mode">
+<body class="dark-mode">
 
     <!-- Ambient Background Blobs -->
     <div class="blob-container">
@@ -92,12 +92,6 @@
                 <!-- Language Toggle -->
                 <button class="lang-toggle" id="lang-toggle" aria-label="Switch language">
                     <span class="lang-toggle-code" id="lang-toggle-code">AR</span>
-                </button>
-
-                <!-- Theme Toggle Switch -->
-                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-                    <i data-lucide="sun" class="sun-icon"></i>
-                    <i data-lucide="moon" class="moon-icon"></i>
                 </button>
 
                 <a href="#contact" class="btn-talk" data-i18n="nav.talk">Let's Talk</a>
@@ -281,10 +275,16 @@
                             </div>
                         </div>
                     </div>
-                    <a href="https://www.youtube.com/@salma.elmaghawry" target="_blank" class="btn btn-yt">
-                        <i data-brand="youtube"></i>
-                        <span data-i18n="yt.btn">Visit My Channel</span>
-                    </a>
+                    <div class="yt-actions">
+                        <a href="https://www.youtube.com/@salma.elmaghawry" target="_blank" class="btn btn-yt">
+                            <i data-brand="youtube"></i>
+                            <span data-i18n="yt.btn">Visit My Channel</span>
+                        </a>
+                        <a href="https://www.facebook.com/salmaelmaghawryy/" target="_blank" class="btn btn-yt btn-fb">
+                            <i data-brand="facebook"></i>
+                            <span data-i18n="yt.btn_fb">Follow on Facebook</span>
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Auto-playing Shorts row (muted + looping, plays when scrolled into view) -->
@@ -840,6 +840,7 @@
             <div class="video-modal-title" id="video-modal-title" dir="auto"></div>
             <div class="video-iframe-wrapper">
                 <iframe id="video-modal-iframe" src="" title="YouTube Shorts" frameborder="0"
+                    referrerpolicy="strict-origin-when-cross-origin"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowfullscreen loading="lazy">
                 </iframe>

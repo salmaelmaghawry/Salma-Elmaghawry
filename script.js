@@ -1,6 +1,6 @@
 /* ==========================================================================
    Salma Elmaghawry Portfolio - Interaction Scripts JS
-   Provides premium scrolling, theme toggles, dynamic text cycling, 
+   Provides premium scrolling, dynamic text cycling, 
    project filtering, tabs toggling, certificate lightbox, and form submissions.
    ========================================================================== */
 
@@ -137,26 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- THEME SELECTOR (DARK / LIGHT MODE) ---
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const body = document.body;
-    
-    // Get persisted theme preference or default to light mode
-    const storedTheme = localStorage.getItem('theme') || 'light-mode';
-    body.className = storedTheme;
-    
-    themeToggleBtn.addEventListener('click', () => {
-        if (body.classList.contains('light-mode')) {
-            body.classList.remove('light-mode');
-            body.classList.add('dark-mode');
-            localStorage.setItem('theme', 'dark-mode');
-        } else {
-            body.classList.remove('dark-mode');
-            body.classList.add('light-mode');
-            localStorage.setItem('theme', 'light-mode');
-        }
-    });
-
     // --- PREMIUM TYPING TEXT EFFECT CYCLER (language-aware) ---
     const typingSpan = document.querySelector('.typing-text');
     const FALLBACK_PROFESSIONS = ["Software Engineer & Flutter Developer"];
@@ -247,7 +227,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // Educational Content row is actually on screen.
     const shortPlayers = document.querySelectorAll('.short-player');
 
-    if (shortPlayers.length) {
+    // YouTube only plays embeds on pages served over http(s); opened as a
+    // local file (file://) every embed shows "Error 153". There we keep the
+    // thumbnail and open the Short on YouTube instead.
+    const canEmbedYouTube = location.protocol === 'http:' || location.protocol === 'https:';
+
+    if (shortPlayers.length && !canEmbedYouTube) {
+        shortPlayers.forEach(el => {
+            const frame = el.querySelector('.short-frame');
+            frame.classList.add('is-link');
+            frame.setAttribute('role', 'link');
+            frame.setAttribute('tabindex', '0');
+            frame.setAttribute('aria-label', el.getAttribute('data-title') || 'Watch on YouTube');
+            const open = () => window.open(`https://youtube.com/shorts/${el.getAttribute('data-video')}`, '_blank', 'noopener');
+            frame.addEventListener('click', open);
+            frame.addEventListener('keydown', e => { if (e.key === 'Enter') open(); });
+        });
+    } else if (shortPlayers.length) {
         const shortsObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 const el = entry.target;
@@ -259,9 +255,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!frame.querySelector('iframe')) {
                         const id = el.getAttribute('data-video');
                         const iframe = document.createElement('iframe');
-                        iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=1&rel=0&modestbranding=1&playsinline=1`;
+                        iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=1&rel=0&modestbranding=1&playsinline=1&origin=${encodeURIComponent(location.origin)}`;
                         iframe.title = el.getAttribute('data-title') || 'YouTube Short';
                         iframe.setAttribute('frameborder', '0');
+                        // YouTube refuses embeds that arrive without a Referer (Error 153)
+                        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
                         iframe.setAttribute('loading', 'lazy');
                         iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
                         iframe.allowFullscreen = true;
@@ -474,6 +472,11 @@ function openVideoModal(videoId, title) {
     const iframe = document.getElementById('video-modal-iframe');
     const titleEl = document.getElementById('video-modal-title');
     const ytLink = document.getElementById('video-modal-yt-link');
+
+    if (location.protocol !== 'http:' && location.protocol !== 'https:') {
+        window.open(`https://youtube.com/shorts/${videoId}`, '_blank', 'noopener');
+        return;
+    }
 
     // Set embed src with autoplay for immediate playback
     iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;

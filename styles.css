@@ -40,35 +40,6 @@
     --brand-paper: #FCF9F3;
 }
 
-/* --- LIGHT MODE COLORS (oat background, sage + cocoa accents) --- */
-body.light-mode {
-    --bg-primary: #F6EFE4;          /* oat - primary light background */
-    --bg-secondary: #FCF9F3;        /* paper - raised surface on oat */
-    --bg-card: rgba(252, 249, 243, 0.68); /* paper glass card */
-
-    --accent-mint: #4C7A5B;         /* sage - primary brand green */
-    --accent-mint-hover: #3D6249;
-    --accent-mint-light: rgba(76, 122, 91, 0.14);
-
-    --accent-pink: #6E4A32;         /* cocoa - emphasis colour on light */
-    --accent-pink-hover: #5A3C28;
-    --accent-pink-light: rgba(110, 74, 50, 0.14);
-
-    --accent-lavender: #223528;     /* ink used as neutral third tone - no 4th hue */
-    --accent-lavender-light: rgba(34, 53, 40, 0.07);
-
-    --accent-honey: #E3A02B;        /* signature accent - dark surfaces only, used sparingly */
-    --alert: #B4453A;
-
-    --text-primary: #223528;        /* ink */
-    --text-secondary: #626D60;      /* muted ink */
-    --text-muted: #8C9286;
-
-    --border-color: rgba(76, 122, 91, 0.10);
-    --glass-border: rgba(255, 255, 255, 0.5);
-    --glass-shadow: 0 8px 32px 0 rgba(110, 74, 50, 0.07);
-}
-
 /* --- DARK MODE COLORS (ink background, glowing sage + honey accent) --- */
 body.dark-mode {
     --bg-primary: #223528;          /* ink */
@@ -364,38 +335,6 @@ body.dark-mode .logo-dot {
 
 body.dark-mode .lang-toggle:hover {
     color: var(--accent-honey);
-}
-
-/* --- SUN/MOON THEME TOGGLER --- */
-.theme-toggle {
-    width: 44px;
-    height: 44px;
-    border-radius: var(--border-radius-md);
-    background-color: var(--bg-card);
-    border: 1px solid var(--glass-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--shadow-sm);
-    color: var(--text-primary);
-}
-
-.theme-toggle:hover {
-    background-color: var(--bg-primary);
-    transform: scale(1.05);
-    color: var(--accent-mint);
-}
-
-.theme-toggle .moon-icon {
-    display: none;
-}
-
-body.dark-mode .theme-toggle .sun-icon {
-    display: none;
-}
-
-body.dark-mode .theme-toggle .moon-icon {
-    display: block;
 }
 
 .btn-talk {
@@ -2918,8 +2857,23 @@ body.dark-mode .volunteer-achievement {
     margin-bottom: 0;
 }
 
-.yt-banner .btn-yt {
+.yt-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     flex-shrink: 0;
+}
+
+.yt-banner .btn-yt {
+    justify-content: center;
+}
+
+.btn-fb {
+    background-color: #1877F2;
+}
+
+.btn-fb:hover {
+    background-color: #0F63D6;
 }
 
 /* Row of vertical Shorts players */
@@ -2980,6 +2934,30 @@ body.dark-mode .volunteer-achievement {
     z-index: 1;
 }
 
+/* Local-file fallback: thumbnail with a play button that opens YouTube */
+.short-frame.is-link {
+    cursor: pointer;
+}
+
+.short-frame.is-link::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 64px;
+    height: 64px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: rgba(255, 0, 0, 0.9) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E") center / 30px no-repeat;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    z-index: 2;
+    transition: transform 0.25s ease;
+}
+
+.short-frame.is-link:hover::before {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
 .short-caption {
     padding: 14px 16px 18px;
     position: relative;
@@ -3034,9 +3012,9 @@ body.dark-mode .volunteer-achievement {
         flex-direction: column;
         align-items: flex-start;
     }
+    .yt-actions,
     .yt-banner .btn-yt {
         width: 100%;
-        justify-content: center;
     }
 }
 

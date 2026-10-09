@@ -56,6 +56,7 @@ window.TRANSLATIONS = {
         "yt.stat2_label": "Foundation Videos",
         "yt.stat3_label": "Real-World Tips",
         "yt.btn": "Visit My Channel",
+        "yt.btn_fb": "Follow on Facebook",
 
         "skills.tag": "expertise",
         "skills.title": "My Technical Toolbox",
@@ -193,6 +194,7 @@ window.TRANSLATIONS = {
         "yt.stat2_label": "فيديوهات تأسيسية",
         "yt.stat3_label": "نصائح من الواقع العملي",
         "yt.btn": "زوروا قناتي",
+        "yt.btn_fb": "تابعوني على فيسبوك",
 
         "skills.tag": "الخبرات",
         "skills.title": "أدواتي التقنية",
