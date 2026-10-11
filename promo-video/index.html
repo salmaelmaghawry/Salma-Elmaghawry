@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Salma · Flutter Developer (60s)</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#223528; --sage:#4C7A5B; --mist:#B9CFBC; --cocoa:#6E4A32;
+    --honey:#E3A02B; --oat:#F6EFE4; --clay:#E8D5B7;
+    --ink2:#2A4031;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#111;overflow:hidden}
+  #stage{position:relative;width:1920px;height:1080px;background:var(--ink);overflow:hidden;
+    font-family:Nunito,sans-serif;color:var(--oat);transform-origin:0 0}
+  .scene{position:absolute;inset:0;opacity:0}
+  .abs{position:absolute}
+  .mono{font-family:'JetBrains Mono',monospace}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:30px;letter-spacing:.08em;color:var(--mist)}
+  .eyebrow b{color:var(--honey);font-weight:700}
+  .h1{font-weight:800;font-size:120px;line-height:1.05;letter-spacing:-.01em}
+  .h2{font-weight:800;font-size:84px;line-height:1.1}
+  .body{font-size:36px;line-height:1.5;color:var(--mist);font-weight:600}
+  .rule{height:6px;background:var(--sage);border-radius:3px;transform-origin:left center}
+  .frame{border-radius:32px;overflow:hidden;background:var(--ink2)}
+  .frame img{width:100%;height:100%;object-fit:cover;display:block}
+  .chip{display:inline-block;font-family:'JetBrains Mono',monospace;font-weight:500;font-size:26px;
+    padding:12px 24px;border-radius:999px;border:2px solid var(--sage);color:var(--mist)}
+  .chip.fill{background:var(--sage);color:var(--oat);border-color:var(--sage)}
+  .word{display:inline-block}
+  .clip{overflow:hidden;display:inline-block;vertical-align:bottom;padding-bottom:.08em}
+  #progress{position:absolute;left:0;bottom:0;height:8px;background:var(--honey);width:0}
+  #wm{position:absolute;right:56px;top:48px;width:64px;opacity:.35}
+  .cursor{display:inline-block;width:.55em;height:1em;background:var(--mist);vertical-align:-.12em;margin-left:6px}
+  .phone{position:absolute;border-radius:36px;overflow:hidden;border:10px solid #1a2a1f;background:#fff}
+  .phone img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+  .stat{position:absolute;width:390px;height:250px;border-radius:28px;background:var(--ink2);padding:36px}
+  .stat .n{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:62px;white-space:nowrap;color:var(--oat)}
+  .stat .l{font-size:28px;font-weight:700;color:var(--mist);margin-top:14px;line-height:1.3}
+  .tl-item{position:absolute;left:150px;width:820px}
+  .tl-date{font-family:'JetBrains Mono',monospace;font-size:26px;color:var(--mist);letter-spacing:.06em}
+  .tl-role{font-size:54px;font-weight:800;margin-top:8px}
+  .tl-org{font-size:32px;font-weight:700;color:var(--mist);margin-top:4px}
+  .tl-desc{font-size:28px;color:var(--mist);margin-top:16px;line-height:1.45;font-weight:600;opacity:.9}
+  .dot{position:absolute;left:96px;width:28px;height:28px;border-radius:50%;background:var(--sage);border:6px solid var(--ink)}
+  .contact{font-family:'JetBrains Mono',monospace;font-size:34px;color:var(--oat);margin-bottom:22px}
+  .contact span{color:var(--mist)}
+  /* preview controls (hidden while rendering) */
+  #ui{position:fixed;left:0;right:0;bottom:0;padding:10px 16px;background:#000c;display:flex;gap:12px;align-items:center;font:14px 'JetBrains Mono',monospace;color:#ddd}
+  #ui input{flex:1}
+  .rendering #ui{display:none}
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- S1 · intro -->
+  <section class="scene" id="s1">
+    <div class="abs mono" id="s1-type" style="left:0;right:0;top:330px;text-align:center;font-size:64px;font-weight:500;color:var(--oat)"></div>
+    <svg class="abs" id="s1-logo" viewBox="0 0 100 100" style="left:860px;top:480px;width:200px;height:200px">
+      <rect width="100" height="100" rx="29" fill="#4C7A5B"/>
+      <path id="ch1" d="M32,30 L48,46 L32,62" fill="none" stroke="#F6EFE4" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1"/>
+      <path id="ch2" d="M52,30 L68,46 L52,62" fill="none" stroke="#F6EFE4" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1"/>
+      <rect id="bar" x="32" y="76" width="38" height="10" rx="5" fill="#E3A02B"/>
+    </svg>
+  </section>
+
+  <!-- S2 · whoami -->
+  <section class="scene" id="s2">
+    <div class="frame abs" id="s2-photo" style="left:150px;top:150px;width:620px;height:780px"><img src="../assets/Sub_profile.png" style="object-position:center 20%"></div>
+    <div class="abs" style="left:880px;top:250px;width:960px">
+      <div class="eyebrow" id="s2-eb"><b>//</b> whoami</div>
+      <div class="body" id="s2-hi" style="margin-top:36px;font-size:44px;color:var(--oat)">Hi, I'm</div>
+      <div class="h1" style="margin-top:6px"><span class="clip"><span class="word" id="s2-n1">Salma</span></span><br><span class="clip"><span class="word" id="s2-n2">Elmaghawry</span></span></div>
+      <div class="rule" id="s2-rule" style="width:160px;margin:40px 0 34px"></div>
+      <div id="s2-role" style="font-size:44px;font-weight:800">Software Engineer · Flutter Developer</div>
+      <div class="body" id="s2-line" style="margin-top:20px;width:900px">I build clean, fast mobile apps and teach the next generation of developers.</div>
+    </div>
+  </section>
+
+  <!-- S3 · foundation + numbers -->
+  <section class="scene" id="s3">
+    <div class="abs" style="left:150px;top:150px">
+      <div class="eyebrow" id="s3-eb"><b>//</b> foundation</div>
+      <div class="h2" style="margin-top:26px"><span class="clip"><span class="word" id="s3-t">B.Sc. Computer Science</span></span></div>
+      <div id="s3-chips" style="margin-top:34px;display:flex;gap:18px">
+        <span class="chip">Algorithms</span><span class="chip">Data Structures</span><span class="chip">OOP</span><span class="chip">Software Engineering</span>
+      </div>
+    </div>
+    <div class="stat" id="st0" style="left:150px;top:640px"><div class="n" data-to="5" data-suf="">0</div><div class="l">Flutter apps<br>built end to end</div></div>
+    <div class="stat" id="st1" style="left:574px;top:640px"><div class="n" data-to="1.5" data-suf="+ yrs">0</div><div class="l">Programming<br>mentor</div></div>
+    <div class="stat" id="st2" style="left:998px;top:640px"><div class="n" data-to="1" data-suf="+ yr">0</div><div class="l">Programming<br>instructor</div></div>
+    <div class="stat" id="st3" style="left:1422px;top:640px;width:350px"><div class="n" data-to="100" data-suf="%">0</div><div class="l">Free tech content<br>on YouTube</div></div>
+  </section>
+
+  <!-- S4 · experience -->
+  <section class="scene" id="s4">
+    <div class="abs" style="left:150px;top:120px">
+      <div class="eyebrow" id="s4-eb"><b>//</b> experience</div>
+    </div>
+    <div class="abs" id="s4-line" style="left:107px;top:300px;width:6px;height:600px;background:var(--sage);opacity:.5;transform-origin:top"></div>
+    <div class="dot" id="s4-d1" style="top:300px"></div>
+    <div class="tl-item" id="s4-i1" style="top:288px">
+      <div class="tl-date">MAR 2025 → PRESENT · REMOTE</div>
+      <div class="tl-role">Programming Instructor</div>
+      <div class="tl-org">Cairo Coding School</div>
+      <div class="tl-desc">Live C++ & OOP lectures, data structures and algorithms, reviewing student code for clean logic.</div>
+    </div>
+    <div class="dot" id="s4-d2" style="top:620px"></div>
+    <div class="tl-item" id="s4-i2" style="top:608px">
+      <div class="tl-date">AUG 2025 → PRESENT · PART-TIME</div>
+      <div class="tl-role">Educational Technologist</div>
+      <div class="tl-org">Cairo Coding School</div>
+      <div class="tl-desc">Designing interactive, AI-enhanced learning paths for software engineering students.</div>
+    </div>
+    <div class="frame abs" id="s4-a" style="left:1060px;top:150px;width:340px;height:340px"><img src="../assets/My_activities/github_workshop.jpeg"></div>
+    <div class="frame abs" id="s4-b" style="left:1430px;top:150px;width:340px;height:340px"><img src="../assets/My_activities/presentation_workshop.jpeg"></div>
+    <div class="frame abs" id="s4-c" style="left:1060px;top:520px;width:710px;height:400px"><img src="../assets/My_activities/2.jpeg"></div>
+    <div class="abs mono" id="s4-cap" style="left:1060px;top:950px;font-size:24px;color:var(--mist);letter-spacing:.06em">workshops · mentoring · live lectures</div>
+  </section>
+
+  <!-- S5 · projects intro -->
+  <section class="scene" id="s5">
+    <div class="abs" style="left:0;right:0;top:390px;text-align:center">
+      <div class="eyebrow" id="s5-eb"><b>//</b> projects</div>
+      <div class="h1" style="margin-top:28px"><span class="clip"><span class="word" id="s5-t1">5 Flutter apps.</span></span><br><span class="clip"><span class="word" id="s5-t2" style="color:var(--mist)">Real problems.</span></span></div>
+    </div>
+  </section>
+
+  <!-- S6..S10 · project cards (filled by JS) -->
+  <div id="projects"></div>
+
+  <!-- S11 · toolbox -->
+  <section class="scene" id="s11">
+    <div class="abs" style="left:150px;top:150px">
+      <div class="eyebrow" id="s11-eb"><b>//</b> toolbox</div>
+      <div class="h2" style="margin-top:26px"><span class="clip"><span class="word" id="s11-t">What I build with</span></span></div>
+    </div>
+    <div class="abs" id="s11-chips" style="left:150px;top:420px;width:1620px;display:flex;flex-wrap:wrap;gap:24px"></div>
+  </section>
+
+  <!-- S12 · CTA -->
+  <section class="scene" id="s12">
+    <div class="frame abs" id="s12-photo" style="left:150px;top:150px;width:620px;height:780px"><img src="../assets/profile_pc.png" style="object-position:center 30%"></div>
+    <div class="abs" style="left:880px;top:190px;width:940px">
+      <div class="eyebrow" id="s12-eb"><b>//</b> status: open_to_work</div>
+      <div class="h2" style="margin-top:30px;font-size:80px">
+        <span class="clip"><span class="word" id="s12-t1">Looking for a role as a</span></span><br>
+        <span class="clip"><span class="word" id="s12-t2" style="color:var(--honey)">Flutter Developer</span></span>
+      </div>
+      <div class="body" id="s12-sub" style="margin-top:26px">Ready to ship clean, tested, scalable apps with your team.</div>
+      <div class="rule" id="s12-rule" style="width:160px;margin:46px 0 46px"></div>
+      <div id="s12-contacts">
+        <div class="contact"><span>mail ›</span> salmaelmaghawry91@gmail.com</div>
+        <div class="contact"><span>in ›</span> linkedin.com/in/salma-elmaghawry</div>
+        <div class="contact"><span>git ›</span> github.com/salma-elmaghawry</div>
+      </div>
+    </div>
+  </section>
+
+  <svg id="wm" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="29" fill="none" stroke="#F6EFE4" stroke-width="6"/>
+    <path d="M32,30 L48,46 L32,62 M52,30 L68,46 L52,62" fill="none" stroke="#F6EFE4" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="32" y="76" width="38" height="10" rx="5" fill="#F6EFE4"/>
+  </svg>
+  <div id="progress"></div>
+</div>
+
+<div id="ui"><button id="play">pause</button><input id="scrub" type="range" min="0" max="60" step="0.01" value="0"><span id="time">0.00</span></div>
+
+<script>
+const DUR = 60;
+const $ = id => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const E = {
+  lin: t => t,
+  out: t => 1 - Math.pow(1 - t, 3),
+  out5: t => 1 - Math.pow(1 - t, 5),
+  inOut: t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
+  back: t => { const c = 1.6; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); },
+};
+// progress of a tween that starts at s and lasts d seconds
+const P = (t, s, d, e = 'out') => E[e](clamp((t - s) / d));
+const lerp = (a, b, k) => a + (b - a) * k;
+function css(el, { o, x = 0, y = 0, s = 1, r = 0, clip }) {
+  if (typeof el === 'string') el = $(el);
+  if (o !== undefined) el.style.opacity = o;
+  el.style.transform = `translate(${x}px,${y}px) scale(${s}) rotate(${r}deg)`;
+  if (clip !== undefined) el.style.clipPath = clip;
+}
+// fade + rise in at s, used for most text
+const rise = (el, t, s, d = .7, dist = 40) => { const k = P(t, s, d); css(el, { o: k, y: (1 - k) * dist }); };
+// word slides up from behind its .clip mask
+const reveal = (el, t, s, d = .8) => { const k = P(t, s, d, 'out5'); css(el, { y: (1 - k) * 140 }); };
+const eyebrow = (el, t, s) => { const k = P(t, s, .6); css(el, { o: k, x: (1 - k) * -30 }); };
+// scene visibility envelope: fade/blur out at the end
+function scene(id, t, a, b, fadeOut = .5) {
+  const el = $(id);
+  const on = t >= a - .001 && t < b;
+  el.style.display = on ? 'block' : 'none';
+  if (!on) return false;
+  const out = P(t, b - fadeOut, fadeOut, 'inOut');
+  el.style.opacity = 1 - out;
+  el.style.transform = `translateY(${-out * 30}px)`;
+  return true;
+}
+
+/* ---------- projects data ---------- */
+const PROJECTS = [
+  { name: 'Flowsy', kind: 'Smart budgeting & wallets', desc: 'Splits money into wallets and shows what is really left. Bilingual, with biometric lock.',
+    tags: ['Flutter', 'Firebase', 'Clean Arch', 'Biometrics'], img: 'Projects_images/Flowsy_poster.png' },
+  { name: 'Chainly', kind: 'Smart supply chain', desc: 'Live tracking, QR identification and ML demand prediction.',
+    tags: ['Cubit', 'Google Maps', 'QR Scanner', 'ML'], img: 'Projects_images/chainly_poster.png' },
+  { name: 'My Clinic', kind: "Doctor's clinic assistant", desc: 'Offline-first patient files, QR prescriptions, appointments and stats.',
+    tags: ['Cubit', 'Offline-first', 'EN / AR + RTL'], phones: ['my_clinic app/01_home.png', 'my_clinic app/08_prescription_qr.png', 'my_clinic app/11_stats.png'] },
+  { name: 'StudyMate', kind: 'AI study companion', desc: 'AI summaries, flashcards, quizzes, Pomodoro and XP-based goals.',
+    tags: ['AI Summaries', 'AI Chatbot', 'Gamification'], posters: ['Projects_images/studymate_1.png', 'Projects_images/studymate_2.png', 'Projects_images/studymate_3.png'] },
+  { name: 'Shtiwy', kind: 'Travel & tourism', desc: 'Travel, Hajj and Umrah booking app built on Supabase.',
+    tags: ['BLoC / Cubit', 'Supabase', 'Google Maps'], img: 'Projects_images/shtiway_poster.png' },
+];
+const PROJ_START = 29.5, PROJ_LEN = 3.1;
+const projHost = $('projects');
+PROJECTS.forEach((p, i) => {
+  let media;
+  if (p.img) {
+    media = `<div class="frame abs pm" style="left:860px;top:${p.img.includes('Flowsy') ? 218 : 270}px;width:960px;height:${p.img.includes('Flowsy') ? 645 : 540}px;background:#fff">
+      <img src="../assets/${p.img}" style="object-fit:contain"></div>`;
+  } else if (p.phones) {
+    media = p.phones.map((f, j) => `<div class="phone pm" style="left:${900 + j * 300}px;top:${225 + (j === 1 ? -25 : 25)}px;width:290px;height:630px">
+      <img src="../assets/Projects_images/${f}"></div>`).join('');
+  } else {
+    media = p.posters.map((f, j) => `<div class="frame abs pm" style="left:${870 + j * 330}px;top:${280 + (j === 1 ? -30 : 30)}px;width:300px;height:520px;background:#fff">
+      <img src="../assets/${f}" style="object-fit:cover;object-position:top"></div>`).join('');
+  }
+  projHost.insertAdjacentHTML('beforeend', `
+  <section class="scene" id="p${i}">
+    <div class="abs" style="left:150px;top:300px;width:660px">
+      <div class="eyebrow pe"><b>//</b> ${String(i + 1).padStart(2, '0')} / 05</div>
+      <div class="h2" style="margin-top:24px;font-size:104px"><span class="clip"><span class="word pn">${p.name}</span></span></div>
+      <div class="pk" style="font-size:38px;font-weight:800;color:var(--mist);margin-top:6px">${p.kind}</div>
+      <div class="body pd" style="margin-top:26px;font-size:32px">${p.desc}</div>
+      <div class="ptags" style="margin-top:34px;display:flex;flex-wrap:wrap;gap:14px">${p.tags.map(x => `<span class="chip">${x}</span>`).join('')}</div>
+    </div>
+    ${media}
+  </section>`);
+});
+
+const TOOLS = ['Flutter & Dart', 'BLoC / Cubit', 'Clean Architecture', 'SOLID', 'REST APIs', 'Firebase', 'Supabase',
+  'Hive · SQLite', 'Google Maps', 'Unit Testing', 'Git & GitHub', 'CI/CD', 'Figma', 'AI Integration', 'MCP', 'EN / AR + RTL'];
+const FILLED = new Set(['Flutter & Dart', 'BLoC / Cubit', 'Clean Architecture', 'Firebase']);
+$('s11-chips').innerHTML = TOOLS.map(x => `<span class="chip ${FILLED.has(x) ? 'fill' : ''}" style="font-size:34px;padding:18px 34px">${x}</span>`).join('');
+
+/* ---------- render(t) : the whole video is a pure function of time ---------- */
+function render(t) {
+  $('progress').style.width = (t / DUR * 100) + '%';
+  $('wm').style.opacity = .35 * P(t, 4.6, .6) * (1 - P(t, 51.2, .5));
+
+  // S1 intro 0 – 4.6
+  if (scene('s1', t, 0, 4.6)) {
+    const txt = 'hello, world';
+    const k = clamp((t - .4) / 1.1);
+    const n = Math.round(k * txt.length);
+    const blink = Math.floor(t * 2.2) % 2 === 0 || (k > 0 && k < 1);
+    $('s1-type').innerHTML = `<span style="color:var(--honey)">//</span> ${txt.slice(0, n)}<span class="cursor" style="opacity:${blink ? 1 : 0}"></span>`;
+    css('s1-type', { y: -P(t, 1.8, .7, 'inOut') * 40 });
+    const lk = P(t, 1.9, .7, 'back');
+    css('s1-logo', { o: P(t, 1.9, .3), s: lerp(.4, 1, lk) });
+    $('ch1').style.strokeDashoffset = 1 - P(t, 2.2, .45);
+    $('ch2').style.strokeDashoffset = 1 - P(t, 2.4, .45);
+    $('bar').setAttribute('width', 38 * P(t, 2.75, .45));
+  }
+
+  // S2 whoami 4.6 – 12
+  if (scene('s2', t, 4.6, 12)) {
+    const pk = P(t, 4.7, 1.1, 'out5');
+    css('s2-photo', { o: 1, clip: `inset(${(1 - pk) * 100}% 0 0 0 round 32px)`, y: (1 - pk) * 60 });
+    eyebrow($('s2-eb'), t, 5.0);
+    rise($('s2-hi'), t, 5.3);
+    reveal($('s2-n1'), t, 5.6); reveal($('s2-n2'), t, 5.8);
+    css('s2-rule', { s: 1 }); $('s2-rule').style.transform = `scaleX(${P(t, 6.6, .7)})`;
+    rise($('s2-role'), t, 7.0); rise($('s2-line'), t, 7.6);
+  }
+
+  // S3 foundation 12 – 19
+  if (scene('s3', t, 12, 19)) {
+    eyebrow($('s3-eb'), t, 12.2);
+    reveal($('s3-t'), t, 12.4);
+    [...$('s3-chips').children].forEach((c, i) => { const k = P(t, 13.1 + i * .15, .5, 'back'); css(c, { o: clamp(k * 2), s: lerp(.6, 1, k) }); });
+    for (let i = 0; i < 4; i++) {
+      const el = $('st' + i), s = 14.3 + i * .25;
+      rise(el, t, s, .7, 60);
+      const nEl = el.querySelector('.n'), to = +nEl.dataset.to;
+      const v = to * P(t, s + .2, 1.4);
+      nEl.textContent = (to % 1 ? v.toFixed(1) : Math.round(v)) + nEl.dataset.suf;
+    }
+  }
+
+  // S4 experience 19 – 27
+  if (scene('s4', t, 19, 27)) {
+    eyebrow($('s4-eb'), t, 19.2);
+    $('s4-line').style.transform = `scaleY(${P(t, 19.4, 1.4, 'inOut')})`;
+    ['s4-d1', 's4-d2'].forEach((d, i) => { const k = P(t, 19.6 + i * .9, .5, 'back'); css(d, { o: clamp(k * 2), s: k }); });
+    rise($('s4-i1'), t, 19.7); rise($('s4-i2'), t, 20.6);
+    ['s4-a', 's4-b', 's4-c'].forEach((id, i) => {
+      const k = P(t, 21.4 + i * .35, .9, 'out5');
+      css(id, { o: k, s: lerp(.85, 1, k), y: (1 - k) * 50 });
+    });
+    // slow push on photos
+    $('s4-c').querySelector('img').style.transform = `scale(${1 + (t - 21) * .012})`;
+    rise($('s4-cap'), t, 22.6);
+  }
+
+  // S5 projects intro 27 – 29.5
+  if (scene('s5', t, 27, PROJ_START, .4)) {
+    eyebrow($('s5-eb'), t, 27.1);
+    reveal($('s5-t1'), t, 27.3); reveal($('s5-t2'), t, 27.6);
+  }
+
+  // S6..S10 projects
+  PROJECTS.forEach((_, i) => {
+    const a = PROJ_START + i * PROJ_LEN, b = a + PROJ_LEN;
+    if (!scene('p' + i, t, a, b, .35)) return;
+    const root = $('p' + i);
+    eyebrow(root.querySelector('.pe'), t, a + .05);
+    reveal(root.querySelector('.pn'), t, a + .1, .7);
+    rise(root.querySelector('.pk'), t, a + .35);
+    rise(root.querySelector('.pd'), t, a + .5);
+    [...root.querySelector('.ptags').children].forEach((c, j) => { const k = P(t, a + .7 + j * .08, .45, 'back'); css(c, { o: clamp(k * 2), s: lerp(.7, 1, k) }); });
+    root.querySelectorAll('.pm').forEach((m, j) => {
+      const k = P(t, a + .1 + j * .12, .9, 'out5');
+      const drift = (t - a) * -6;  // slow parallax while on screen
+      css(m, { o: k, x: (1 - k) * 220 + drift, y: (1 - k) * (j % 2 ? -30 : 30) });
+    });
+  });
+
+  // S11 toolbox 45 – 51.5
+  if (scene('s11', t, 45, 51.5)) {
+    eyebrow($('s11-eb'), t, 45.1);
+    reveal($('s11-t'), t, 45.3);
+    [...$('s11-chips').children].forEach((c, i) => { const k = P(t, 46 + i * .11, .55, 'back'); css(c, { o: clamp(k * 2), s: lerp(.5, 1, k), y: (1 - k) * 20 }); });
+  }
+
+  // S12 CTA 51.5 – 60 (no fade out, holds on the last frame)
+  if (scene('s12', t, 51.5, 60.01, .001)) {
+    const pk = P(t, 51.6, 1.1, 'out5');
+    css('s12-photo', { o: 1, clip: `inset(0 0 ${(1 - pk) * 100}% 0 round 32px)` });
+    eyebrow($('s12-eb'), t, 51.9);
+    reveal($('s12-t1'), t, 52.2); reveal($('s12-t2'), t, 52.6);
+    rise($('s12-sub'), t, 53.3);
+    $('s12-rule').style.transform = `scaleX(${P(t, 53.8, .7)})`;
+    [...$('s12-contacts').children].forEach((c, i) => rise(c, t, 54.2 + i * .25, .6, 24));
+  }
+}
+window.render = render;
+
+/* ---------- preview player ---------- */
+const params = new URLSearchParams(location.search);
+if (params.has('render')) {
+  document.body.classList.add('rendering');
+} else {
+  const fit = () => { const s = Math.min(innerWidth / 1920, (innerHeight - 44) / 1080); $('stage').style.transform = `scale(${s})`; };
+  addEventListener('resize', fit); fit();
+  let playing = true, t0 = performance.now(), cur = 0;
+  $('play').onclick = () => { playing = !playing; $('play').textContent = playing ? 'pause' : 'play'; t0 = performance.now() - cur * 1000; };
+  $('scrub').oninput = e => { cur = +e.target.value; t0 = performance.now() - cur * 1000; render(cur); };
+  (function loop() {
+    if (playing) { cur = ((performance.now() - t0) / 1000) % DUR; $('scrub').value = cur; }
+    $('time').textContent = cur.toFixed(2);
+    render(cur); requestAnimationFrame(loop);
+  })();
+}
+render(0);
+</script>
+</body>
+</html>
