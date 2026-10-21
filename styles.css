@@ -239,6 +239,7 @@ body.dark-mode .navbar {
     font-size: 1.6rem;
     font-weight: 800;
     letter-spacing: -0.5px;
+    white-space: nowrap;
     color: var(--text-primary);
 }
 
@@ -601,8 +602,8 @@ body.dark-mode .hero-tag::before {
     width: 100%;
     height: 100%;
     border-radius: var(--border-radius-lg);
-    background: var(--bg-card);
-    border: 2px solid var(--glass-border);
+    background: var(--brand-paper);
+    border: 6px solid var(--brand-paper);
     box-shadow: var(--glass-shadow);
     backdrop-filter: blur(10px);
     position: relative;
@@ -630,40 +631,54 @@ body.dark-mode .hero-tag::before {
     to { transform: translateY(10px); }
 }
 
-.floating-tech {
+.floating-stat {
     position: absolute;
-    width: 54px;
-    height: 54px;
-    border-radius: var(--border-radius-md);
-    background: var(--bg-card);
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--shadow-md);
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    padding: 8px 14px;
+    border-radius: var(--border-radius-md);
+    background: var(--brand-paper);
+    box-shadow: var(--glass-shadow);
+    white-space: nowrap;
     animation: floatBadge 6s infinite ease-in-out;
     z-index: 3;
 }
 
-.flutter-icon {
-    top: 20%;
-    left: 10%;
-    color: var(--accent-mint);
+.floating-stat-number {
+    font-size: 1.3rem;
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--accent-honey);
+}
+
+.floating-stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--brand-sage);
+}
+
+.linkedin-stat {
+    top: 6%;
+    left: -14%;
     animation-delay: 0s;
 }
 
-.code-icon {
-    bottom: 20%;
-    right: 12%;
-    color: var(--accent-lavender);
-    animation-delay: 2s;
+.youtube-stat {
+    top: 24%;
+    right: -14%;
+    animation-delay: 1.5s;
 }
 
-.heart-icon {
-    top: 15%;
-    right: 15%;
-    font-size: 1.4rem;
-    animation-delay: 4s;
+.students-stat {
+    bottom: 22%;
+    left: -12%;
+    animation-delay: 3s;
+}
+
+.workshops-stat {
+    bottom: 4%;
+    right: -10%;
+    animation-delay: 4.5s;
 }
 
 @keyframes floatBadge {
@@ -1212,6 +1227,22 @@ body.dark-mode .edu-icon {
     margin-bottom: 12px;
 }
 
+/* "Live on Google Play" status pill above a published app's title */
+.project-status {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 6px;
+    margin-bottom: 10px;
+    padding: 4px 10px;
+    border-radius: var(--border-radius-full);
+    background-color: var(--accent-mint-light);
+    color: var(--accent-mint);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
 .project-desc {
     font-size: 0.95rem;
     color: var(--text-secondary);
@@ -1245,7 +1276,8 @@ body.dark-mode .project-tags .tag {
 
 .project-links {
     display: flex;
-    gap: 16px;
+    flex-wrap: wrap;
+    gap: 10px 16px;
     border-top: 1px solid var(--border-color);
     padding-top: 16px;
 }
@@ -2162,9 +2194,30 @@ body.dark-mode .volunteer-achievement {
         font-size: 6rem;
     }
 
-    .floating-tech {
-        width: 44px;
-        height: 44px;
+    .floating-stat {
+        padding: 6px 10px;
+    }
+
+    .floating-stat-number {
+        font-size: 1.05rem;
+    }
+
+    .floating-stat-label {
+        font-size: 0.62rem;
+    }
+
+    .linkedin-stat,
+    .students-stat {
+        left: -6%;
+    }
+
+    .youtube-stat,
+    .workshops-stat {
+        right: -6%;
+    }
+
+    .youtube-stat {
+        top: 44%;
     }
 
     .scroll-indicator {
@@ -2294,6 +2347,10 @@ body.dark-mode .volunteer-achievement {
 
 /* Small phones (480px and down) */
 @media (max-width: 480px) {
+    .logo {
+        font-size: 1.2rem;
+    }
+
     .skills-grid {
         grid-template-columns: 1fr;
     }
@@ -2359,6 +2416,11 @@ body.dark-mode .volunteer-achievement {
         font-size: 0.78rem;
     }
 
+    .logo {
+        font-size: 1.05rem;
+        gap: 8px;
+    }
+
     .nav-container {
         padding-left: 12px;
         padding-right: 12px;
@@ -2376,7 +2438,7 @@ body.dark-mode .volunteer-achievement {
     height: 100%;
     object-fit: cover;
     object-position: top center;
-    border-radius: var(--border-radius-lg);
+    border-radius: calc(var(--border-radius-lg) - 6px);
     display: block;
 }
 
@@ -2832,6 +2894,7 @@ body.dark-mode .volunteer-achievement {
 /* Context-specific sizing */
 .method-icon .brand-svg svg { width: 22px; height: 22px; }
 .proj-link .brand-svg svg { width: 16px; height: 16px; }
+.project-status .brand-svg svg { width: 13px; height: 13px; }
 .btn .brand-svg svg { width: 18px; height: 18px; }
 .footer-socials .brand-svg svg { width: 18px; height: 18px; }
 .video-modal-yt-link .brand-svg svg { width: 20px; height: 20px; }
@@ -3156,6 +3219,9 @@ body.dark-mode .volunteer-achievement {
 
 [dir="rtl"] button,
 [dir="rtl"] .hero-tag,
+[dir="rtl"] .floating-stat-label,
+[dir="rtl"] .skill-badge[data-i18n],
+[dir="rtl"] .project-status,
 [dir="rtl"] .section-tag,
 [dir="rtl"] .card-meta,
 [dir="rtl"] .input-container input,
@@ -3214,6 +3280,12 @@ body.dark-mode .volunteer-achievement {
 
 [dir="rtl"] .textarea-container textarea {
     padding-right: 16px;
+}
+
+/* Keep "10K+" reading left-to-right inside the Arabic layout */
+[dir="rtl"] .floating-stat-number {
+    direction: ltr;
+    text-align: right;
 }
 
 /* Directional icons: point the other way in RTL */
