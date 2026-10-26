@@ -56,7 +56,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="dark-mode">
+<body>
 
     <!-- Ambient Background Blobs -->
     <div class="blob-container">
@@ -81,10 +81,10 @@
             <nav class="nav-menu" id="nav-menu">
                 <a href="#about" class="nav-link active" data-i18n="nav.about">About</a>
                 <a href="#youtube" class="nav-link" data-i18n="nav.tutorials">Tutorials</a>
-                <a href="#skills" class="nav-link" data-i18n="nav.skills">Skills</a>
                 <a href="#volunteering" class="nav-link" data-i18n="nav.impact">Impact</a>
-                <a href="#experience" class="nav-link" data-i18n="nav.experience">Experience</a>
                 <a href="#projects" class="nav-link" data-i18n="nav.projects">Projects</a>
+                <a href="#skills" class="nav-link" data-i18n="nav.skills">Skills</a>
+                <a href="#experience" class="nav-link" data-i18n="nav.experience">Experience</a>
                 <a href="#contact" class="nav-btn-mobile" data-i18n="nav.talk">Let's Talk</a>
             </nav>
 
@@ -159,7 +159,7 @@
                         <div class="glow-ring glow-ring-pink"></div>
                         <div class="avatar-frame">
                             <!-- Real profile photo -->
-                            <img src="assets/profile_pc.png" alt="Salma Elmaghawry - Flutter Developer"
+                            <img src="assets/profile-hero.jpg" alt="Salma Elmaghawry - Flutter Developer"
                                 class="profile-photo">
                         </div>
                         <!-- Impact numbers floating around the photo -->
@@ -345,88 +345,6 @@
             </div>
         </section>
 
-        <!-- Skills Section -->
-        <section class="skills-section section-padding" id="skills">
-            <div class="container">
-                <div class="section-header center">
-                    <span class="section-tag" data-i18n="skills.tag">expertise</span>
-                    <h2 class="section-title" data-i18n="skills.title">My Technical Toolbox</h2>
-                    <p class="section-desc" data-i18n="skills.desc">What I build with, and the projects where I've applied it.</p>
-                </div>
-
-                <div class="skills-grid">
-                    <!-- Category 1: Flutter & Dart -->
-                    <div class="skill-category-card">
-                        <div class="category-header pink-accent">
-                            <i data-lucide="smartphone"></i>
-                            <h3>Flutter &amp; Dart</h3>
-                        </div>
-                        <ul class="skill-list">
-                            <li><span class="skill-name">Flutter &amp; Dart</span> <span
-                                    class="skill-badge pink" data-i18n="skills.badge_years">2+ yrs</span></li>
-                            <li><span class="skill-name">BLoC / Cubit</span> <span class="skill-badge pink">Chainly</span></li>
-                            <li><span class="skill-name">Riverpod &amp; go_router</span> <span class="skill-badge pink">Cairo Coding</span></li>
-                            <li><span class="skill-name">Clean Architecture &amp; GetIt</span> <span class="skill-badge pink">No Wait</span></li>
-                            <li><span class="skill-name">AR / EN Localization + RTL</span> <span class="skill-badge pink">My-Clinic</span></li>
-                            <li><span class="skill-name">Light &amp; Dark Themes</span> <span class="skill-badge pink">No Wait</span></li>
-                            <li><span class="skill-name">Responsive UI &amp; App Flavors</span></li>
-                        </ul>
-                    </div>
-
-                    <!-- Category 2: Backend & Data -->
-                    <div class="skill-category-card">
-                        <div class="category-header mint-accent">
-                            <i data-lucide="database"></i>
-                            <h3 data-i18n="skills.cat2">Backend &amp; Data</h3>
-                        </div>
-                        <ul class="skill-list">
-                            <li><span class="skill-name">REST APIs, Dio &amp; JSON</span> <span class="skill-badge mint">No Wait</span></li>
-                            <li><span class="skill-name">Firebase Authentication</span> <span class="skill-badge mint">Easy Chat</span></li>
-                            <li><span class="skill-name">Firestore &amp; Security Rules</span> <span class="skill-badge mint">Cairo Coding</span></li>
-                            <li><span class="skill-name">Supabase</span> <span class="skill-badge mint">Shtiwy</span></li>
-                            <li><span class="skill-name">Pagination</span> <span class="skill-badge mint">Easy Chat</span></li>
-                            <li><span class="skill-name">Error Handling (dartz / Either)</span> <span class="skill-badge mint">No Wait</span></li>
-                            <li><span class="skill-name">Hive &amp; Local Storage</span></li>
-                        </ul>
-                    </div>
-
-                    <!-- Category 3: Mobile Features -->
-                    <div class="skill-category-card">
-                        <div class="category-header lavender-accent">
-                            <i data-lucide="map-pin"></i>
-                            <h3 data-i18n="skills.cat3">Mobile Features</h3>
-                        </div>
-                        <ul class="skill-list">
-                            <li><span class="skill-name">Google Maps &amp; Location Tracking</span> <span class="skill-badge lavender">Chainly</span></li>
-                            <li><span class="skill-name">Camera &amp; QR Scanning</span> <span class="skill-badge lavender">Chainly</span></li>
-                            <li><span class="skill-name">Biometric Auth (local_auth)</span> <span class="skill-badge lavender">Flowsy</span></li>
-                            <li><span class="skill-name">Local Notifications</span> <span class="skill-badge lavender">Flowsy</span></li>
-                            <li><span class="skill-name">Real-time Messaging</span> <span class="skill-badge lavender">Easy Chat</span></li>
-                            <li><span class="skill-name">Read Receipts &amp; Online Status</span> <span class="skill-badge lavender">Easy Chat</span></li>
-                            <li><span class="skill-name">Offline-first Apps</span> <span class="skill-badge lavender">My-Clinic</span></li>
-                        </ul>
-                    </div>
-
-                    <!-- Category 4: Testing & Engineering -->
-                    <div class="skill-category-card">
-                        <div class="category-header mint-accent">
-                            <i data-lucide="flask-conical"></i>
-                            <h3 data-i18n="skills.cat4">Testing &amp; Engineering</h3>
-                        </div>
-                        <ul class="skill-list">
-                            <li><span class="skill-name">Automated Testing</span> <span class="skill-badge mint">Cairo Coding</span></li>
-                            <li><span class="skill-name">Unit Testing &amp; Mockito</span></li>
-                            <li><span class="skill-name">Git &amp; GitHub</span> <span class="skill-badge mint">Cellula</span></li>
-                            <li><span class="skill-name">OOP</span> <span class="skill-badge mint" data-i18n="skills.badge_teaching">Teaching</span></li>
-                            <li><span class="skill-name">SOLID Principles</span> <span class="skill-badge mint" data-i18n="skills.badge_teaching">Teaching</span></li>
-                            <li><span class="skill-name">Data Structures &amp; Algorithms</span> <span class="skill-badge mint" data-i18n="skills.badge_teaching">Teaching</span></li>
-                            <li><span class="skill-name">Problem-solving</span> <span class="skill-badge mint">ECPC 2024</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Impact / Community Activities Section -->
         <section class="volunteering-section section-padding" id="volunteering">
             <div class="container">
@@ -440,123 +358,6 @@
                 <!-- Auto-scrolling, shuffled photo marquee -->
                 <div class="activities-marquee">
                     <div class="activities-track" id="activities-track"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience Timeline Section -->
-        <section class="experience-section section-padding" id="experience">
-            <div class="container">
-                <div class="section-header center">
-                    <span class="section-tag" data-i18n="exp.tag">journey</span>
-                    <h2 class="section-title" data-i18n="exp.title">Work Experience</h2>
-                    <p class="section-desc" data-i18n="exp.desc">Freelance Flutter development, developer internships, and teaching
-                        programming.</p>
-                </div>
-
-                <div class="timeline-container">
-                    <!-- Experience Card 1 -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot dot-mint"></div>
-                        <div class="timeline-card">
-                            <div class="card-meta">
-                                <span class="work-date"><i data-lucide="calendar"></i> <span data-i18n="exp.card1.date">Aug 2025 - Present</span></span>
-                                <span class="work-type"><i data-lucide="briefcase"></i> <span data-i18n="exp.card1.type">Freelance</span></span>
-                            </div>
-                            <h3 class="role-title" data-i18n="exp.card1.role">Freelance Flutter Developer</h3>
-                            <h4 class="company-name highlight-mint" data-i18n="exp.card1.company">Self-employed</h4>
-                            <p class="role-desc" data-i18n="exp.card1.desc">
-                                Building Flutter mobile apps end to end, from architecture and state management to API integration and production-ready features.
-                            </p>
-                            <ul class="role-bullets">
-                                <li data-i18n="exp.card1.b1">Developing No Wait, an e-commerce and installment-shopping app, with feature-first Clean Architecture, Cubit, GetIt and dartz/Either error handling.</li>
-                                <li data-i18n="exp.card1.b2">Built a variable-product catalog that resolves attribute selections into store SKUs, with dynamic price ranges and seller price comparisons.</li>
-                                <li data-i18n="exp.card1.b3">Integrated REST APIs with Dio for auth, catalog, cart, installment checkout, map-based addresses and order history, plus Arabic/English RTL and persisted light/dark themes.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Experience Card 2 -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot dot-pink"></div>
-                        <div class="timeline-card">
-                            <div class="card-meta">
-                                <span class="work-date"><i data-lucide="calendar"></i> <span data-i18n="exp.card2.date">Aug 2025 - Present</span></span>
-                                <span class="work-type"><i data-lucide="clock"></i> <span data-i18n="exp.card2.type">Part-time</span></span>
-                            </div>
-                            <h3 class="role-title" data-i18n="exp.card2.role">Educational Technologist</h3>
-                            <h4 class="company-name highlight-pink">Cairo Coding School</h4>
-                            <p class="role-desc" data-i18n="exp.card2.desc">
-                                Supporting educational technology and learning activities for programming courses.
-                            </p>
-                            <ul class="role-bullets">
-                                <li data-i18n="exp.card2.b1">Prepare learning materials with step-by-step explanations, simple code examples and comparison tables.</li>
-                                <li data-i18n="exp.card2.b2">Create exercises, MCQs and interactive quizzes with clear learning objectives.</li>
-                                <li data-i18n="exp.card2.b3">Pair Arabic explanations with English technical terms, so students can follow documentation on their own later.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Experience Card 3 -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot dot-mint"></div>
-                        <div class="timeline-card">
-                            <div class="card-meta">
-                                <span class="work-date"><i data-lucide="calendar"></i> <span data-i18n="exp.card3.date">Mar 2025 - Present</span></span>
-                                <span class="work-type"><i data-lucide="globe"></i> <span data-i18n="exp.card3.type">Remote</span></span>
-                            </div>
-                            <h3 class="role-title" data-i18n="exp.card3.role">Programming Instructor</h3>
-                            <h4 class="company-name highlight-mint">Cairo Coding School</h4>
-                            <p class="role-desc" data-i18n="exp.card3.desc">
-                                Teaching programming in practical, structured, beginner-friendly sessions.
-                            </p>
-                            <ul class="role-bullets">
-                                <li data-i18n="exp.card3.b1">Teach C++ and programming fundamentals: functions, pointers, OOP, and data structures &amp; algorithms.</li>
-                                <li data-i18n="exp.card3.b2">Explain each concept step by step with simple code examples, then reinforce it with hands-on practice.</li>
-                                <li data-i18n="exp.card3.b3">Review student code and walk through fixes, keeping logic clean and readable.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Experience Card 4 -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot dot-pink"></div>
-                        <div class="timeline-card">
-                            <div class="card-meta">
-                                <span class="work-date"><i data-lucide="calendar"></i> <span data-i18n="exp.card4.date">Feb 2025 - Apr 2025</span></span>
-                                <span class="work-type"><i data-lucide="briefcase"></i> <span data-i18n="exp.card4.type">Internship</span></span>
-                            </div>
-                            <h3 class="role-title" data-i18n="exp.card4.role">Flutter Developer Intern</h3>
-                            <h4 class="company-name highlight-pink">Cellula Technologies</h4>
-                            <p class="role-desc" data-i18n="exp.card4.desc">
-                                Worked on Flutter projects using Clean Architecture, dependency injection, BLoC/Cubit and GitHub.
-                            </p>
-                            <ul class="role-bullets">
-                                <li data-i18n="exp.card4.b1">Weather Prediction AI app with real-time weather API integration and recommendations.</li>
-                                <li data-i18n="exp.card4.b2">Gemini AI meal-recommendation app.</li>
-                                <li data-i18n="exp.card4.b3">Received a recommendation letter from Cellula Technologies.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Experience Card 5 -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot dot-mint"></div>
-                        <div class="timeline-card">
-                            <div class="card-meta">
-                                <span class="work-date"><i data-lucide="calendar"></i> <span data-i18n="exp.card5.date">Apr 2024 - Oct 2024</span></span>
-                                <span class="work-type"><i data-lucide="briefcase"></i> <span data-i18n="exp.card5.type">Internship</span></span>
-                            </div>
-                            <h3 class="role-title" data-i18n="exp.card5.role">Mobile App Developer Intern</h3>
-                            <h4 class="company-name highlight-mint" data-i18n="exp.card5.company">Digital Egypt Pioneers Initiative (DEPI)</h4>
-                            <p class="role-desc" data-i18n="exp.card5.desc">
-                                Worked on mobile application development during the DEPI program.
-                            </p>
-                            <ul class="role-bullets">
-                                <li data-i18n="exp.card5.b1">Contributed to Hagzy, a doctor appointment booking app.</li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -579,6 +380,31 @@
                 </div>
 
                 <div class="projects-grid">
+                    <!-- Project: Cairo Coding -->
+                    <div class="project-card" data-category="flutter">
+                        <div class="project-image-placeholder project-img-cover">
+                            <img src="assets/Projects_images/cairocoding_1.png" alt="Cairo Coding admin dashboard and student app" class="project-cover-img">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title" data-i18n="proj6.title">Cairo Coding - Admin Dashboard &amp; Student App</h3>
+                            <p class="project-desc" data-i18n="proj6.desc">A Flutter Web admin dashboard and an Android/iOS student app for Cairo Coding School, from one codebase: group enrollment, session schedules generated in Cairo time, recordings, and role-based Firestore rules.</p>
+                            <div class="project-tags">
+                                <span class="tag">Flutter Web</span>
+                                <span class="tag">Riverpod</span>
+                                <span class="tag">Firebase</span>
+                                <span class="tag">go_router</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/salma-elmaghawry/Cairo-Coding-App" target="_blank" class="proj-link"><i
+                                        data-brand="github"></i> <span data-i18n="link.github">GitHub</span></a>
+                                <a href="https://youtu.be/3QkZTTSbrbQ"
+                                    target="_blank" class="proj-link demo-link"><i data-lucide="play-circle"></i> <span data-i18n="proj6.link_video">Watch Video</span></a>
+                                <a href="https://miro.com/app/board/uXjVEd9BKNo=/?share_link_id=122107319382"
+                                    target="_blank" class="proj-link"><i data-lucide="workflow"></i> <span data-i18n="proj6.link_design">System Design</span></a>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Project: Flowsy -->
                     <div class="project-card" data-category="flutter">
                         <div class="project-image-placeholder project-img-cover">
@@ -721,6 +547,205 @@
             </div>
         </section>
 
+        <!-- Skills Section -->
+        <section class="skills-section section-padding" id="skills">
+            <div class="container">
+                <div class="section-header center">
+                    <span class="section-tag" data-i18n="skills.tag">expertise</span>
+                    <h2 class="section-title" data-i18n="skills.title">My Technical Toolbox</h2>
+                    <p class="section-desc" data-i18n="skills.desc">What I build with, and the projects where I've applied it.</p>
+                </div>
+
+                <div class="skills-grid">
+                    <!-- Category 1: Flutter & Dart -->
+                    <div class="skill-category-card">
+                        <div class="category-header pink-accent">
+                            <i data-lucide="smartphone"></i>
+                            <h3>Flutter &amp; Dart</h3>
+                        </div>
+                        <ul class="skill-list">
+                            <li><span class="skill-name">Flutter &amp; Dart</span> <span
+                                    class="skill-badge pink" data-i18n="skills.badge_years">2+ yrs</span></li>
+                            <li><span class="skill-name">BLoC / Cubit</span> <span class="skill-badge pink">Chainly</span></li>
+                            <li><span class="skill-name">Riverpod &amp; go_router</span> <span class="skill-badge pink">Cairo Coding</span></li>
+                            <li><span class="skill-name">Clean Architecture &amp; GetIt</span> <span class="skill-badge pink">No Wait</span></li>
+                            <li><span class="skill-name">AR / EN Localization + RTL</span> <span class="skill-badge pink">My-Clinic</span></li>
+                            <li><span class="skill-name">Light &amp; Dark Themes</span> <span class="skill-badge pink">No Wait</span></li>
+                            <li><span class="skill-name">Responsive UI &amp; App Flavors</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Category 2: Backend & Data -->
+                    <div class="skill-category-card">
+                        <div class="category-header mint-accent">
+                            <i data-lucide="database"></i>
+                            <h3 data-i18n="skills.cat2">Backend &amp; Data</h3>
+                        </div>
+                        <ul class="skill-list">
+                            <li><span class="skill-name">REST APIs, Dio &amp; JSON</span> <span class="skill-badge mint">No Wait</span></li>
+                            <li><span class="skill-name">Firebase Authentication</span> <span class="skill-badge mint">Easy Chat</span></li>
+                            <li><span class="skill-name">Firestore &amp; Security Rules</span> <span class="skill-badge mint">Cairo Coding</span></li>
+                            <li><span class="skill-name">Supabase</span> <span class="skill-badge mint">Shtiwy</span></li>
+                            <li><span class="skill-name">Pagination</span> <span class="skill-badge mint">Easy Chat</span></li>
+                            <li><span class="skill-name">Error Handling (dartz / Either)</span> <span class="skill-badge mint">No Wait</span></li>
+                            <li><span class="skill-name">Hive &amp; Local Storage</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Category 3: Mobile Features -->
+                    <div class="skill-category-card">
+                        <div class="category-header lavender-accent">
+                            <i data-lucide="map-pin"></i>
+                            <h3 data-i18n="skills.cat3">Mobile Features</h3>
+                        </div>
+                        <ul class="skill-list">
+                            <li><span class="skill-name">Google Maps &amp; Location Tracking</span> <span class="skill-badge lavender">Chainly</span></li>
+                            <li><span class="skill-name">Camera &amp; QR Scanning</span> <span class="skill-badge lavender">Chainly</span></li>
+                            <li><span class="skill-name">Biometric Auth (local_auth)</span> <span class="skill-badge lavender">Flowsy</span></li>
+                            <li><span class="skill-name">Local Notifications</span> <span class="skill-badge lavender">Flowsy</span></li>
+                            <li><span class="skill-name">Real-time Messaging</span> <span class="skill-badge lavender">Easy Chat</span></li>
+                            <li><span class="skill-name">Read Receipts &amp; Online Status</span> <span class="skill-badge lavender">Easy Chat</span></li>
+                            <li><span class="skill-name">Offline-first Apps</span> <span class="skill-badge lavender">My-Clinic</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Category 4: Testing & Engineering -->
+                    <div class="skill-category-card">
+                        <div class="category-header mint-accent">
+                            <i data-lucide="flask-conical"></i>
+                            <h3 data-i18n="skills.cat4">Testing &amp; Engineering</h3>
+                        </div>
+                        <ul class="skill-list">
+                            <li><span class="skill-name">Automated Testing</span> <span class="skill-badge mint">Cairo Coding</span></li>
+                            <li><span class="skill-name">Unit Testing &amp; Mockito</span></li>
+                            <li><span class="skill-name">Git &amp; GitHub</span> <span class="skill-badge mint">Cellula</span></li>
+                            <li><span class="skill-name">OOP</span> <span class="skill-badge mint" data-i18n="skills.badge_teaching">Teaching</span></li>
+                            <li><span class="skill-name">SOLID Principles</span> <span class="skill-badge mint" data-i18n="skills.badge_teaching">Teaching</span></li>
+                            <li><span class="skill-name">Data Structures &amp; Algorithms</span> <span class="skill-badge mint" data-i18n="skills.badge_teaching">Teaching</span></li>
+                            <li><span class="skill-name">Problem-solving</span> <span class="skill-badge mint">ECPC 2024</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Timeline Section -->
+        <section class="experience-section section-padding" id="experience">
+            <div class="container">
+                <div class="section-header center">
+                    <span class="section-tag" data-i18n="exp.tag">journey</span>
+                    <h2 class="section-title" data-i18n="exp.title">Work Experience</h2>
+                    <p class="section-desc" data-i18n="exp.desc">Freelance Flutter development, developer internships, and teaching
+                        programming.</p>
+                </div>
+
+                <div class="timeline-container">
+                    <!-- Experience Card 1 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot dot-mint"></div>
+                        <div class="timeline-card">
+                            <div class="card-meta">
+                                <span class="work-date"><i data-lucide="calendar"></i> <span data-i18n="exp.card1.date">Aug 2025 - Present</span></span>
+                                <span class="work-type"><i data-lucide="briefcase"></i> <span data-i18n="exp.card1.type">Freelance</span></span>
+                            </div>
+                            <h3 class="role-title" data-i18n="exp.card1.role">Freelance Flutter Developer</h3>
+                            <h4 class="company-name highlight-mint" data-i18n="exp.card1.company">Self-employed</h4>
+                            <p class="role-desc" data-i18n="exp.card1.desc">
+                                Building Flutter mobile apps end to end, from architecture and state management to API integration and production-ready features.
+                            </p>
+                            <ul class="role-bullets">
+                                <li data-i18n="exp.card1.b1">Developing No Wait, an e-commerce and installment-shopping app, with feature-first Clean Architecture, Cubit, GetIt and dartz/Either error handling.</li>
+                                <li data-i18n="exp.card1.b2">Built a variable-product catalog that resolves attribute selections into store SKUs, with dynamic price ranges and seller price comparisons.</li>
+                                <li data-i18n="exp.card1.b3">Integrated REST APIs with Dio for auth, catalog, cart, installment checkout, map-based addresses and order history, plus Arabic/English RTL and persisted light/dark themes.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Experience Card 2 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot dot-pink"></div>
+                        <div class="timeline-card">
+                            <div class="card-meta">
+                                <span class="work-date"><i data-lucide="calendar"></i> <span data-i18n="exp.card2.date">Aug 2025 - Present</span></span>
+                                <span class="work-type"><i data-lucide="clock"></i> <span data-i18n="exp.card2.type">Part-time</span></span>
+                            </div>
+                            <h3 class="role-title" data-i18n="exp.card2.role">Educational Technologist</h3>
+                            <h4 class="company-name highlight-pink">Cairo Coding School</h4>
+                            <p class="role-desc" data-i18n="exp.card2.desc">
+                                Supporting educational technology and learning activities for programming courses.
+                            </p>
+                            <ul class="role-bullets">
+                                <li data-i18n="exp.card2.b1">Prepare learning materials with step-by-step explanations, simple code examples and comparison tables.</li>
+                                <li data-i18n="exp.card2.b2">Create exercises, MCQs and interactive quizzes with clear learning objectives.</li>
+                                <li data-i18n="exp.card2.b3">Pair Arabic explanations with English technical terms, so students can follow documentation on their own later.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Experience Card 3 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot dot-mint"></div>
+                        <div class="timeline-card">
+                            <div class="card-meta">
+                                <span class="work-date"><i data-lucide="calendar"></i> <span data-i18n="exp.card3.date">Mar 2025 - Present</span></span>
+                                <span class="work-type"><i data-lucide="globe"></i> <span data-i18n="exp.card3.type">Remote</span></span>
+                            </div>
+                            <h3 class="role-title" data-i18n="exp.card3.role">Programming Instructor</h3>
+                            <h4 class="company-name highlight-mint">Cairo Coding School</h4>
+                            <p class="role-desc" data-i18n="exp.card3.desc">
+                                Teaching programming in practical, structured, beginner-friendly sessions.
+                            </p>
+                            <ul class="role-bullets">
+                                <li data-i18n="exp.card3.b1">Teach C++ and programming fundamentals: functions, pointers, OOP, and data structures &amp; algorithms.</li>
+                                <li data-i18n="exp.card3.b2">Explain each concept step by step with simple code examples, then reinforce it with hands-on practice.</li>
+                                <li data-i18n="exp.card3.b3">Review student code and walk through fixes, keeping logic clean and readable.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Experience Card 4 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot dot-pink"></div>
+                        <div class="timeline-card">
+                            <div class="card-meta">
+                                <span class="work-date"><i data-lucide="calendar"></i> <span data-i18n="exp.card4.date">Feb 2025 - Apr 2025</span></span>
+                                <span class="work-type"><i data-lucide="briefcase"></i> <span data-i18n="exp.card4.type">Internship</span></span>
+                            </div>
+                            <h3 class="role-title" data-i18n="exp.card4.role">Flutter Developer Intern</h3>
+                            <h4 class="company-name highlight-pink">Cellula Technologies</h4>
+                            <p class="role-desc" data-i18n="exp.card4.desc">
+                                Worked on Flutter projects using Clean Architecture, dependency injection, BLoC/Cubit and GitHub.
+                            </p>
+                            <ul class="role-bullets">
+                                <li data-i18n="exp.card4.b1">Weather Prediction AI app with real-time weather API integration and recommendations.</li>
+                                <li data-i18n="exp.card4.b2">Gemini AI meal-recommendation app.</li>
+                                <li data-i18n="exp.card4.b3">Received a recommendation letter from Cellula Technologies.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Experience Card 5 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot dot-mint"></div>
+                        <div class="timeline-card">
+                            <div class="card-meta">
+                                <span class="work-date"><i data-lucide="calendar"></i> <span data-i18n="exp.card5.date">Apr 2024 - Oct 2024</span></span>
+                                <span class="work-type"><i data-lucide="briefcase"></i> <span data-i18n="exp.card5.type">Internship</span></span>
+                            </div>
+                            <h3 class="role-title" data-i18n="exp.card5.role">Mobile App Developer Intern</h3>
+                            <h4 class="company-name highlight-mint" data-i18n="exp.card5.company">Digital Egypt Pioneers Initiative (DEPI)</h4>
+                            <p class="role-desc" data-i18n="exp.card5.desc">
+                                Worked on mobile application development during the DEPI program.
+                            </p>
+                            <ul class="role-bullets">
+                                <li data-i18n="exp.card5.b1">Contributed to Hagzy, a doctor appointment booking app.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Contact Section -->
         <section class="contact-section section-padding" id="contact">
             <div class="container">
@@ -854,10 +879,10 @@
 
             <div class="footer-links">
                 <a href="#about" data-i18n="nav.about">About</a>
-                <a href="#skills" data-i18n="nav.skills">Skills</a>
-                <a href="#projects" data-i18n="nav.projects">Projects</a>
                 <a href="#youtube" data-i18n="nav.tutorials">Tutorials</a>
                 <a href="#volunteering" data-i18n="footer.volunteering">Community</a>
+                <a href="#projects" data-i18n="nav.projects">Projects</a>
+                <a href="#skills" data-i18n="nav.skills">Skills</a>
                 <a href="#contact" data-i18n="nav.contact">Contact</a>
             </div>
 

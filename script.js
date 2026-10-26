@@ -282,7 +282,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const activityFiles = [
             '1.jpeg', '2.jpeg', '3.jpeg', '4.jpeg', '5.jpeg', '6.jpeg', '7.jpeg',
             '8.jpeg', '9.jpeg', '10.png', '11.png', '12.png', '13.png', '14.png',
-            '15.png', 'github_workshop.jpeg', 'presentation_workshop.jpeg'
+            '15.png', 'github_workshop.jpeg', 'presentation_workshop.jpeg',
+            // ALX × Paymob hackathon
+            'alx_paymob_hackathon.jpg', 'paymob_and_cursor.png',
+            '0408CD38-1646-4EE6-BDC8-3BD72EB9C90F_1_105_c.jpeg',
+            '52ABDDAE-B095-443E-9C9F-DE6A93758C76_1_105_c.jpeg',
+            '976C3BB4-5F46-4526-9A16-B64416CB7522_1_105_c.jpeg',
+            'C456BACF-3AE4-4FD2-BC68-DC58DCBA3BC3_1_105_c.jpeg'
         ];
 
         // Fisher–Yates shuffle for a random order each visit
