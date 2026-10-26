@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Salma · Open to Work (LinkedIn 4:5)</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#223528; --sage:#4C7A5B; --mist:#B9CFBC; --cocoa:#6E4A32;
+    --honey:#E3A02B; --oat:#F6EFE4; --clay:#E8D5B7;
+    --ink2:#2A4031; --ink3:#1A2A1F;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#111;overflow:hidden}
+  #stage{position:relative;width:1080px;height:1350px;background:var(--ink);overflow:hidden;
+    font-family:Nunito,sans-serif;color:var(--oat);transform-origin:0 0}
+  .scene{position:absolute;inset:0;display:none}
+  .abs{position:absolute}
+  .center{left:0;right:0;text-align:center}
+  .mono{font-family:'JetBrains Mono',monospace}
+  .label{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:30px;letter-spacing:.1em;color:var(--mist);
+    text-transform:uppercase;display:inline-flex;align-items:center;gap:18px}
+  .label::before{content:'';width:44px;height:10px;border-radius:5px;background:var(--sage)}
+  .h1{font-weight:800;font-size:112px;line-height:1.04;letter-spacing:-.015em}
+  .h2{font-weight:800;font-size:84px;line-height:1.08;letter-spacing:-.01em}
+  .sub{font-size:38px;line-height:1.4;color:var(--mist);font-weight:700}
+  .honey{color:var(--honey)}
+  .clip{overflow:hidden;display:inline-block;vertical-align:bottom;padding:0 .04em .1em}
+  .word{display:inline-block}
+  .rule{height:8px;background:var(--sage);border-radius:4px;transform-origin:center}
+  .chip{display:inline-block;font-family:'JetBrains Mono',monospace;font-weight:500;font-size:30px;
+    padding:12px 26px;border-radius:999px;border:2px solid var(--sage);color:var(--mist);white-space:nowrap}
+  .chip.fill{background:var(--sage);color:var(--oat)}
+  .frame{border-radius:28px;overflow:hidden;background:#fff;outline:2px solid rgba(246,239,228,.1)}
+  .frame img{width:100%;height:100%;object-fit:cover;display:block}
+  .phone{position:absolute;border-radius:44px;overflow:hidden;border:11px solid var(--ink3);background:#fff;
+    outline:2px solid rgba(246,239,228,.12)}
+  .phone img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+  .badge{position:absolute;display:inline-flex;align-items:center;gap:14px;background:var(--sage);color:var(--oat);
+    font-weight:800;font-size:34px;padding:16px 30px;border-radius:999px;white-space:nowrap;outline:3px solid var(--ink)}
+  .badge svg{width:34px;height:34px}
+
+  .bubble{position:absolute;border-radius:50%;overflow:hidden}
+  .bubble i{position:absolute;left:14%;top:9%;width:46%;height:26%;border-radius:50%;background:var(--oat);
+    opacity:.09;transform:rotate(-32deg)}
+
+  .tile{position:absolute;width:450px;height:380px;border-radius:34px;background:var(--ink2);padding:40px 44px;
+    outline:2px solid rgba(246,239,228,.06)}
+  .tile .v{font-weight:800;font-size:112px;line-height:1;white-space:nowrap;display:flex;align-items:center;gap:18px}
+  .tile .v small{font-size:46px;color:var(--mist);font-weight:800;margin-left:-8px;align-self:flex-end;margin-bottom:12px}
+  .tile .l{font-size:33px;font-weight:700;color:var(--mist);margin-top:26px;line-height:1.3}
+  .tile .ic{position:absolute;right:38px;top:40px;width:54px;height:54px;color:var(--mist);opacity:.55}
+  .live-dot{width:30px;height:30px;border-radius:50%;background:var(--mist)}
+
+  .pcount{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:30px;letter-spacing:.1em;color:var(--mist)}
+  .pname{font-weight:800;font-size:104px;line-height:1.02;letter-spacing:-.015em}
+  .pline{font-size:38px;font-weight:700;color:var(--mist);margin-top:14px;line-height:1.35}
+  .ptags{margin-top:30px;display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+
+  .row{position:absolute;left:160px;width:860px}
+  .row .d{font-family:'JetBrains Mono',monospace;font-size:27px;color:var(--mist);letter-spacing:.08em}
+  .row .r{font-size:52px;font-weight:800;margin-top:6px;line-height:1.1}
+  .row .o{font-size:34px;font-weight:700;color:var(--mist);margin-top:6px}
+  .dot{position:absolute;left:84px;width:40px;height:40px;border-radius:50%;background:var(--sage);border:9px solid var(--ink)}
+
+  .stat3{position:absolute;width:300px;text-align:center}
+  .stat3 .n{font-weight:800;font-size:92px;line-height:1;white-space:nowrap}
+  .stat3 .n b{color:var(--mist);font-weight:800}
+  .stat3 .l{font-size:30px;font-weight:700;color:var(--mist);margin-top:14px;line-height:1.3}
+
+  .contact{display:flex;align-items:center;gap:26px;margin-bottom:24px}
+  .contact .sq{width:76px;height:76px;border-radius:20px;background:var(--sage);display:grid;place-items:center;flex:none}
+  .contact .sq svg{width:40px;height:40px}
+  .contact .k{font-family:'JetBrains Mono',monospace;font-size:23px;color:var(--mist);letter-spacing:.08em;text-transform:uppercase}
+  .contact .v{font-family:'JetBrains Mono',monospace;font-size:31px;color:var(--oat);margin-top:4px;font-weight:500}
+
+  #wipe{position:absolute;left:0;top:0;width:1080px;height:1350px;background:var(--sage);display:none;z-index:20}
+  #wipe svg{position:absolute;left:390px;top:525px;width:300px;height:300px}
+  #progress{position:absolute;left:0;bottom:0;height:10px;background:var(--honey);width:0;z-index:30}
+  #wm{position:absolute;right:48px;top:48px;width:60px;opacity:0;z-index:25}
+
+  #ui{position:fixed;left:0;right:0;bottom:0;padding:10px 16px;background:#000c;display:flex;gap:12px;align-items:center;font:14px 'JetBrains Mono',monospace;color:#ddd}
+  #ui input{flex:1}
+  .rendering #ui{display:none}
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <div id="bubbles">
+    <div class="bubble" id="b0" style="width:640px;height:640px;background:rgba(76,122,91,.34)"><i></i></div>
+    <div class="bubble" id="b1" style="width:520px;height:520px;background:rgba(185,207,188,.10)"><i></i></div>
+    <div class="bubble" id="b2" style="width:760px;height:760px;background:rgba(76,122,91,.24)"><i></i></div>
+  </div>
+
+  <!-- the #OpenToWork photo badge travels across S1 and S2 -->
+  <svg id="badge" class="abs" viewBox="0 0 640 640" style="width:600px;height:600px;z-index:5">
+    <defs>
+      <clipPath id="pc"><circle cx="320" cy="320" r="272"/></clipPath>
+      <path id="arcText" d="M34.4,370.4 A290,290 0 0 0 571.1,465"/>
+    </defs>
+    <circle cx="320" cy="320" r="300" fill="#2A4031"/>
+    <image href="../assets/Sub_profile.png" x="20" y="-10" width="600" height="750" preserveAspectRatio="xMidYMin slice" clip-path="url(#pc)"/>
+    <path id="ring" d="M47.5,220.8 A290,290 0 1 0 605.6,370.4" fill="none" stroke="#4C7A5B" stroke-width="50" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+    <text id="ringText" font-family="Nunito" font-weight="800" font-size="31" letter-spacing="5" fill="#F6EFE4" dominant-baseline="middle" opacity="0">
+      <textPath href="#arcText" startOffset="50%" text-anchor="middle">#OPENTOWORK</textPath>
+    </text>
+  </svg>
+
+  <!-- S1 · hook -->
+  <section class="scene" id="s1">
+    <div class="abs center" style="top:810px">
+      <div class="h1"><span class="clip"><span class="word" id="s1-a">Open to work</span></span></div>
+      <div class="h1" style="font-size:98px"><span class="clip"><span class="word honey" id="s1-b">Flutter Developer</span></span></div>
+      <div class="abs center mono" id="s1-c" style="top:262px;font-size:30px;color:var(--mist);letter-spacing:.1em">SALMA ELMAGHAWRY · CAIRO, EGYPT</div>
+    </div>
+  </section>
+
+  <!-- S2 · who -->
+  <section class="scene" id="s2">
+    <div class="abs center" style="top:470px">
+      <div class="sub" id="s2-hi" style="font-size:46px;color:var(--oat)">Hi, I'm</div>
+      <div class="h1" style="font-size:132px;margin-top:4px"><span class="clip"><span class="word" id="s2-n1">Salma</span></span><br><span class="clip"><span class="word" id="s2-n2">Elmaghawry</span></span></div>
+      <div class="rule" id="s2-rule" style="width:150px;margin:34px auto 30px"></div>
+      <div id="s2-role" style="font-size:46px;font-weight:800">Software Engineer · Flutter Developer</div>
+      <div class="sub" id="s2-line" style="margin:22px auto 0;width:900px">I build clean, tested Flutter apps,<br>from architecture to Google Play.</div>
+    </div>
+  </section>
+
+  <!-- S3 · quick facts -->
+  <section class="scene" id="s3">
+    <div class="abs" style="left:75px;top:150px">
+      <div class="label" id="s3-lb">Quick facts</div>
+      <div class="h2" style="margin-top:24px"><span class="clip"><span class="word" id="s3-t">The short version</span></span></div>
+    </div>
+    <div class="tile" id="t0" style="left:75px;top:420px">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></svg>
+      <div class="v"><span class="cnt" data-to="2">0</span><span class="honey" style="margin-left:-14px">+</span><small>yrs</small></div>
+      <div class="l">Hands-on Flutter<br>experience</div>
+    </div>
+    <div class="tile" id="t1" style="left:555px;top:420px">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 3.5v17l14-8.5z"/></svg>
+      <div class="v"><span class="live-dot" id="live"></span>Live</div>
+      <div class="l">Flowsy, my app<br>on Google Play</div>
+    </div>
+    <div class="tile" id="t2" style="left:75px;top:830px">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4"/></svg>
+      <div class="v">1st</div>
+      <div class="l">Paymob × Cursor<br>Build-a-thon (team)</div>
+    </div>
+    <div class="tile" id="t3" style="left:555px;top:830px">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></svg>
+      <div class="v">ITIDA</div>
+      <div class="l">Funded graduation<br>project, Chainly</div>
+    </div>
+  </section>
+
+  <!-- S4 · selected work intro -->
+  <section class="scene" id="s4">
+    <div class="abs center" style="top:470px">
+      <div class="label" id="s4-lb">Selected work</div>
+      <div class="h1" style="margin-top:34px;font-size:124px"><span class="clip"><span class="word" id="s4-a">Real projects.</span></span><br><span class="clip"><span class="word" id="s4-b" style="color:var(--mist)">Clean code.</span></span></div>
+    </div>
+  </section>
+
+  <!-- S5..S9 · projects (filled by JS) -->
+  <div id="projects"></div>
+
+  <!-- S10 · experience -->
+  <section class="scene" id="s10">
+    <div class="abs" style="left:75px;top:130px">
+      <div class="label" id="s10-lb">Experience</div>
+      <div class="h2" style="margin-top:24px"><span class="clip"><span class="word" id="s10-t">Building &amp; teaching</span></span></div>
+    </div>
+    <div class="abs" id="s10-line" style="left:101px;top:400px;width:6px;height:820px;background:var(--sage);opacity:.55;transform-origin:top"></div>
+    <div class="dot" style="top:398px"></div><div class="row" style="top:384px">
+      <div class="d">AUG 2025 – PRESENT</div><div class="r">Freelance Flutter Developer</div><div class="o">No Wait · e-commerce &amp; installments</div></div>
+    <div class="dot" style="top:608px"></div><div class="row" style="top:594px">
+      <div class="d">MAR 2025 – PRESENT</div><div class="r">Programming Instructor</div><div class="o">Cairo Coding School</div></div>
+    <div class="dot" style="top:818px"></div><div class="row" style="top:804px">
+      <div class="d">FEB – APR 2025</div><div class="r">Flutter Developer Intern</div><div class="o">Cellula Technologies</div></div>
+    <div class="dot" style="top:1028px"></div><div class="row" style="top:1014px">
+      <div class="d">APR – OCT 2024</div><div class="r">Mobile App Developer Intern</div><div class="o">Digital Egypt Pioneers (DEPI)</div></div>
+  </section>
+
+  <!-- S11 · toolbox -->
+  <section class="scene" id="s11">
+    <div class="abs" style="left:75px;top:150px">
+      <div class="label" id="s11-lb">Toolbox</div>
+      <div class="h2" style="margin-top:24px"><span class="clip"><span class="word" id="s11-t">What I build with</span></span></div>
+    </div>
+    <div class="abs" id="s11-chips" style="left:75px;top:420px;width:930px;display:flex;flex-wrap:wrap;gap:22px"></div>
+  </section>
+
+  <!-- S12 · the extra -->
+  <section class="scene" id="s12">
+    <div class="abs center" style="top:150px">
+      <div class="label" id="s12-lb">And one more thing</div>
+      <div class="h1" style="margin-top:30px;font-size:104px"><span class="clip"><span class="word" id="s12-a">A developer</span></span><br><span class="clip"><span class="word" id="s12-b">who can <span class="honey">explain</span>.</span></span></div>
+      <div class="sub" id="s12-sub" style="margin-top:24px">Clear code reviews, docs and onboarding.</div>
+    </div>
+    <div class="stat3" id="m0" style="left:60px;top:700px"><div class="n">10K<b>+</b></div><div class="l">LinkedIn<br>followers</div></div>
+    <div class="stat3" id="m1" style="left:390px;top:700px"><div class="n">6.5K<b>+</b></div><div class="l">YouTube<br>subscribers</div></div>
+    <div class="stat3" id="m2" style="left:720px;top:700px"><div class="n">300<b>+</b></div><div class="l">Students<br>taught</div></div>
+    <div class="abs" id="s12-q" style="left:110px;top:990px;width:860px;padding:44px 56px;border-radius:34px;background:var(--ink2);outline:2px solid rgba(246,239,228,.06)">
+      <svg viewBox="0 0 24 24" style="position:absolute;left:-20px;top:-34px;width:84px;height:84px" fill="#4C7A5B"><path d="M4 18v-5.5C4 8.4 6.4 5.7 10 5l.8 1.8C8.6 7.6 7.6 9.2 7.5 11H10v7zm10 0v-5.5c0-4.1 2.4-6.8 6-7.5l.8 1.8c-2.2.8-3.2 2.4-3.3 4.2H20v7z"/></svg>
+      <div style="font-size:50px;font-weight:800;line-height:1.2">Simple and fun explanation.</div>
+      <div class="mono" style="font-size:24px;color:var(--mist);letter-spacing:.1em;margin-top:14px">FEEDBACK FROM A STUDENT</div>
+    </div>
+  </section>
+
+  <!-- S13 · call to action -->
+  <section class="scene" id="s13">
+    <div class="frame abs" id="s13-photo" style="left:310px;top:90px;width:460px;height:520px;background:var(--ink2)">
+      <img src="../assets/profile_pc.png" style="object-position:center 22%">
+    </div>
+    <div class="badge" id="s13-badge" style="left:380px;top:575px;font-size:30px;padding:12px 26px">#OPENTOWORK</div>
+    <div class="abs center" style="top:675px">
+      <div class="h2" style="font-size:88px"><span class="clip"><span class="word" id="s13-a">Hiring a</span></span><br><span class="clip"><span class="word" id="s13-b">Flutter Developer?</span></span><br><span class="clip"><span class="word honey" id="s13-c">Let's talk.</span></span></div>
+    </div>
+    <div class="abs" id="s13-contacts" style="left:50%;top:1010px;transform:translateX(-50%);width:max-content">
+      <div class="contact"><div class="sq"><svg viewBox="0 0 24 24" fill="none" stroke="#F6EFE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
+        <div><div class="k">Email</div><div class="v">salmaelmaghawry91@gmail.com</div></div></div>
+      <div class="contact"><div class="sq"><svg viewBox="0 0 24 24" fill="none" stroke="#F6EFE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg></div>
+        <div><div class="k">LinkedIn</div><div class="v">linkedin.com/in/salma-elmaghawry</div></div></div>
+      <div class="contact"><div class="sq"><svg viewBox="0 0 24 24" fill="none" stroke="#F6EFE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
+        <div><div class="k">Portfolio</div><div class="v">salmaelmaghawry.github.io/Salma-Elmaghawry</div></div></div>
+    </div>
+  </section>
+
+  <div id="wipe"><svg viewBox="0 0 100 100">
+    <path d="M32,30 L48,46 L32,62 M52,30 L68,46 L52,62" fill="none" stroke="#F6EFE4" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="32" y="76" width="38" height="10" rx="5" fill="#E3A02B"/></svg></div>
+  <svg id="wm" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="29" fill="none" stroke="#F6EFE4" stroke-width="6"/>
+    <path d="M32,30 L48,46 L32,62 M52,30 L68,46 L52,62" fill="none" stroke="#F6EFE4" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="32" y="76" width="38" height="10" rx="5" fill="#F6EFE4"/>
+  </svg>
+  <div id="progress"></div>
+</div>
+
+<div id="ui"><button id="play">pause</button><input id="scrub" type="range" min="0" max="46" step="0.01" value="0"><span id="time">0.00</span></div>
+
+<script>
+// every cut sits on a 0.5s grid, so a 120 BPM track lines up with the edit
+window.VIDEO = { w: 1080, h: 1350, dur: 46, fps: 30 };
+const DUR = VIDEO.dur, W = VIDEO.w;
+const $ = id => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const E = {
+  lin: t => t,
+  out: t => 1 - Math.pow(1 - t, 3),
+  out5: t => 1 - Math.pow(1 - t, 5),
+  inOut: t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
+  in: t => t * t * t,
+  back: t => { const c = 1.7; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); },
+};
+// progress of a tween that starts at s and lasts d seconds
+const P = (t, s, d, e = 'out') => E[e](clamp((t - s) / d));
+const lerp = (a, b, k) => a + (b - a) * k;
+function css(el, { o, x = 0, y = 0, s = 1, r = 0, blur }) {
+  if (typeof el === 'string') el = $(el);
+  if (o !== undefined) el.style.opacity = o;
+  el.style.transform = `translate(${x}px,${y}px) scale(${s}) rotate(${r}deg)`;
+  if (blur !== undefined) el.style.filter = blur > .05 ? `blur(${blur}px)` : 'none';
+}
+const rise = (el, t, s, d = .6, dist = 40) => { const k = P(t, s, d); css(el, { o: k, y: (1 - k) * dist }); };
+// word slides up from behind its .clip mask, landing slightly oversized then settling
+const reveal = (el, t, s, d = .7) => { const k = P(t, s, d, 'out5'); css(el, { y: (1 - k) * 150, s: lerp(1.06, 1, P(t, s, d * 1.4)) }); };
+const label = (el, t, s) => { const k = P(t, s, .5); css(el, { o: k, x: (1 - k) * -40 }); };
+const pop = (el, t, s, d = .5, from = .6) => { const k = P(t, s, d, 'back'); css(el, { o: clamp(P(t, s, d) * 2), s: lerp(from, 1, k) }); };
+function show(id, t, a, b) {
+  const el = $(id), on = t >= a - .001 && t < b;
+  el.style.display = on ? 'block' : 'none';
+  return on;
+}
+// fade + lift out over the last `f` seconds, slow push-in while on screen
+function scene(id, t, a, b, f = .4) {
+  if (!show(id, t, a, b)) return false;
+  const out = P(t, b - f, f, 'inOut');
+  const el = $(id);
+  el.style.opacity = 1 - out;
+  el.style.transform = `translateY(${-out * 40}px) scale(${1 + (t - a) * .006})`;
+  return true;
+}
+// sage panel sweeps up over the cut at `at`
+const WIPES = [9, 40];
+function wipe(t) {
+  const w = WIPES.find(c => t >= c - .35 && t < c + .35), el = $('wipe');
+  if (w === undefined) { el.style.display = 'none'; return; }
+  el.style.display = 'block';
+  const inK = P(t, w - .35, .35, 'inOut'), outK = P(t, w, .35, 'inOut');
+  el.style.transform = `translateY(${(1 - inK) * 1350 - outK * 1350}px)`;
+}
+
+/* ---------- background bubbles: drift, and glide to a new spot at each section ---------- */
+const BUB = [
+  // [time, x, y] keyframes (top-left corner)
+  [[0, -260, -220], [4.5, -300, -300], [9, 640, -260], [14, -240, 820], [28, 620, 900], [32.5, -300, -280], [40, -280, -320]],
+  [[0, 720, 640], [4.5, 760, 260], [9, -200, 560], [14, 760, -180], [28, -220, 520], [32.5, 760, 760], [40, 780, 380]],
+  [[0, -320, 980], [4.5, 420, 1040], [9, 520, 1080], [14, 380, 1100], [28, 560, -380], [32.5, -260, 1020], [40, -360, 1000]],
+];
+function bubbles(t) {
+  BUB.forEach((keys, i) => {
+    let j = 0; while (j < keys.length - 1 && t >= keys[j + 1][0]) j++;
+    const [ta, xa, ya] = keys[j], nxt = keys[j + 1];
+    let x = xa, y = ya;
+    if (nxt) { const k = P(t, nxt[0] - .6, 1.2, 'inOut'); x = lerp(xa, nxt[1], k); y = lerp(ya, nxt[2], k); }
+    x += Math.sin(t * .35 + i * 2) * 30; y += Math.cos(t * .3 + i) * 24;
+    css('b' + i, { x, y, s: 1 + Math.sin(t * .4 + i) * .03 });
+  });
+}
+
+/* ---------- projects ---------- */
+const PROJECTS = [
+  { name: 'Cairo Coding', line: 'Admin dashboard + student app', tags: ['Flutter Web', 'Riverpod', 'Firebase', 'go_router'],
+    badge: 'Web + mobile, one codebase', media: `<div class="frame abs pm" style="left:70px;top:230px;width:940px;height:594px"><img src="../assets/Projects_images/cairocoding_1.png"></div>` },
+  { name: 'Flowsy', line: 'Budget wallets, biometric lock', tags: ['local_auth', 'Notifications', 'Clean UI'],
+    badge: 'Live on Google Play', play: true, media: `<div class="frame abs pm" style="left:70px;top:210px;width:940px;height:632px"><img src="../assets/Projects_images/Flowsy_poster.png"></div>` },
+  { name: 'Chainly', line: 'Smart supply chain · team project', tags: ['Cubit', 'Google Maps', 'QR Scanner'],
+    badge: 'ITIDA-funded · 1st at RedDev & IEEE', media: `<div class="frame abs pm" style="left:70px;top:260px;width:940px;height:529px"><img src="../assets/Projects_images/chainly_poster.png"></div>` },
+  { name: 'My-Clinic', line: 'Clinic assistant for doctors', tags: ['Offline-first', 'EN / AR + RTL', 'Cubit'],
+    badge: 'Runs fully offline', media: ['myclinic_8', 'myclinic_1', 'myclinic_9'].map((f, j) =>
+      `<div class="phone pm" style="left:${118 + j * 290}px;top:${j === 1 ? 175 : 225}px;width:270px;height:587px;z-index:${j === 1 ? 2 : 1}"><img src="../assets/Projects_images/${f}.png"></div>`).join('') },
+  { name: 'StudyMate', line: 'Study companion with AI support', tags: ['Flashcards', 'Quizzes', 'Pomodoro'],
+    badge: 'AI-powered', media: ['studymate_2', 'studymate_1', 'studymate_3'].map((f, j) =>
+      `<div class="frame abs pm" style="left:${95 + j * 305}px;top:${j === 1 ? 180 : 230}px;width:285px;height:${j === 1 ? 440 : 440}px;z-index:${j === 1 ? 2 : 1}"><img src="../assets/Projects_images/${f}.png" style="object-position:top"></div>`).join('') },
+];
+const PLAY_ICON = `<svg viewBox="0 0 24 24" fill="#F6EFE4"><path d="M5 3.2v17.6c0 .6.6 1 1.2.7L21 12.7c.5-.3.5-1.1 0-1.4L6.2 2.5C5.6 2.2 5 2.6 5 3.2z"/></svg>`;
+const CHECK_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="#F6EFE4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>`;
+const PJ0 = 15.5, PJL = 2.5, PUSH = .45;
+PROJECTS.forEach((p, i) => {
+  $('projects').insertAdjacentHTML('beforeend', `
+  <section class="scene" id="p${i}">
+    <div class="abs pcount" style="left:75px;top:120px">${String(i + 1).padStart(2, '0')} / 05</div>
+    ${p.media}
+    <div class="badge pb" style="left:50%;top:${i > 2 ? 800 : 800}px;z-index:3">${p.play ? PLAY_ICON : CHECK_ICON}${p.badge}</div>
+    <div class="abs center" style="top:945px">
+      <div class="pname"><span class="clip"><span class="word pn">${p.name}</span></span></div>
+      <div class="pline">${p.line}</div>
+      <div class="ptags">${p.tags.map(x => `<span class="chip">${x}</span>`).join('')}</div>
+    </div>
+  </section>`);
+});
+
+const TOOLS = ['Flutter', 'Dart', 'BLoC / Cubit', 'Riverpod', 'Clean Architecture', 'Firebase', 'Supabase', 'REST APIs · Dio',
+  'go_router', 'GetIt', 'Hive', 'Google Maps', 'Unit Testing', 'Mockito', 'EN / AR + RTL', 'Git & GitHub', 'SOLID'];
+const FILLED = new Set(['Flutter', 'Dart', 'BLoC / Cubit', 'Riverpod', 'Clean Architecture', 'Firebase']);
+$('s11-chips').innerHTML = TOOLS.map(x => `<span class="chip ${FILLED.has(x) ? 'fill' : ''}" style="font-size:36px;padding:18px 32px">${x}</span>`).join('');
+
+/* ---------- render(t): the whole video is a pure function of time ---------- */
+function render(t) {
+  $('progress').style.width = (t / DUR * 100) + '%';
+  $('wm').style.opacity = .35 * P(t, 9, .4) * (1 - P(t, 39.6, .4));
+  bubbles(t);
+  wipe(t);
+
+  // badge: hero in S1, shrinks to the top in S2, gone by S3
+  {
+    const el = $('badge'), on = t < 9;
+    el.style.display = on ? 'block' : 'none';
+    if (on) {
+      const m = P(t, 4.1, .9, 'inOut');           // S1 -> S2 move
+      const size = lerp(600, 340, m), cx = 540, cy = lerp(470, 290, m);
+      const intro = P(t, 0, .7, 'out5');
+      el.style.left = (cx - size / 2) + 'px'; el.style.top = (cy - size / 2) + 'px';
+      el.style.width = el.style.height = size + 'px';
+      css(el, { o: 1, s: lerp(.9, 1, intro) * (1 - P(t, 8.4, .5, 'in') * .15), y: -P(t, 8.4, .5, 'in') * 60 });
+      $('ring').style.strokeDashoffset = 1 - P(t, .35, .9, 'inOut');
+      $('ringText').setAttribute('opacity', P(t, .95, .4));
+    }
+  }
+
+  // S1 hook 0 – 4.5
+  if (show('s1', t, 0, 4.5)) {
+    reveal($('s1-a'), t, .15); reveal($('s1-b'), t, .4);
+    rise($('s1-c'), t, 1.1, .6, 20);
+    const out = P(t, 4.0, .45, 'in');
+    css('s1', { o: 1 - out, y: out * -80 });
+  }
+
+  // S2 who 4.5 – 9
+  if (scene('s2', t, 4.5, 9, .35)) {
+    rise($('s2-hi'), t, 4.75);
+    reveal($('s2-n1'), t, 4.95); reveal($('s2-n2'), t, 5.15);
+    $('s2-rule').style.transform = `scaleX(${P(t, 5.8, .6)})`;
+    rise($('s2-role'), t, 6.0); rise($('s2-line'), t, 6.4);
+  }
+
+  // S3 quick facts 9 – 14
+  if (scene('s3', t, 9, 14)) {
+    label($('s3-lb'), t, 9.15); reveal($('s3-t'), t, 9.3);
+    for (let i = 0; i < 4; i++) {
+      const s = 9.8 + i * .2, k = P(t, s, .7, 'out5');
+      css('t' + i, { o: clamp(k * 1.5), y: (1 - k) * 90, s: lerp(.92, 1, k) });
+    }
+    const c = $('t0').querySelector('.cnt');
+    c.textContent = Math.round(2 * P(t, 10, .8));
+    const ph = ((t - 9) % 1.2) / 1.2;  // live dot pulse
+    $('live').style.boxShadow = `0 0 0 ${ph * 22}px rgba(185,207,188,${.45 * (1 - ph)})`;
+  }
+
+  // S4 selected work 14 – 15.5 (pushes left into the first project)
+  if (show('s4', t, 14, PJ0 + PUSH)) {
+    const inK = P(t, 14, .4);
+    label($('s4-lb'), t, 14.05);
+    reveal($('s4-a'), t, 14.15, .6); reveal($('s4-b'), t, 14.35, .6);
+    const ex = P(t, PJ0, PUSH, 'inOut');
+    css('s4', { o: inK, x: -ex * W });
+  }
+
+  // S5..S9 projects 15.5 – 28, each pushes the previous one out
+  PROJECTS.forEach((_, i) => {
+    const a = PJ0 + i * PJL, b = a + PJL;
+    if (!show('p' + i, t, a, b + PUSH)) return;
+    const root = $('p' + i);
+    const enter = P(t, a, PUSH + .1, 'out5'), exit = P(t, b, PUSH, 'inOut');
+    css(root, { x: (1 - enter) * W - exit * W });
+    root.querySelectorAll('.pm').forEach((m, j) => {
+      const k = P(t, a + .05 + j * .07, .8, 'out5');
+      const drift = (t - a) * -8;
+      css(m, { x: (1 - k) * 260 + drift, s: lerp(1.08, 1, k), r: (m.classList.contains('phone') ? (j - 1) * 3 : 0) * k });
+    });
+    const pb = root.querySelector('.pb'), kb = P(t, a + .55, .5, 'back');
+    pb.style.transform = `translateX(-50%) scale(${lerp(.5, 1, kb)})`; pb.style.opacity = clamp(P(t, a + .55, .3) * 1.2);
+    reveal(root.querySelector('.pn'), t, a + .25, .6);
+    rise(root.querySelector('.pline'), t, a + .45, .5, 24);
+    [...root.querySelector('.ptags').children].forEach((c, j) => pop(c, t, a + .65 + j * .07, .4, .7));
+  });
+
+  // S10 experience 28 – 32.5 (pushed in from the right by the last project)
+  if (show('s10', t, 28, 32.5)) {
+    const enter = P(t, 28, PUSH + .1, 'out5'), out = P(t, 32.1, .4, 'inOut');
+    css('s10', { o: 1 - out, x: (1 - enter) * W, y: -out * 40 });
+    label($('s10-lb'), t, 28.2); reveal($('s10-t'), t, 28.3);
+    $('s10-line').style.transform = `scaleY(${P(t, 28.5, 1.4, 'inOut')})`;
+    $('s10').querySelectorAll('.dot').forEach((d, i) => pop(d, t, 28.6 + i * .28, .4, 0));
+    $('s10').querySelectorAll('.row').forEach((r, i) => { const k = P(t, 28.65 + i * .28, .55, 'out5'); css(r, { o: k, x: (1 - k) * 60 }); });
+  }
+
+  // S11 toolbox 32.5 – 36
+  if (scene('s11', t, 32.5, 36)) {
+    label($('s11-lb'), t, 32.6); reveal($('s11-t'), t, 32.7);
+    [...$('s11-chips').children].forEach((c, i) => { const k = P(t, 33.1 + i * .065, .45, 'back'); css(c, { o: clamp(k * 2), s: lerp(.4, 1, k), y: (1 - k) * 30 }); });
+  }
+
+  // S12 the extra 36 – 40
+  if (scene('s12', t, 36, 40, .3)) {
+    label($('s12-lb'), t, 36.1);
+    reveal($('s12-a'), t, 36.2); reveal($('s12-b'), t, 36.4);
+    rise($('s12-sub'), t, 36.9);
+    ['m0', 'm1', 'm2'].forEach((id, i) => rise($(id), t, 37.2 + i * .15, .6, 50));
+    const q = P(t, 37.8, .7, 'out5'); css('s12-q', { o: q, y: (1 - q) * 60, r: -1.2 * q });
+  }
+
+  // S13 call to action 40 – 46 (holds on the last frame)
+  if (show('s13', t, 40, DUR + .01)) {
+    css('s13', { s: 1 + (t - 40) * .004 });
+    const pk = P(t, 40.1, .9, 'out5');
+    css('s13-photo', { o: pk, y: (1 - pk) * 80, r: 1.6 * pk, s: lerp(.9, 1, pk) });
+    pop($('s13-badge'), t, 40.6, .5, .3);
+    $('s13-badge').style.transform += ' rotate(-2deg)';
+    reveal($('s13-a'), t, 40.5); reveal($('s13-b'), t, 40.7); reveal($('s13-c'), t, 41.0);
+    [...$('s13-contacts').children].forEach((c, i) => { const k = P(t, 41.6 + i * .2, .55, 'out5'); css(c, { o: k, x: (1 - k) * -50 }); });
+  }
+}
+window.render = render;
+
+/* ---------- preview player ---------- */
+const params = new URLSearchParams(location.search);
+if (params.has('render')) {
+  document.body.classList.add('rendering');
+} else {
+  const fit = () => { const s = Math.min(innerWidth / 1080, (innerHeight - 44) / 1350); $('stage').style.transform = `scale(${s})`; };
+  addEventListener('resize', fit); fit();
+  let playing = true, t0 = performance.now(), cur = 0;
+  $('play').onclick = () => { playing = !playing; $('play').textContent = playing ? 'pause' : 'play'; t0 = performance.now() - cur * 1000; };
+  $('scrub').oninput = e => { cur = +e.target.value; t0 = performance.now() - cur * 1000; render(cur); };
+  (function loop() {
+    if (playing) { cur = ((performance.now() - t0) / 1000) % DUR; $('scrub').value = cur; }
+    $('time').textContent = cur.toFixed(2);
+    render(cur); requestAnimationFrame(loop);
+  })();
+}
+render(0);
+</script>
+</body>
+</html>

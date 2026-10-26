@@ -133,6 +133,10 @@ window.TRANSLATIONS = {
         "proj5.title": "My-Clinic - Offline Clinic Assistant",
         "proj5.desc": "For doctors of any specialty, running fully offline on the doctor's phone: patient files, QR prescriptions, appointments and stats, in English and Arabic.",
         "proj5.link_video": "Watch Video",
+        "proj6.title": "Cairo Coding - Admin Dashboard &amp; Student App",
+        "proj6.desc": "A Flutter Web admin dashboard and an Android/iOS student app for Cairo Coding School, from one codebase: group enrollment, session schedules generated in Cairo time, recordings, and role-based Firestore rules.",
+        "proj6.link_video": "Watch Video",
+        "proj6.link_design": "System Design",
         "link.github": "GitHub",
         "link.play": "Google Play",
 
@@ -293,6 +297,10 @@ window.TRANSLATIONS = {
         "proj5.title": "My-Clinic - مساعد عيادة بدون إنترنت",
         "proj5.desc": "لأطباء كل التخصصات، ويعمل بالكامل بدون إنترنت على هاتف الطبيب: ملفات المرضى، وروشتات بـ QR، والمواعيد والإحصائيات، بالعربية والإنجليزية.",
         "proj5.link_video": "مشاهدة الفيديو",
+        "proj6.title": "Cairo Coding - لوحة تحكم وتطبيق للطلاب",
+        "proj6.desc": "لوحة تحكم للإدارة على Flutter Web وتطبيق للطلاب على Android وiOS لمدرسة Cairo Coding من كود واحد: تسجيل الطلاب في المجموعات، وجدول جلسات يُنشأ تلقائيًا بتوقيت القاهرة، والتسجيلات، وصلاحيات Firestore حسب الدور.",
+        "proj6.link_video": "مشاهدة الفيديو",
+        "proj6.link_design": "تصميم النظام",
         "link.github": "GitHub",
         "link.play": "Google Play",
 

@@ -40,33 +40,33 @@
     --brand-paper: #FCF9F3;
 }
 
-/* --- DARK MODE COLORS (ink background, glowing sage + honey accent) --- */
-body.dark-mode {
-    --bg-primary: #223528;          /* ink */
-    --bg-secondary: #2E4636;        /* lightened ink */
-    --bg-card: rgba(46, 70, 54, 0.55);
+/* --- MINT THEME COLORS (mint background, deep sage + caramel brown accent) --- */
+body {
+    --bg-primary: #E3F3EA;          /* mint */
+    --bg-secondary: #D2EADD;        /* deeper mint */
+    --bg-card: rgba(255, 255, 255, 0.6);
 
-    --accent-mint: #6FA382;         /* sage, brightened for legibility on ink (4.5:1) */
-    --accent-mint-hover: #86B899;
-    --accent-mint-light: rgba(111, 163, 130, 0.16);
+    --accent-mint: #3F6B4E;         /* deep sage, legible on mint (5.2:1) */
+    --accent-mint-hover: #4C7A5B;
+    --accent-mint-light: rgba(76, 122, 91, 0.14);
 
-    --accent-pink: #E3A02B;         /* honey - the brand's designated dark-surface pop (5.8:1) */
-    --accent-pink-hover: #F0B04A;
-    --accent-pink-light: rgba(227, 160, 43, 0.16);
+    --accent-pink: #8B5A2B;         /* caramel brown - replaces honey as the warm pop (5.3:1) */
+    --accent-pink-hover: #A06A36;
+    --accent-pink-light: rgba(139, 90, 43, 0.12);
 
-    --accent-lavender: #B9CFBC;     /* mist - cool neutral, third tone (7.9:1) */
-    --accent-lavender-light: rgba(185, 207, 188, 0.12);
+    --accent-lavender: #4E6E5A;     /* muted sage - cool neutral, third tone (4.7:1) */
+    --accent-lavender-light: rgba(78, 110, 90, 0.12);
 
-    --accent-honey: #E3A02B;        /* the one accent allowed to pop on dark - use sparingly */
-    --alert: #E07E6A;
+    --accent-honey: #8B5A2B;        /* same caramel brown - the one warm accent, use sparingly */
+    --alert: #B5523E;
 
-    --text-primary: #F6EFE4;        /* oat */
-    --text-secondary: #B9CFBC;      /* mist */
-    --text-muted: rgba(185, 207, 188, 0.6);
+    --text-primary: #223528;        /* ink */
+    --text-secondary: #3E5747;
+    --text-muted: rgba(34, 53, 40, 0.62);
 
-    --border-color: rgba(185, 207, 188, 0.14);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    --border-color: rgba(34, 53, 40, 0.12);
+    --glass-border: rgba(255, 255, 255, 0.7);
+    --glass-shadow: 0 8px 32px 0 rgba(34, 53, 40, 0.1);
 }
 
 /* --- GENERAL RESET & BASE STYLES --- */
@@ -146,11 +146,6 @@ img {
     transition: background-color var(--transition-normal);
 }
 
-body.dark-mode .blob {
-    opacity: 0.12;
-    mix-blend-mode: screen;
-}
-
 .blob-mint {
     width: 500px;
     height: 500px;
@@ -179,10 +174,6 @@ body.dark-mode .blob {
     animation-delay: 8s;
 }
 
-body.dark-mode .blob-lavender {
-    background-color: var(--accent-lavender);
-}
-
 @keyframes floatBlob {
     0% {
         transform: translate(0, 0) scale(1);
@@ -205,16 +196,12 @@ body.dark-mode .blob-lavender {
     left: 0;
     width: 100%;
     height: var(--header-height);
-    background-color: rgba(246, 239, 228, 0.7);
+    background-color: rgba(227, 243, 234, 0.8);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     z-index: 100;
     transition: all var(--transition-normal);
     border-bottom: 1px solid var(--glass-border);
-}
-
-body.dark-mode .navbar {
-    background-color: rgba(34, 53, 40, 0.75);
 }
 
 .navbar.scrolled {
@@ -252,10 +239,6 @@ body.dark-mode .navbar {
     color: var(--accent-pink);
     display: inline-block;
     transition: color var(--transition-normal);
-}
-
-body.dark-mode .logo-dot {
-    color: var(--accent-honey);
 }
 
 .logo:hover .logo-dot {
@@ -332,10 +315,6 @@ body.dark-mode .logo-dot {
     background-color: var(--bg-primary);
     transform: scale(1.05);
     color: var(--accent-pink);
-}
-
-body.dark-mode .lang-toggle:hover {
-    color: var(--accent-honey);
 }
 
 .btn-talk {
@@ -423,10 +402,6 @@ body.dark-mode .lang-toggle:hover {
     margin-right: 0.5em;
     color: var(--accent-pink);
     font-weight: 700;
-}
-
-body.dark-mode .hero-tag::before {
-    color: var(--accent-honey);
 }
 
 .hero-title {
@@ -602,8 +577,8 @@ body.dark-mode .hero-tag::before {
     width: 100%;
     height: 100%;
     border-radius: var(--border-radius-lg);
-    background: var(--brand-paper);
-    border: 6px solid var(--brand-paper);
+    background: #FFF;
+    border: 6px solid #FFF;
     box-shadow: var(--glass-shadow);
     backdrop-filter: blur(10px);
     position: relative;
@@ -637,7 +612,7 @@ body.dark-mode .hero-tag::before {
     flex-direction: column;
     padding: 8px 14px;
     border-radius: var(--border-radius-md);
-    background: var(--brand-paper);
+    background: #FFF;
     box-shadow: var(--glass-shadow);
     white-space: nowrap;
     animation: floatBadge 6s infinite ease-in-out;
@@ -759,10 +734,6 @@ body.dark-mode .hero-tag::before {
     font-weight: 700;
 }
 
-body.dark-mode .section-tag::before {
-    color: var(--accent-honey);
-}
-
 .section-title {
     font-size: clamp(1.75rem, 4vw, 2.6rem);
     font-weight: 800;
@@ -825,10 +796,6 @@ body.dark-mode .section-tag::before {
     flex-shrink: 0;
 }
 
-body.dark-mode .edu-icon {
-    color: var(--accent-mint);
-}
-
 .edu-details {
     display: flex;
     flex-direction: column;
@@ -837,7 +804,7 @@ body.dark-mode .edu-icon {
 .edu-time {
     font-size: 0.85rem;
     font-weight: 700;
-    color: var(--accent-mint-hover);
+    color: var(--accent-honey);
     margin-bottom: 4px;
 }
 
@@ -893,6 +860,7 @@ body.dark-mode .edu-icon {
     font-size: 1.35rem;
     font-weight: 700;
     letter-spacing: -0.02em;
+    color: var(--accent-honey);
     margin-bottom: 4px;
 }
 
@@ -1270,10 +1238,6 @@ body.dark-mode .edu-icon {
     border-radius: var(--border-radius-sm);
 }
 
-body.dark-mode .project-tags .tag {
-    background-color: rgba(255, 255, 255, 0.05);
-}
-
 .project-links {
     display: flex;
     flex-wrap: wrap;
@@ -1288,15 +1252,11 @@ body.dark-mode .project-tags .tag {
     display: flex;
     align-items: center;
     gap: 6px;
-    color: var(--text-secondary);
+    color: var(--accent-honey);
 }
 
 .proj-link:hover {
-    color: var(--accent-mint);
-}
-
-.proj-link.demo-link:hover {
-    color: var(--accent-pink);
+    color: var(--text-primary);
 }
 
 /* --- YOUTUBE EDUCATIONAL SECTION --- */
@@ -1636,10 +1596,6 @@ body.dark-mode .project-tags .tag {
     margin-bottom: 16px;
 }
 
-body.dark-mode .volunteer-achievement {
-    background-color: rgba(255, 255, 255, 0.03);
-}
-
 .volunteer-achievement i {
     width: 18px;
     height: 18px;
@@ -1764,7 +1720,7 @@ body.dark-mode .volunteer-achievement {
 .method-label {
     font-size: 0.8rem;
     font-weight: 700;
-    color: var(--text-muted);
+    color: var(--accent-honey);
     text-transform: uppercase;
 }
 
@@ -2437,7 +2393,7 @@ body.dark-mode .volunteer-achievement {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top center;
+    object-position: center 40%;
     border-radius: calc(var(--border-radius-lg) - 6px);
     display: block;
 }
